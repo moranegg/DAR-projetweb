@@ -23,10 +23,10 @@ TODO: Write credits
 
 TODO: Write license
 
-ecap des principales commandes:
-1. premi�refois: git clone 
-2. recuperer la derniere version du depot: git pull
-3. ajouter un fichier (encore jamais versionné): git add 
-mettre a jour les fichiers: git commit -a -m "comment" git push
-N'oubliez pas d'update votre git pour que l'on ai votre nom ! (voir git --config)
+Recap des principales commandes:
+-première fois: git clone 
+- recuperer la derniere version du depot: git pull
+- ajouter un fichier (encore jamais versionnÃ©): git add 
+- mettre a jour les fichiers: git commit -a -m "comment" git push
+-N'oubliez pas d'update votre git pour que l'on ai votre nom ! (voir git --config)
 
