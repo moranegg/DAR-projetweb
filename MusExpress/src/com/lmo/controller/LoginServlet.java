@@ -20,6 +20,7 @@ public class LoginServlet extends HttpServlet
  
      String email = request.getParameter("email");   
      String password = request.getParameter("password");
+
      LoginService loginService = new LoginService();
      boolean result = loginService.authenticateUser(email, password);
      User user = loginService.getUserByUserEmail(email);

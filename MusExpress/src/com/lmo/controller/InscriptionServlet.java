@@ -19,21 +19,26 @@ public class InscriptionServlet extends HttpServlet {
 		String prenom = request.getParameter("prenom");	
 		String codep = request.getParameter("codep");	
 		String email = request.getParameter("email");	
-		String password = request.getParameter("password");	
+		String password = request.getParameter("user_password");	
+
+
+
+
+
 		
 		InscriptionService inscriptionservice = new InscriptionService();
 		boolean result = inscriptionservice.createUser(nom, prenom, codep, email, password);
 	    
 		/** Cas où l'inscription s'est bien faite : rediriger vers la page d'accueil */
-//		if(result == true)
-//	     {
-//	         response.sendRedirect("home.jsp");
-//	     }
-//	     else
-//	     {
+		if(result == true)
+	     {
+	         response.sendRedirect("home.jsp");
+	     }
+	     else
+	     {
 		/** Cas où l'inscription s'est bien faite : rediriger vers une page d'erreur */
-//	         response.sendRedirect("error1.jsp");
-//	     }
+         response.sendRedirect("error1.jsp");
+         }
 	}
 
 }

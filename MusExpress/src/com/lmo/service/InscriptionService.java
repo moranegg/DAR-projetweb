@@ -9,7 +9,8 @@ import org.hibernate.cfg.Configuration;
 import com.lmo.hibernate.util.HibernateUtil;
 import com.lmo.model.User;
 
-public class InscriptionService {
+public class InscriptionService 
+{
 //	Transaction tx = null;
 //    Session session = null;
    // User user = null;
@@ -31,7 +32,8 @@ public class InscriptionService {
         	sess.save(user);
         	tran.commit();
             return true;
-        } catch (Exception e) 
+        } 
+        catch (Exception e) 
         {
             if (tran != null) 
             {
