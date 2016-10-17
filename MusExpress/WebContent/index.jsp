@@ -26,8 +26,12 @@ body {
 }
 </style>
 
+<<<<<<< HEAD
 
 
+=======
+<!-- TODO: changer les liens en local -->
+>>>>>>> eb82a54ddc49cffb8a0c18c4eda86678b25b7f0d
 <!-- Latest compiled and minified CSS -->
  <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -132,7 +136,7 @@ body {
 					
 					<blockquote>
   <p>La meilleure fa&ccedil;on de visiter en IDF. Chaque week-end je trouve le mus&eacute;e avec le moins d'attente et j'y vais! 
-  Et je sais si je prends mon parapluie...</p>
+  Et je sais si je dois prendre mon parapluie...</p>
   <footer>Hugo de  <cite title="Source Title">Timeout</cite></footer>
 </blockquote>
 				</div>
@@ -208,10 +212,9 @@ body {
 
 			<footer class="footer">
 				<p  class="text-center">
-					The source code for this application is available in <a href="#">this
+					The source code for this application is available in <a href="https://github.com/moranegg/DAR-projetweb">this
 						repository</a> on GitHub.
 				</p>
 			</footer>
 </body>
 </html>
-<!-- try change -->
