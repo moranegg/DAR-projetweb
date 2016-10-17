@@ -3,13 +3,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><script type="text/javascript" src="/MusExpress/js/login.js"></script>
+<script type="text/javascript" src="/MusExpress/js/jquery-3.1.1.js"></script>
+
 
 <title>Connexion</title>
 </head>
     <body>
-        <form action="LoginServlet" method="post">
-				
+			<form name="form_login" action="javascript:(function(){return;})()"
+				method="post" OnSubmit="javascript:login(this)">				
             <fieldset>
             
                 <legend>Connexion</legend>
@@ -26,6 +28,9 @@
                 <br />
                 
             </fieldset>
+            
+            	<div id='notifier'></div>
+            
 
         </form>
 

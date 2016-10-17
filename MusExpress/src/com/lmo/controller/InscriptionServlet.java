@@ -11,6 +11,9 @@ import com.lmo.model.User;
 import com.lmo.service.InscriptionService;
 
 public class InscriptionServlet extends HttpServlet {
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

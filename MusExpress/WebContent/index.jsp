@@ -3,13 +3,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
+
 <meta charset="utf-8">
 <title>MusExpress</title>
-<meta name="description" content="MusExpress ">
+<meta name="description" content="MusExpress">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <meta name="csrf-token" content="{{csrfToken}}">
+
+<script type="text/javascript" src="/MusExpress/js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="/MusExpress/js/tether.min.js"></script>
+<!--  <script type="text/javascript" src="/MusExpress/js/bootstrap.min.js"></script>-->
+<script type="text/javascript" src="/MusExpress/js/login.js"></script>
+
 
 <style>
 body {
@@ -18,20 +26,22 @@ body {
 }
 </style>
 
+
+
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
+ <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
 
 <!-- Optional theme -->
-<link rel="stylesheet"
+  <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
 	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
 	crossorigin="anonymous">
 
 <!-- Latest compiled and minified JavaScript -->
-<script
+ <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 	crossorigin="anonymous"></script>
@@ -50,6 +60,9 @@ body {
         #wrap {display:table;height:100%}
     </style>
     <![endif]-->
+    
+
+
 
 </head>
 
@@ -76,11 +89,14 @@ body {
                 	<div class="row">
                             <div class="col-md-10">
                               
-							<form action="LoginServlet" method="post">
-									<div class="form-group">
+			<form name="form_login" action="javascript:(function(){return;})()"
+				method="post" OnSubmit="javascript:login(this)">	
+				
+				   
+												<div class="form-group">
 										<div class="">
 											<input class="form-control login_input" id="email" placeholder="Email"
-												value="" name="email"
+												value="" name="email" 
 												data-required="true" data-notblank="true" />
 												
 												 <span class="help-block"></span>
@@ -102,6 +118,8 @@ body {
 												value="Connexion" id="login-btn" data-bypass />
 										</div>
 									</div>
+									
+									<div id='notifier'></div>
 
 								
 

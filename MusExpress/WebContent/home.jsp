@@ -16,9 +16,9 @@
 			 <b>This is Sample Result Page</b><br/>
 			 <%=new Date()%></br>
 			 <%
-				 User user = (User) session.getAttribute("user");
+				 //User user = (User) session.getAttribute("user");
 			 %>		
-			 <b>Welcome <%= user.getEmail()%></b>		
+			 <b>Welcome</b>		
 			 <br/>
 		 </p>
 
