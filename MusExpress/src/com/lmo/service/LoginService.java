@@ -35,7 +35,7 @@ public class LoginService
         }
         else
         {
-            return com.lmo.utils.Tools.serviceMessage("Invalid email or password");
+            return Tools.serviceMessage("Invalid email or password");
             //return false;
         }
     	   
@@ -48,18 +48,24 @@ public class LoginService
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
         User user = null;
-        try {
+        try 
+        {
             tx = session.getTransaction();
             tx.begin();
             Query query = session.createQuery("from User where email='"+email+"'");
             user = (User)query.uniqueResult();
             tx.commit();
-        } catch (Exception e) {
-            if (tx != null) {
+        }
+        catch (Exception e) 
+        {
+            if (tx != null) 
+            {
                 tx.rollback();
             }
             e.printStackTrace();
-        } finally {
+        } 
+        finally 
+        {
             session.close();
         }
         return user;

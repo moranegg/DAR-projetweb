@@ -18,12 +18,12 @@ public class User implements Serializable
     private String prenom;
     private String email;
     private String password;
-    private int codep;
+    private String codep;
  
     public User() {
     } 
      
-    public User(String nom, String prenom, String email, String password,  int codep) 
+    public User(String nom, String prenom, String email, String password,  String codep) 
     {
     	//this.id=id;
     	this.nom=nom;
@@ -34,7 +34,7 @@ public class User implements Serializable
 
     }
     
-    public User(String email, String password,  int codep) 
+    public User(String email, String password,  String codep) 
     {
         this.email = email;
         this.password = password;
@@ -51,11 +51,11 @@ public class User implements Serializable
         this.id = id;
     }
      
-     public int getCodep() {
+     public String getCodep() {
          return codep;
      }
   
-      public void setCodep(int codep) {
+      public void setCodep(String codep) {
          this.codep = codep;
      }
  

@@ -4,10 +4,14 @@ import java.io.IOException;
 import java.util.Map;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
- 
+import javax.servlet.http.HttpSession;
+
+import org.json.JSONObject;
+
 import com.lmo.model.User;
 import com.lmo.service.LoginService;
  
@@ -16,6 +20,14 @@ import com.lmo.service.LoginService;
  
 public class LoginServlet extends HttpServlet 
 {
+	
+	private static final long serialVersionUID = 1L;
+
+	public LoginServlet() {super();}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);}
+	
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
@@ -38,6 +50,7 @@ public class LoginServlet extends HttpServlet
     	
     	try 
     	{
+
            Map<String, String[]> map=request.getParameterMap();
            response.setContentType("text/plain");
            String email = request.getParameter("email");
@@ -46,9 +59,22 @@ public class LoginServlet extends HttpServlet
         		   && map.containsKey("password") &&!password.equals(""))
            {
         	     LoginService loginService = new LoginService();
-				response.getWriter().print(loginService.authenticateUser(email, password));
+        	     JSONObject jo = loginService.authenticateUser(email, password);
+        	     if (jo.equals("1")) 
+        	     {
+        	             User user = loginService.getUserByUserEmail(email);
+                         request.getSession().setAttribute("userId", Integer.toString(user.getId())); 
+          				 Cookie cookieId = new Cookie("userId",Integer.toString(user.getId()));
+         				 response.addCookie(cookieId);                         
+        				
+        	     }
+        	     
+				 response.getWriter().print(loginService.authenticateUser(email, password));
+
+        	    	 
+        	 }
+
 				
-           }
            
            else 
         	   

@@ -3,7 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><script type="text/javascript" src="/MusExpress/js/login.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script type="text/javascript" src="/MusExpress/js/login.js"></script>
 <script type="text/javascript" src="/MusExpress/js/jquery-3.1.1.js"></script>
 
 
