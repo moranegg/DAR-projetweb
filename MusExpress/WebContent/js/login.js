@@ -1,30 +1,33 @@
-
-
-
 $(document).ready(function() 
-{
+	{
 	$("#login-btn").click(function()
 			{
+
 		var email = $('#email').val();
 		var password = $('#password').val();
-		//alert("Thank you for your comment!" + email + " " +password);
+		alert("Thank you for your comment!" + email + " " +password);
+		
+		//
 		$.post("LoginServlet",
 				{ email: email, password:password},
 				function(data) 
 				{
 
 					var resultat = $.parseJSON(data);
+					var user = resultat.user;
 					if (resultat.message=="1") 		
 					{
-						window.location.href = "home.html";
+						//TODO: ajouter id utilisateur au path
+						$(location).attr('home.html'); 
+						//$(location).attr('home.html/'+user); 
 					}
 
 
-				});
-
-
 			});
-		});
+
+
+	});
+});
 
 
 /*
