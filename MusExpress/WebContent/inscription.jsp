@@ -4,14 +4,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Création de compte utilisateur</title>
-<script type="text/javascript" src="inscription.js\"></script>
+<script type="text/javascript" src="/MusExpress/js/enregistrement.js"></script>
+<script type="text/javascript" src="/MusExpress/js/jquery-3.1.1.js"></script>
+<title>Inscription</title>
+
+
 </head>
 <body>
-<form action="InscriptionServlet" method="post">
+
+<form action="javascript:(function(){return;})()" method="post"
+				OnSubmit="javascript:enregistrement(this)">
+				
+
 				
             <fieldset>
-            
+              
                 <legend>Inscription</legend>
                 
                 <label for="nom">Nom </label>
@@ -33,11 +40,12 @@
                 <input type="password"  id="password" name="password" value="" size="20" maxlength="20" required/>
                 <br />
 
-                <input type="submit" value="Valider" onclick="test();"/>
+                <input type="submit" value="Valider"/>
                 <br />
                 
             </fieldset>
-
+            
+            	<div id='notifier'></div>
         </form>
 </body>
 </html>

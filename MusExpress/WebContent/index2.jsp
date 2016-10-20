@@ -1,24 +1,13 @@
-
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
 <html>
 <head>
-
-
-<meta charset="utf-8">
-<title>MusExpress</title>
-<meta name="description" content="MusExpress">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<meta name="csrf-token" content="{{csrfToken}}">
-
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><script type="text/javascript" src="/MusExpress/js/login.js"></script>
 <script type="text/javascript" src="/MusExpress/js/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="/MusExpress/js/tether.min.js"></script>
-<script type="text/javascript" src="/MusExpress/js/bootstrap.min.js"></script>
+<!--  <script type="text/javascript" src="/MusExpress/js/bootstrap.min.js"></script>-->
 <script type="text/javascript" src="/MusExpress/js/login.js"></script>
-
 
 <style>
 body {
@@ -88,10 +77,8 @@ body {
                 	<div class="row">
                             <div class="col-md-10">
                               
-		<!--  	<form id="form_login" action="javascript:(function(){return;})()"
-				method="post" OnSubmit="javascript:login(this)"> -->	
-				
-			  	<form id="form_login" method="post" > 
+			<form name="form_login" action="javascript:(function(){return;})()"
+				method="post" OnSubmit="javascript:login(this)">	
 				
 				   
 												<div class="form-group">

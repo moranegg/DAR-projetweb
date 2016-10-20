@@ -1,13 +1,21 @@
 package com.lmo.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
- 
+
 import com.lmo.hibernate.util.HibernateUtil;
 import com.lmo.model.User;
+
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.lmo.utils.Tools;
  
 public class LoginService 
 {
@@ -17,37 +25,47 @@ public class LoginService
     User user = null;
     
     
-    public boolean authenticateUser(String email, String password) 
+    public  JSONObject authenticateUser(String email, String password) throws SQLException, JSONException
     {
         User user = getUserByUserEmail(email);         
         if(user!=null && user.getEmail().equals(email) && user.getPassword().equals(password))
         {
-            return true;
+            return Tools.serviceMessage(1);
+            //return true;
         }
         else
         {
-            return false;
+            return Tools.serviceMessage("Invalid email or password");
+            //return false;
         }
     	   
     }
+    
+
  
     public User getUserByUserEmail(String email) 
     {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
         User user = null;
-        try {
+        try 
+        {
             tx = session.getTransaction();
             tx.begin();
             Query query = session.createQuery("from User where email='"+email+"'");
             user = (User)query.uniqueResult();
             tx.commit();
-        } catch (Exception e) {
-            if (tx != null) {
+        }
+        catch (Exception e) 
+        {
+            if (tx != null) 
+            {
                 tx.rollback();
             }
             e.printStackTrace();
-        } finally {
+        } 
+        finally 
+        {
             session.close();
         }
         return user;
