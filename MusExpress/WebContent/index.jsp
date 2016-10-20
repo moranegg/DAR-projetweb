@@ -16,7 +16,7 @@
 
 <script type="text/javascript" src="/MusExpress/js/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="/MusExpress/js/tether.min.js"></script>
-<!--  <script type="text/javascript" src="/MusExpress/js/bootstrap.min.js"></script>-->
+<script type="text/javascript" src="/MusExpress/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/MusExpress/js/login.js"></script>
 
 
@@ -88,8 +88,10 @@ body {
                 	<div class="row">
                             <div class="col-md-10">
                               
-			<form name="form_login" action="javascript:(function(){return;})()"
-				method="post" OnSubmit="javascript:login(this)">	
+		<!--  	<form id="form_login" action="javascript:(function(){return;})()"
+				method="post" OnSubmit="javascript:login(this)"> -->	
+				
+			  	<form id="form_login" method="post" > 
 				
 				   
 												<div class="form-group">

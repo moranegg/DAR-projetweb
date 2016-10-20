@@ -1,3 +1,34 @@
+
+
+
+$(document).ready(function() 
+{
+	$("#login-btn").click(function()
+			{
+		var email = $('#email').val();
+		var password = $('#password').val();
+		//alert("Thank you for your comment!" + email + " " +password);
+		$.post("LoginServlet",
+				{ email: email, password:password},
+				function(data) 
+				{
+
+					var resultat = $.parseJSON(data);
+					if (resultat.message=="1") 		
+					{
+						window.location.href = "home.html";
+					}
+
+
+				});
+
+
+			});
+		});
+
+
+/*
+
 function login(formulaire) 
 {
 	var email = formulaire.email.value;
@@ -9,7 +40,7 @@ function login(formulaire)
 		printHTML("#notifier","");
 		connect(email, mdp);
 	}
-	
+
 	return false;
 }
 
@@ -19,8 +50,8 @@ function login(formulaire)
 
 function verif(email, mdp) 
 {
-	
-	
+
+
 	if(email.length==0)
 	{
 		func_erreur("Email manquant");
@@ -32,7 +63,7 @@ function verif(email, mdp)
 		func_erreur("Mot de passe manquant");
 		return false;
 	}
-	
+
 
 	else 
 	{
@@ -43,7 +74,7 @@ function verif(email, mdp)
 
 function connect(email, mdp) 
 {
-	$.ajax({
+	/*$.ajax({
 		type : "POST",
 		url : "LoginServlet",
 		data : "email=" + email+ "&password=" + mdp,
@@ -53,7 +84,13 @@ function connect(email, mdp)
 		{
 			alert(XHR + "" + testStatus + "" + errorThrown);
 		}
-	});
+	});*/
+
+/*	$(document).ready(function() {
+        $('#form_login').ajaxForm(function() {
+  alert("Thank you for your comment!");
+});
+});
 }
 
 function traiteReponseEnregistrement(rep) 
@@ -87,4 +124,4 @@ function printHTML(dom,htm)
 	$(dom).html(htm);
 }
 
-
+ */
