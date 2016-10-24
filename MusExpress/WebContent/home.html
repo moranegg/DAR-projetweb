@@ -24,8 +24,6 @@
 <script type="text/javascript" src="/MusExpress/js/lib/bootstrap.min.js"></script>
 
 <!--  -->
-<script type="text/javascript" src="/MusExpress/js/login.js"></script>
-<script type="text/javascript" src="/MusExpress/js/enregistrement.js"></script>
 <script type="text/javascript" src="/MusExpress/js/app.js"></script>
 	 
 </head>
@@ -114,41 +112,6 @@
 
 
 
-
-	<div class="row">
-
-	 <div>
-		 <h1>Result Page</h1>
-			 <b>This is Sample Result Page</b><br/>
-			 <%=new Date()%></br>
-			 <%
-				 User user = (User) session.getAttribute("user");
-			 %>		
-			 <b>Welcome <%= user.getEmail()%></b>		
-			 <br/>
-		 </p>
-
-		 <table>
-			 <thead>
-				 <tr>
-					 <th>email</th>					
-				 </tr>
-			 </thead>
-			 <tbody>
-				 <%
-					 LoginService loginService = new LoginService();
-					 List<User> list = loginService.getListOfUsers();
-					 for (User u : list) {
-				 %>
-				 <tr>
- 					 <td><%=u.getEmail()%></td>
-				 </tr>
-				 <%}%>
-			 <tbody>
-		 </table>		
-		 <br/>
-		</div>
-	</div> <!-- fin row -->
 </div>	<!-- fin container -->
 
 </body>

@@ -1,25 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
 <html>
 <head>
-
-
-<meta charset="utf-8">
-<title>MusExpress</title>
-<meta name="description" content="MusExpress">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-<!-- Libs -->
-<script type="text/javascript" src="/MusExpress/js/lib/jquery-3.1.1.min.js"></script>
-<script type="text/javascript" src="/MusExpress/js/lib/tether.min.js"></script>
-<script type="text/javascript" src="/MusExpress/js/lib/bootstrap.min.js"></script>
-
-<!--  -->
-<script type="text/javascript" src="/MusExpress/js/index.js"></script>
-
-
-
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><script type="text/javascript" src="/MusExpress/js/login.js"></script>
+<script type="text/javascript" src="/MusExpress/js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="/MusExpress/js/tether.min.js"></script>
+<!--  <script type="text/javascript" src="/MusExpress/js/bootstrap.min.js"></script>-->
+<script type="text/javascript" src="/MusExpress/js/login.js"></script>
 
 <style>
 body {
@@ -34,7 +22,17 @@ body {
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
 
+<!-- Optional theme -->
+  <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous">
 
+<!-- Latest compiled and minified JavaScript -->
+ <script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
 
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -79,13 +77,13 @@ body {
                 	<div class="row">
                             <div class="col-md-10">
                               
-				
-			  	<form id="form_login" > 
+			<form name="form_login" action="javascript:(function(){return;})()"
+				method="post" OnSubmit="javascript:login(this)">	
 				
 				   
 												<div class="form-group">
 										<div class="">
-											<input class="form-control login_input" id="email_login" placeholder="Email"
+											<input class="form-control login_input" id="email" placeholder="Email"
 												value="" name="email" 
 												data-required="true" data-notblank="true" />
 												
@@ -95,7 +93,7 @@ body {
 									</div>
 									<div class="form-group mb20 ">
 										<div class="">
-											<input type="password" id="password_login"
+											<input type="password" id="password"
 												class="form-control login_input" placeholder="Mot de Passe"
 												name="password" value="" data-required="true"
 												data-notblank="true" data-rangelength="[5,25]"> <span
@@ -104,12 +102,12 @@ body {
 									</div>
 									<div class="form-group ">
 										<div class="controls">
-											<input class="btn btn-success"  name="login"
+											<input class="btn btn-success" type="submit" name="login"
 												value="Connexion" id="login-btn" data-bypass />
 										</div>
 									</div>
 									
-									<div id='notifier-login'></div>
+									<div id='notifier'></div>
 
 								
 
@@ -138,7 +136,7 @@ body {
                             <div class="col-md-10">
                               
                                 <!-- form inscription-->
-                                <form class="form" id="register-form">
+                                <form action="InscriptionServlet" method="post" class="form">
                                     <div class="form-group">
                                         <div class="controls">
                                             <input type="text" id="nom" name="nom" class="form-control login_input" placeholder="Nom" 
@@ -162,7 +160,7 @@ body {
                                     </div>
                                     <div class="form-group">
                                         <div class="controls">
-                                            <input type="email" id="email_register" name="email" class="form-control login_input" placeholder="Email" 
+                                            <input type="email" id="email" name="email" class="form-control login_input" placeholder="Email" 
                                                    data-required="true" data-notblank="true" data-parsley-type="email">
 
                                         </div>
@@ -171,16 +169,15 @@ body {
                                     <div class="form-group">
                                         <div class="control-group">
                                             <div class="controls">
-                                                <input type="password" id="password_register" class="form-control login_input"  placeholder="Mot de passe" name="password"
-                                                        data-required="true" data-notblank="true" data-rangelength="[8,25]">
+                                                <input type="password" id="user_password" class="form-control login_input"  placeholder="Mot de passe" name="user_password"
+                                                        data-required="true" data-notblank="true" data-rangelength="[5,25]">
                                                 <span class="help-block"></span>
                                             </div>
                                         </div>
                                     </div>
 
 
-									 <input class="btn btn-primary btn-lg" value="Valider" id="register-btn"/>
-									 <div id='notifier-register'></div>
+									 <input class="btn btn-primary btn-lg" type="submit" value="Valider" onclick="test();"/>
                                    
 
                                 </form>
