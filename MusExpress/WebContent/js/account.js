@@ -41,7 +41,7 @@ function readUser(){
 function updateUser(nom,prenom,codep,email, password){
 	$.ajax({
 		type : "POST",
-		url : "InscriptionServlet",
+		url : "updateUserServlet",
 		data : "prenom=" + prenom + "&nom=" + nom + "&codep=" + codep + "&email="
 				+ email+ "&password=" + password,
 		dataType : "json",
@@ -58,8 +58,9 @@ function updateUser(nom,prenom,codep,email, password){
 function readFavoris(){
 	//favoris par FavorisSerrvlet
 	$.ajax({
-		type: "GET",
+		type: "POST",
         url : "NameServlet",
+        data : userId,
         dataType : 'json',
         error : function() {
 
