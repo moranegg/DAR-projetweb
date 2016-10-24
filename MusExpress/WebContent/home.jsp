@@ -3,6 +3,8 @@
 <%@page import="com.lmo.service.LoginService"%>
 <%@page import="java.util.Date"%>
 <%@page import="com.lmo.model.User"%>
+<%@page import="com.lmo.dao.UserDao"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -32,8 +34,10 @@
 			 </thead>
 			 <tbody>
 				 <%
-					 LoginService loginService = new LoginService();
-					 List<User> list = loginService.getListOfUsers();
+					// LoginService loginService = new LoginService();
+					 //List<User> list = loginService.getListOfUsers();
+					 UserDao userdao = new UserDao();
+					 List<User> list = userdao.getListOfUsers();
 					 for (User u : list) {
 				 %>
 				 <tr>

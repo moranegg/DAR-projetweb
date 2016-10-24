@@ -21,5 +21,7 @@
 	    <property name="hibernate.show_sql">true</property>
 	    <property name="hibernate.format_sql">true</property>
 		<mapping resource="user.hbm.xml"/>
+		<mapping resource="musee.hbm.xml"/>
+		
 	</session-factory>
 </hibernate-configuration>

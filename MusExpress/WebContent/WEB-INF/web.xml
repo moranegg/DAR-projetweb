@@ -3,7 +3,7 @@
   <display-name>MusExpress</display-name>
   
   	<welcome-file-list>
-		<welcome-file>index2.jsp</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 	
   <servlet>

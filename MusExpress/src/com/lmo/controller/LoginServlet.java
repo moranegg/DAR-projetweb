@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
+import com.lmo.dao.UserDao;
 import com.lmo.model.User;
 import com.lmo.service.LoginService;
  
@@ -51,21 +52,21 @@ public class LoginServlet extends HttpServlet
     	try 
     	{
 
-           Map<String, String[]> map=request.getParameterMap();
            response.setContentType("text/plain");
            String email = request.getParameter("email");
            String password = request.getParameter("password");
-           if (map.containsKey("email") && !email.equals("")
-        		   && map.containsKey("password") &&!password.equals(""))
+            if (!email.equals("") && !password.equals(""))
+ 
+
            {
         	     LoginService loginService = new LoginService();
         	     JSONObject jo = loginService.authenticateUser(email, password);
         	     if (jo.equals("1")) 
         	     {
-        	             User user = loginService.getUserByUserEmail(email);
+        	             User user = LoginService.getUserByUserEmail(email);
                          request.getSession().setAttribute("userId", Integer.toString(user.getId())); 
           				 Cookie cookieId = new Cookie("userId",Integer.toString(user.getId()));
-         				 response.addCookie(cookieId);                         
+         				 response.addCookie(cookieId);                        
         				
         	     }
         	     

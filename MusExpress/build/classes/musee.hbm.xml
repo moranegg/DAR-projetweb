@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping>
+
+	<class name="com.lmo.model.Musee" table="musee">
+		
+		<id name="id" type="int" column="id" >
+			<generator class="increment"/>
+		</id>
+		
+		<property name="nom"> 
+			<column name="nom"/>
+		</property>
+		
+		<property name="adresse"> 
+			<column name="adresse"/>
+		</property>
+		
+		<property name="ville"> 
+			<column name="ville"/>
+		</property>
+		
+		<property name="departement"> 
+			<column name="departement"/>
+		</property>
+		
+		<property name="codep"> 
+			<column name="codep"/>
+		</property>
+		
+		<property name="ferme"> 
+			<column name="ferme"/>
+		</property>
+		
+		<property name="siteweb"> 
+			<column name="siteweb"/>
+		</property>
+		
+		
+		<property name="periode_ouvertue"> 
+			<column name="periode_ouvertue"/>
+		</property>
+		
+		<property name="fermeture_annuelle"> 
+			<column name="fermeture_annuelle"/>
+		</property>
+		
+		<property name="latitude"> 
+			<column name="latitude"/>
+		</property>
+		
+		<property name="longitude"> 
+			<column name="longitude"/>
+		</property>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</class>
+
+</hibernate-mapping>

@@ -87,9 +87,7 @@ body {
                 <div class="panel-body">
                 	<div class="row">
                             <div class="col-md-10">
-                              
-		<!--  	<form id="form_login" action="javascript:(function(){return;})()"
-				method="post" OnSubmit="javascript:login(this)"> -->	
+	
 				
 			  	<form id="form_login" method="post" > 
 				

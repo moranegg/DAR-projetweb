@@ -16,7 +16,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.lmo.utils.Tools;
- 
+import com.lmo.dao.UserDao;
+
 public class LoginService 
 {
 	
@@ -27,7 +28,7 @@ public class LoginService
     
     public  JSONObject authenticateUser(String email, String password) throws SQLException, JSONException
     {
-        User user = getUserByUserEmail(email);         
+        User user = UserDao.getUserByUserEmail(email);         
         if(user!=null && user.getEmail().equals(email) && user.getPassword().equals(password))
         {
             return Tools.serviceMessage(1);
@@ -41,53 +42,16 @@ public class LoginService
     	   
     }
     
+    
+	public static User getUserByUserEmail(String email) throws SQLException, Exception 
+	{
+		User user = UserDao.getUserByUserEmail(email);
+		if (user != null)
+			return user;
+		return null;
+	}
+}
+    
 
  
-    public User getUserByUserEmail(String email) 
-    {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction tx = null;
-        User user = null;
-        try 
-        {
-            tx = session.getTransaction();
-            tx.begin();
-            Query query = session.createQuery("from User where email='"+email+"'");
-            user = (User)query.uniqueResult();
-            tx.commit();
-        }
-        catch (Exception e) 
-        {
-            if (tx != null) 
-            {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        } 
-        finally 
-        {
-            session.close();
-        }
-        return user;
-    }
-     
-    public List<User> getListOfUsers(){
-        List<User> list = new ArrayList<User>();
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction tx = null;       
-        try {
-            tx = session.getTransaction();
-            tx.begin();
-            list = session.createQuery("from User").list();                       
-            tx.commit();
-        } catch (Exception e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-        return list;
-    }
-}
+ 
