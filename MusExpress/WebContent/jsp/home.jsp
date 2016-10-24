@@ -1,4 +1,3 @@
-
 <%@page import="java.util.List"%>
 <%@page import="com.lmo.service.LoginService"%>
 <%@page import="java.util.Date"%>
@@ -50,4 +49,3 @@
 	 </div>
 	</center>	
 </body>
-</html>
