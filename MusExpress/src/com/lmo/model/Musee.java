@@ -47,6 +47,22 @@ public class Musee implements Serializable
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
+	
+	public Musee(String nom, String adresse, String ville, int departement, int codep, String ferme,
+			String siteweb, String periode_ouvertue, String fermeture_annuelle, double latitude, double longitude) {
+		super();
+		this.nom = nom;
+		this.adresse = adresse;
+		this.ville = ville;
+		this.departement = departement;
+		this.codep = codep;
+		this.ferme = ferme;
+		this.siteweb = siteweb;
+		this.periode_ouvertue = periode_ouvertue;
+		this.fermeture_annuelle = fermeture_annuelle;
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
 
 	public int getId() {
 		return id;

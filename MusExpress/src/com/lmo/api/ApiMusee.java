@@ -22,12 +22,14 @@ public class ApiMusee
 		ApiMusee http = new ApiMusee();
 
 		System.out.println("Testing 1 - Send Http GET request");
-		http.sendGet();
+		http.sendGetMusees();
+		http.sendGetParcs();
+
 
 
 	}
 
-	private void sendGet() throws Exception 
+	private void sendGetMusees() throws Exception 
 	{
 
 		String url = "http://data.iledefrance.fr/api/records/1.0/search/?dataset=liste_des_musees_franciliens&rows=139";
@@ -108,6 +110,115 @@ public class ApiMusee
 					
 					MuseeDao.addMusee
 					(nom_du_musee, 
+							adresse, 
+							ville, 
+							dept, 
+							cp, 
+							ferme, 
+							sitweb, 
+							periode_ouverture, 							
+							fermeture_annuelle, 
+							latitude, 
+							longitude);
+					
+
+					
+				}
+			}
+		}
+
+			catch (JSONException e) 
+			{
+				e.printStackTrace();
+			}
+
+		}
+	
+	private void sendGetParcs() throws Exception 
+	{
+
+		String url = "http://data.iledefrance.fr/api/records/1.0/search/?dataset=parcs-naturels-regionaux&q=musée&rows=51";
+
+		URL obj = new URL(url);
+		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+		con.setRequestMethod("GET");
+
+		BufferedReader in = new BufferedReader(
+				new InputStreamReader(con.getInputStream()));
+		String inputLine;
+		StringBuffer response = new StringBuffer();
+
+		while ((inputLine = in.readLine()) != null) {
+			response.append(inputLine);
+		}
+		in.close();
+
+//		System.out.println(response.toString());
+
+		try 
+		{
+			JSONObject j = new JSONObject(response.toString());
+
+			if ( j.getJSONArray( "records" ).length() >0) 
+			{
+				JSONArray parcs = j.getJSONArray( "records" );
+
+				for ( int i = 0 ; i < parcs.length() ; i++ ) 
+				{
+					JSONObject jo = parcs.getJSONObject( i );
+					JSONObject ja = jo.getJSONObject("fields");
+					String titre="", parc="", adresse = "", ville = "", ferme = "", sitweb = "", periode_ouverture = "", fermeture_annuelle = "";
+					int dept = 0, cp =0;
+					double latitude = 0, longitude =0;
+					
+					
+					if (ja.has("titre"))
+						titre = ja.getString("titre");
+					
+					if (ja.has("parc"))
+						parc = ja.getString("parc");
+					
+					
+					if (ja.has("adresse"))
+						adresse = ja.getString("adresse");
+					
+					if (ja.has("ville"))
+						ville = ja.getString("ville");
+					
+					if (ja.has("departement"))
+						dept = ja.getInt("departement");
+					
+					if (ja.has("code_postal"))
+						cp = ja.getInt("code_postal");
+					
+					if (ja.has("ferme"))
+						ferme = ja.getString("ferme");
+					
+					if (ja.has("site_web"))
+						sitweb = ja.getString("site_web");
+					
+					if (ja.has("horaires"))
+						periode_ouverture = ja.getString("horaires");
+					
+
+					
+					if (ja.has("wgs84"))
+					{
+						if (ja.getJSONArray("wgs84").length()>0)
+						{
+							latitude = ja.getJSONArray("wgs84").getDouble(0);
+							longitude = ja.getJSONArray("wgs84").getDouble(1);						
+						}
+					}
+					
+					
+						
+					System.out.println(i);
+
+					
+					MuseeDao.addMusee
+					(titre+"\n Parc " +parc, 
 							adresse, 
 							ville, 
 							dept, 
