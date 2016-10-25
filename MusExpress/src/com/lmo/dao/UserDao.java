@@ -46,6 +46,34 @@ public class UserDao
 	        return user;
 	    }
 	   
+	   public static User getUserById(String id) 
+	    {
+	        Session session = HibernateUtil.getSessionFactory().openSession();
+	        Transaction tx = null;
+	        User user = null;
+	        try 
+	        {
+	            tx = session.getTransaction();
+	            tx.begin();
+	            Query query = session.createQuery("from User where id='"+id+"'");
+	            user = (User)query.uniqueResult();
+	            tx.commit();
+	        }
+	        catch (Exception e) 
+	        {
+	            if (tx != null) 
+	            {
+	                tx.rollback();
+	            }
+	            e.printStackTrace();
+	        } 
+	        finally 
+	        {
+	            session.close();
+	        }
+	        return user;
+	    }
+	   
 	    public static User createUser(String nom ,String prenom ,String codep, String email,String password)
 	    	    {
         	        User user = null;
@@ -53,7 +81,7 @@ public class UserDao
 	    	    	SessionFactory sessFact = new 
 	    	    			Configuration().configure().buildSessionFactory();
 	    	    	Session sess = sessFact.openSession();
-	    	    	Transaction tran =sess.beginTransaction();;
+	    	    	Transaction tran =sess.beginTransaction();
 	    	    	Query query = sess.createQuery("from User where email = :email");
 	    	    	query.setParameter("email", email);
 	    	    	List list = query.list();
@@ -76,6 +104,32 @@ public class UserDao
 	    	    	
 	    	    }
 	     
+	    public static void updateUser(User olduser,
+	    		String nom, String prenom, String codep, String email, String password)
+	    {
+	        User user = null;
+
+	    	SessionFactory sessFact = new 
+	    			Configuration().configure().buildSessionFactory();
+	    	Session sess = sessFact.openSession();
+	    	Transaction tran =sess.beginTransaction();
+	    	
+	    	if(nom!="")
+	        	olduser.setNom(nom);
+	    	if(prenom != "")
+	        	olduser.setPrenom(prenom);
+	    	if(codep!="")
+	        	olduser.setCodep(codep);
+	    	if(email!="")
+	        	olduser.setEmail(email);
+	    	if(password!="")
+	        	olduser.setPassword(password);
+	    	
+	        	sess.save(user);
+	        	tran.commit();   	
+	    	
+	    }
+ 
 	    public List<User> getListOfUsers(){
 	        List<User> list = new ArrayList<User>();
 	        Session session = HibernateUtil.getSessionFactory().openSession();

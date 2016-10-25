@@ -1,7 +1,6 @@
 $( document ).ready(function(){
 		displayTime();
-		$("#update-btn").click(account.update);
-		
+		$("#update-btn").click(account.updateUser);		
 	});
 
 var account = {
@@ -20,7 +19,7 @@ function readUser(){
 	//ou ReadUserServlet dans l'approche SOAP
 	$.ajax({
 		type: "GET",
-        url : "NameServlet",
+        url : "ConsulterUserServlet",
         dataType : 'json',
         error : function() {
 
@@ -29,20 +28,25 @@ function readUser(){
         success : function(data) {
         	var resultat = $.parseJSON(data);
 
-			var nom = resultat.nom;
-			var prenom = resultat.prenom;
-			var codep = resultat.codep;
-			var email = resultat.email;
+//			var nom = resultat.nom;
+//			var prenom = resultat.prenom;
+//			var codep = resultat.codep;
+//			var email = resultat.email;
 			//var photo = ...
+			document.getElementById("nom").value = resultat.nom;
+			document.getElementById("prenom").value = resultat.prenom;
+			document.getElementById("codep").value = resultat.codep;
+			document.getElementById("email_register").value = resultat.email;
+			document.getElementById("password_register").value = resultat.password;
 			
         }
     });
 }
-function updateUser(nom,prenom,codep,email, password){
+function updateUser(id, nom,prenom,codep,email, password){
 	$.ajax({
 		type : "POST",
-		url : "updateUserServlet",
-		data : "prenom=" + prenom + "&nom=" + nom + "&codep=" + codep + "&email="
+		url : "UpdateUserServlet",
+		data : "id="+id+"&&prenom=" + prenom + "&nom=" + nom + "&codep=" + codep + "&email="
 				+ email+ "&password=" + password,
 		dataType : "json",
 		success : function(){
