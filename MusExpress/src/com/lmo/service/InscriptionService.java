@@ -20,63 +20,14 @@ import com.lmo.utils.Tools;
 
 public class InscriptionService 
 {
-//	Transaction tx = null;
-//    Session session = null;
-   // User user = null;
-    
- /*   public static JSONObject createUser(String nom ,String prenom ,String codep, String email,String password)
-    throws JSONException
-    {
-    	SessionFactory sessFact = new 
-    			Configuration().configure().buildSessionFactory();
-    	Session sess = sessFact.openSession();
-    	Transaction tran =sess.beginTransaction();;
-    	Query query = sess.createQuery("from User where email = :email");
-    	query.setParameter("email", email);
-    	List list = query.list();
-    	if(list.isEmpty())
-    	{
-    	//ResultSet rs = st.executeQuery(query);
-//        try {
-     // if()  	
-        	User user = new User();
-        	user.setNom(nom);
-        	user.setPrenom(prenom);
-        	user.setCodep(codep);
-        	user.setEmail(email);
-        	user.setPassword(password);
-        	sess.save(user);
-        	tran.commit();
-        	return Tools.serviceMessage(1);
-    	}
-//        } 
-//        catch (Exception e) 
-//        {
-//            if (tran != null) 
-//            {
-//                tran.rollback();
-//            }
-//            e.printStackTrace();
-//        } finally {
-//            sess.close();
-//        }
-//        
-    	else
-    		{
-    			return Tools.serviceMessage("Email existant ! ");
-    		}
-    	
-    	
-    }*/
-	
-	
+
     public static JSONObject createUser(String nom ,String prenom ,String codep, String email,String password)
     	    throws JSONException
     {
         User user = UserDao.createUser(nom,prenom,codep,email,password);         
         if(user!=null)
         {
-            return Tools.serviceMessage(1);
+        	return Tools.serviceMessage(""+UserDao.getUserId(email));
             //return true;
         }
         else

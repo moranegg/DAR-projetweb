@@ -95,6 +95,34 @@ public class UserDao
 	        }
 	        return list;
 	    }
+	    public static int getUserId(String email) 
+	    {
+	        Session session = HibernateUtil.getSessionFactory().openSession();
+	        Transaction tx = null;
+	        int id=0;
+	        try 
+	        {
+	            tx = session.getTransaction();
+	            tx.begin();
+	            Query query = session.createQuery("select user.id from User user where user.email='"+email+"'");
+	            id = (int)query.uniqueResult();
+	            tx.commit();
+	        }
+	        catch (Exception e) 
+	        {
+	            if (tx != null) 
+	            {
+	                tx.rollback();
+	            }
+	            e.printStackTrace();
+	        } 
+	        finally 
+	        {
+	            session.close();
+	        }
+	        return id;
+	    }
+	   
 	}
 
 

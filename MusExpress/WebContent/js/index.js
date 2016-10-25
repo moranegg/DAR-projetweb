@@ -30,7 +30,7 @@ var index = {
     		enregistre(nom, prenom, codep, email, password);
     	}else{
     		console.log("bad!!!");
-    		alert("problème !!")
+    		alert("problème !! ")
     	}
     	
     }
