@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,20 +18,13 @@
 	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
 	crossorigin="anonymous">
 
-<!-- Latest compiled and minified JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-	crossorigin="anonymous">
-	
-	</script>
-	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="../app.js"></script>
-	<script>
+<!-- Libs -->
+<script type="text/javascript" src="/MusExpress/js/lib/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="/MusExpress/js/lib/tether.min.js"></script>
+<script type="text/javascript" src="/MusExpress/js/lib/bootstrap.min.js"></script>
 
-
-</script>
+<!--  -->
+<script type="text/javascript" src="/MusExpress/js/app.js"></script>
 	 
 </head>
 <body>
@@ -43,16 +35,12 @@
 		
 		<form class="navbar-form navbar-left">
 		        <div class="form-group">
-		          <input type="text" class="form-control recherche" placeholder="Recherche par nom">
+		          <input type="text" class="form-control" placeholder="Recherche par nom" id="recherche">
 		        </div>
-		        <button type="submit" class="btn btn-default" id="go">Go!</button>
-		         <button type="submit" class="btn btn-default" id="testservletget">Get</button>
-		          <button type="submit" class="btn btn-default" id="testservletpost">Post</button>
-		          <span id="ajaxResponse"></span>
-		        
+		        <button type="submit" class="btn btn-default " id="go">Go!</button>
 		</form>
 		      
-		<p class="navbar-text navbar-right"><a href="#" class="navbar-link">
+		<p class="navbar-text navbar-right" id="account"><a href="#" class="navbar-link">
 			<span class="glyphicon glyphicon-user" aria-hidden="true"></span>Signed in as </a></p>
 	</nav>
 			
@@ -67,7 +55,7 @@
 		</div>
 		<div class="row">
 			<div class="panel panel-success">
-				<div class="panel-heading">La météo du <span id="day"></span> </div> 
+				<div class="panel-heading">La météo du <span id="day"></span></div> <!-- ajouter date -->
 				  <div class="panel-body">
 				    <span class="glyphicon glyphicon-cloud" aria-hidden="true"></span>
 				    injecter météo avec API
@@ -124,41 +112,6 @@
 
 
 
-
-	<div class="row">
-
-	 <div>
-		 <h1>Result Page</h1>
-			 <b>This is Sample Result Page</b><br/>
-			 <%=new Date()%></br>
-			 <%
-				 User user = (User) session.getAttribute("user");
-			 %>		
-			 <b>Welcome <%= user.getEmail()%></b>		
-			 <br/>
-		 </p>
-
-		 <table>
-			 <thead>
-				 <tr>
-					 <th>email</th>					
-				 </tr>
-			 </thead>
-			 <tbody>
-				 <%
-					 LoginService loginService = new LoginService();
-					 List<User> list = loginService.getListOfUsers();
-					 for (User u : list) {
-				 %>
-				 <tr>
- 					 <td><%=u.getEmail()%></td>
-				 </tr>
-				 <%}%>
-			 <tbody>
-		 </table>		
-		 <br/>
-		</div>
-	</div> <!-- fin row -->
 </div>	<!-- fin container -->
 
 </body>

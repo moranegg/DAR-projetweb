@@ -28,6 +28,25 @@
         <url-pattern>/InscriptionServlet</url-pattern>
     </servlet-mapping>
     
+    	<servlet>
+        <display-name>UpdateUserServlet</display-name>
+        <servlet-name>UpdateUserServlet</servlet-name>
+        <servlet-class>com.lmo.controller.UpdateUserServlet</servlet-class>
+    </servlet>
 
-    
+    <servlet-mapping>
+        <servlet-name>UpdateUserServlet</servlet-name>
+        <url-pattern>/UpdateUserServlet</url-pattern>
+    </servlet-mapping>
+
+     	<servlet>
+        <display-name>ConsulterUserServlet</display-name>
+        <servlet-name>ConsulterUserServlet</servlet-name>
+        <servlet-class>com.lmo.controller.ConsulterUserServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ConsulterUserServlet</servlet-name>
+        <url-pattern>/ConsulterUserServlet</url-pattern>
+    </servlet-mapping>
 </web-app>
