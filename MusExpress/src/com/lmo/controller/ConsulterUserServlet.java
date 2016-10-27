@@ -12,11 +12,12 @@ import com.lmo.service.ConsulterUserService;
 import com.lmo.service.UpdateUserService;
 
 public class ConsulterUserServlet extends HttpServlet {
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
+		}
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try
 	{
@@ -36,7 +37,8 @@ public class ConsulterUserServlet extends HttpServlet {
 		{
 			e.printStackTrace(); //local debug
 			request.setAttribute("error", e); //remote debug
-			request.getRequestDispatcher("error1.jsp").forward(request, response);
+			//TODO
+			//request.getRequestDispatcher("home.html").forward(request, response);
 		}
 	}
 }

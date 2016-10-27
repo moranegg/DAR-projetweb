@@ -55,7 +55,7 @@ public class UserDao
 	        {
 	            tx = session.getTransaction();
 	            tx.begin();
-	            Query query = session.createQuery("from User where id='"+id+"'");
+	            Query query = session.createQuery("from User where id="+id+";");
 	            user = (User)query.uniqueResult();
 	            tx.commit();
 	        }
@@ -87,8 +87,7 @@ public class UserDao
 	    	    	List list = query.list();
 	    	    	if(list.isEmpty())
 	    	    	{
- 	
-	    	        	user = new User();
+ 	    	        	user = new User();
 	    	        	user.setNom(nom);
 	    	        	user.setPrenom(prenom);
 	    	        	user.setCodep(codep);

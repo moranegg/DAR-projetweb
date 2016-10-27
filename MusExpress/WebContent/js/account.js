@@ -1,5 +1,6 @@
 $( document ).ready(function(){
 		displayTime();
+		readUser();
 		$("#update-btn").click(account.updateUser);		
 	});
 
@@ -18,26 +19,28 @@ function readUser(){
 	//readUser avec UserServlet/AccountServlet dans l'approche REST
 	//ou ReadUserServlet dans l'approche SOAP
 	$.ajax({
-		type: "GET",
-        url : "ConsulterUserServlet",
+		type: "POST",
+        url : "../ConsulterUserServlet",
         dataType : 'json',
+        data : {id : "1"},
         error : function() {
 
-            alert("problème");
+            alert("problème :(");
         },
         success : function(data) {
+        	
         	var resultat = $.parseJSON(data);
-
+        	alert(resultat);
 //			var nom = resultat.nom;
 //			var prenom = resultat.prenom;
 //			var codep = resultat.codep;
 //			var email = resultat.email;
 			//var photo = ...
-			document.getElementById("nom").value = resultat.nom;
-			document.getElementById("prenom").value = resultat.prenom;
-			document.getElementById("codep").value = resultat.codep;
-			document.getElementById("email_register").value = resultat.email;
-			document.getElementById("password_register").value = resultat.password;
+        	$("#nom").append(resultat.nom);
+        	$("#prenom").append(resultat.prenom);
+        	$("#codep").append(resultat.codep);
+        	$("#email_register").append(resultat.email_register);
+        	$("#password_register").append(resultat.password_register);
 			
         }
     });
