@@ -20,8 +20,11 @@ public class UpdateUserService {
         	UserDao.updateUser(user, nom, prenom, codep, email, password);
         	
         	//on retourne l'identifiant de l'utilisateur
-        	return Tools.serviceMessage(""+id);
+        	//return Tools.serviceMessage(""+id);
             //return true;
+        	JSONObject jo = new JSONObject().put("id_user",id);
+        	jo.put("message", 1);
+            return jo;
         }
         else
         {

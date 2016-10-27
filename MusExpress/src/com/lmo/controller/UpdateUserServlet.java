@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+
 import com.lmo.service.InscriptionService;
 import com.lmo.service.UpdateUserService;
 
@@ -28,12 +30,12 @@ public class UpdateUserServlet extends HttpServlet
 		if(   	map.containsKey("id")     && !request.getParameter ("id").equals("") )
 		
 		{
-	    
-		response.getWriter().print(
-				UpdateUserService.updateUser(request.getParameter ("id"),request.getParameter ("nom"), request.getParameter ("prenom"),
-						request.getParameter ("codep"), request.getParameter ("email"),
-						request.getParameter("password")
-						));
+			JSONObject jo = UpdateUserService.updateUser(request.getParameter ("id"),request.getParameter ("nom"), request.getParameter ("prenom"),
+					request.getParameter ("codep"), request.getParameter ("email"),
+					request.getParameter("password")
+					);
+			
+		response.getWriter().print(jo);
 		
 		}
 		
