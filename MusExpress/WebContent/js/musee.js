@@ -1,13 +1,4 @@
-$( document ).ready(function(){
-	var search = $(location).attr('search'); 
-	var idMusee = GetURLParameter('id_musee');
 
-	var mus = musee.init(idMusee);
-
-
-
-
-});
 
 var musee = {
 		id : "",
@@ -26,11 +17,13 @@ var musee = {
 
 		init: function(idMusee){
 			this.id = idMusee;
+			console.log("idmusee" + idMusee);
+
 
 			//appel à la BDD
-			//var museeFromDB = readMusee(idMusee);
+			var museeFromDB = readMusee(idMusee);
 			//appel test
-			var museeFromDB = testMusee(idMusee);
+			//var museeFromDB = testMusee(idMusee);
 
 			console.log("musee.init.avant :"+museeFromDB.toString());
 			if(museeFromDB == undefined){
@@ -80,23 +73,33 @@ var musee = {
 		}
 }
 
+
+
+
 //TODO: change NameServlet
-function readMusee(idMusee){
-	$.ajax({
+function readMusee(idMusee)
+{
+	$.ajax
+	({
 		type: "POST",
 		url : "ConsulterMuseeServlet",
-		data : museeId,
+		data : idMusee,
 		dataType : 'json',
-		error : function() {
+		error : function() 
+		{
 
-			alert("problème");
+			alert("problème readMusee");
 		},
-		success : function(data) {
+		success : function(data) 
+		{
 			var resultat = $.parseJSON(data);
 
 			var museeFromDB = resultat.musee;
 			musee.init(museeFromDB);
 			//return museeFromDB;
+
+			
+			
 		}
 	});
 }
@@ -134,3 +137,18 @@ function GetURLParameter(sParam)
 		}
 	}
 }
+
+$( document ).ready(function(){
+	var search = $(location).attr('search'); 
+	var idMusee = GetURLParameter('id_musee');
+	console.log("idmusee" + idMusee);
+
+
+	var mus = musee.init(idMusee);
+
+
+
+
+});
+
+

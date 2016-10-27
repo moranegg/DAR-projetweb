@@ -50,7 +50,7 @@
         <url-pattern>/ConsulterUserServlet</url-pattern>
     </servlet-mapping>
     
-         	<servlet>
+     <servlet>
         <display-name>ConsulterMuseeServlet</display-name>
         <servlet-name>ConsulterMuseeServlet</servlet-name>
         <servlet-class>com.lmo.controller.ConsulterMuseeServlet</servlet-class>
@@ -60,4 +60,6 @@
         <servlet-name>ConsulterMuseeServlet</servlet-name>
         <url-pattern>/ConsulterMuseeServlet</url-pattern>
     </servlet-mapping>
+    
+ 
 </web-app>

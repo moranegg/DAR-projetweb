@@ -19,7 +19,7 @@ public class ConsulterMuseeService
 		{
 
 			//on retourne le musée
-
+            System.out.println("coucou" +Tools.serviceMessage(musee));
 			return Tools.serviceMessage(musee);
 			//return true;
 		}
@@ -30,4 +30,7 @@ public class ConsulterMuseeService
 		}
 
 	}
+	
+	
+	
 }
