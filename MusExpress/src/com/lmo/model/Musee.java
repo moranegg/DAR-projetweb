@@ -64,6 +64,8 @@ public class Musee implements Serializable
 		this.longitude = longitude;
 	}
 
+
+
 	public int getId() {
 		return id;
 	}

@@ -84,7 +84,7 @@ var musee = {
 function readMusee(idMusee){
 	$.ajax({
 		type: "POST",
-		url : "NameServlet",
+		url : "ConsulterMuseeServlet",
 		data : museeId,
 		dataType : 'json',
 		error : function() {
