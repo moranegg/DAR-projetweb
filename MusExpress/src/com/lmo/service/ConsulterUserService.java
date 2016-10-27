@@ -19,7 +19,15 @@ public class ConsulterUserService {
         	       	
         	//on retourne l'utilisateur
         	
-        	return Tools.serviceMessage(user);
+        	//return Tools.serviceMessage(user);
+        	JSONObject jo = new JSONObject().put("id_user",id);
+        	jo.put("nom", user.getNom());
+        	jo.put("prenom", user.getPrenom());
+        	jo.put("codep", user.getCodep());
+        	jo.put("email", user.getEmail());
+        	jo.put("message", 1);
+            return jo;
+        	
             //return true;
         }
         else

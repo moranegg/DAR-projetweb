@@ -11,4 +11,9 @@ public class Tools
 	{
 		return new JSONObject().put("message",msg);
 	}
+	
+	public static JSONObject service(String cle, Object valeur) throws JSONException
+	{
+		return new JSONObject().put(cle,valeur);
+	}
 }

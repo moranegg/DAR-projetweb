@@ -31,7 +31,11 @@ public class LoginService
         User user = UserDao.getUserByUserEmail(email);         
         if(user!=null && user.getEmail().equals(email) && user.getPassword().equals(password))
         {
-            return Tools.serviceMessage(1);
+        	
+        	JSONObject jo = new JSONObject().put("id_user",UserDao.getUserId(email));
+        	jo.put("message", 1);
+            return jo;
+            
             //return true;
         }
         else

@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+
+import com.lmo.model.User;
 import com.lmo.service.ConsulterUserService;
 import com.lmo.service.UpdateUserService;
 
@@ -27,8 +30,9 @@ public class ConsulterUserServlet extends HttpServlet {
 		if( map.containsKey("id")   && !request.getParameter ("id").equals("") )
 		
 		{  
-		response.getWriter().print(
-				ConsulterUserService.getUser(request.getParameter ("id")));
+			JSONObject jo = ConsulterUserService.getUser(request.getParameter ("id"));
+			response.getWriter().print(jo);
+			
 		}
 		
 		else throw new Exception("Wrong Url! Missing parameters\n Il manque des parametres a l'URL!");

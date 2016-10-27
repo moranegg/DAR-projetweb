@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
 
 import com.lmo.service.InscriptionService;
 
@@ -33,12 +34,12 @@ public class InscriptionServlet extends HttpServlet
 		  )
 		
 		{
-	    
-		response.getWriter().print(
-				InscriptionService.createUser(request.getParameter ("nom"), request.getParameter ("prenom"),
-						request.getParameter ("codep"), request.getParameter ("email"),
-						request.getParameter("password")
-						));
+			JSONObject jo = InscriptionService.createUser(request.getParameter ("nom"), request.getParameter ("prenom"),
+					request.getParameter ("codep"), request.getParameter ("email"),
+					request.getParameter("password")
+					);
+			response.getWriter().print(jo);
+		
 		
 		}
 		

@@ -61,16 +61,16 @@ public class LoginServlet extends HttpServlet
            {
         	     LoginService loginService = new LoginService();
         	     JSONObject jo = loginService.authenticateUser(email, password);
-        	     if (jo.equals("1")) 
+        	     if (!jo.equals("Invalid email or password")) 
         	     {
         	             User user = LoginService.getUserByUserEmail(email);
                          request.getSession().setAttribute("userId", Integer.toString(user.getId())); 
-          				 Cookie cookieId = new Cookie("userId",Integer.toString(user.getId()));
-         				 response.addCookie(cookieId);                        
+//          				 Cookie cookieId = new Cookie("userId",Integer.toString(user.getId()));
+//         				 response.addCookie(cookieId);                        
         				
         	     }
         	     
-				 response.getWriter().print(loginService.authenticateUser(email, password));
+				 response.getWriter().print(jo);
 
         	    	 
         	 }
@@ -89,7 +89,7 @@ public class LoginServlet extends HttpServlet
     	{
 			e.printStackTrace(); 
 			request.setAttribute("error", e); 
-			request.getRequestDispatcher("error.jsp").forward(request, response);
+			//request.getRequestDispatcher("error.jsp").forward(request, response);
 		}
 	
     }

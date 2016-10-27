@@ -27,8 +27,9 @@ public class InscriptionService
         User user = UserDao.createUser(nom,prenom,codep,email,password);         
         if(user!=null)
         {
-        	return Tools.serviceMessage(""+UserDao.getUserId(email));
-            //return true;
+        	JSONObject jo = new JSONObject().put("id_user",UserDao.getUserId(email));
+        	jo.put("message", 1);
+            return jo;
         }
         else
         {
