@@ -13,7 +13,6 @@ import org.json.JSONObject;
 
 import com.lmo.hibernate.util.HibernateUtil;
 import com.lmo.model.User;
-import com.lmo.utils.Tools;
 
 public class UserDao 
 {
