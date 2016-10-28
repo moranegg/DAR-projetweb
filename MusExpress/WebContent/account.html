@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Compte</title>
+
+
+<!-- TODO: changer les liens en local -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+<!-- Libs -->
+<script type="text/javascript"
+	src="/MusExpress/js/lib/jquery-3.1.1.min.js"></script>
+<script type="text/javascript"
+	src="/MusExpress/js/lib/tether.min.js"></script>
+<script type="text/javascript"
+	src="../../MusExpress/js/lib/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="../../MusExpress/js/app.js"></script>
+<script type="text/javascript" src="../../MusExpress/js/account.js"></script>
+
+</head>
+<body >
+
+	<nav class="navbar navbar-default navbar-static-top header-template"
+		role="navigation" style="margin-bottom: 0">
+		<a class="navbar-brand" href="#">MusExpress</a>
+
+		<form class="navbar-form navbar-left">
+			<div class="form-group">
+				<input type="text" class="form-control"
+					placeholder="Recherche par nom">
+			</div>
+			<button type="submit" class="btn btn-default">Go!</button>
+			<span id="day"></span>
+		</form>
+
+		<p class="navbar-text navbar-right">
+			<a href="#" class="navbar-link"> <span
+				class="glyphicon glyphicon-user" aria-hidden="true"></span>Signed in
+				as
+			</a>
+		</p>
+	</nav>
+
+	<div class="container">
+		<!-- première ligne -->
+		<div class="row">
+
+			<!--  -->
+			<div class="col-md-2">
+				<div class="row text-center">
+					<img class="img-responsive img-thumbnail"
+						src="http://universityprimaryschool.org.uk/wp-content/themes/spark/static/images/no-photo.png"
+						alt="...">
+
+					<div class="row ">
+						<!-- TODO: lien avec modification photo -->
+						<div class="btn btn-primary hide">modifier photo</div>
+					</div>
+				</div>
+			</div>
+			<!-- information -->
+			<div class="col-md-4">
+				<!-- form update-->
+				<h3>Modifier votre compte:</h3>
+				<form class="form" id="update-form">
+					<div class="form-group">
+						<div class="controls">
+							<input type="text" id="nom" name="nom"
+								class="form-control login_input" placeholder="Nom"
+								data-required="true" data-notblank="true">
+
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="controls">
+							<input type="text" id="prenom" name="prenom"
+								class="form-control login_input" placeholder="Pr&eacute;nom"
+								data-required="true" data-notblank="true">
+
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="controls">
+							<input type="text" id="codep" name="codep"
+								class="form-control login_input" placeholder="Code Postal"
+								data-required="true" data-notblank="true">
+
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="controls">
+							<input type="email" id="email_register" name="email"
+								class="form-control login_input" placeholder="Email"
+								data-required="true" data-notblank="true"
+								data-parsley-type="email">
+
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="control-group">
+							<div class="controls">
+								<input type="password" id="password_register"
+									class="form-control login_input" placeholder="Mot de passe"
+									name="password" data-required="true" data-notblank="true"
+									data-rangelength="[8,25]"> <span class="help-block"></span>
+							</div>
+						</div>
+					</div>
+
+
+					<input class="btn btn-primary btn-lg" value="Valider"
+						id="update-btn" />
+					<div id='notifier-update'></div>
+
+
+				</form>
+
+
+			</div>
+			<!-- fin col-md 4 -->
+
+
+
+			<!-- Les favoris -->
+			<div class="col-md-6">
+				<h3>Vos musées favoris</h3>
+				<div class="panel panel-default">
+
+					<!-- List group à partir du résultat serveur à injecter dans les items-->
+					<ul class="list-group">
+						<li class="list-group-item">Cras justo odio</li>
+						<li class="list-group-item">Dapibus ac facilisis in</li>
+						<li class="list-group-item">Morbi leo risus</li>
+						<li class="list-group-item">Porta ac consectetur ac</li>
+						<li class="list-group-item">Vestibulum at eros</li>
+					</ul>
+				</div>
+
+			</div>
+			<!-- fin col-md 4 -->
+		</div>
+		<!-- fin row-->
+
+
+		<!-- partie des favoris -->
+		<div class="row"></div>
+
+	</div>
+	<!-- fin container -->
+
+</body>
+</html>

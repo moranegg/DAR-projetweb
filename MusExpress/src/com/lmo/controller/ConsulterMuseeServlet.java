@@ -22,12 +22,15 @@ public class ConsulterMuseeServlet extends HttpServlet {
 
 		try
 		{
-			JSONObject musee = null;
-			Map<String,String[]> map=request.getParameterMap();
+			//Map<String,String[]> map=request.getParameterMap();
 
-			if( map.containsKey("museeId")   && !request.getParameter ("museeId").equals("") )
+
+			if(!request.getParameter ("id").equals("") )
 
 			{  
+				System.out.println(request.getParameter ("id"));
+
+				
 				response.getWriter().print(
 						ConsulterMuseeService.getMusee(request.getParameter ("id")));
 			}
