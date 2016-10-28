@@ -5,7 +5,6 @@ import org.json.JSONObject;
 
 import com.lmo.dao.MuseeDao;
 import com.lmo.model.Musee;
-import com.lmo.utils.Tools;
 
 public class ConsulterMuseeService 
 {
