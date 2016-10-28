@@ -19,13 +19,41 @@ public class ConsulterMuseeService
 		{
 
 			//on retourne le musée
-            System.out.println("coucou" +Tools.serviceMessage(musee));
-			return Tools.serviceMessage(musee);
+			//return Tools.serviceMessage(musee);
 			//return true;
+
+			
+            JSONObject museeJSON = new JSONObject();
+			
+			museeJSON.put("id", musee.getId());
+			museeJSON.put("nom", musee.getNom());
+			museeJSON.put("adresse", musee.getAdresse());
+			museeJSON.put("ville", musee.getVille());
+			museeJSON.put("departement", musee.getDepartement());
+			museeJSON.put("codep", musee.getCodep());
+			museeJSON.put("ferme", musee.getFerme());
+			museeJSON.put("siteweb", musee.getSiteweb());
+			museeJSON.put("periode_ouvertue", musee.getPeriode_ouvertue());
+			museeJSON.put("fermeture_annuelle", musee.getFermeture_annuelle());
+			museeJSON.put("latitude", musee.getLatitude());
+			museeJSON.put("longitude", musee.getLongitude());
+			
+			
+			
+			return museeJSON;
+
+
+
+
+
+
+
+
 		}
 		else
 		{
-			return Tools.serviceMessage("Problème !");
+			return new JSONObject().put("musee","");
+
 			//return false;
 		}
 

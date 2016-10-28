@@ -17,9 +17,6 @@ var musee = {
 
 		init: function(idMusee){
 			this.id = idMusee;
-			console.log("idmusee" + idMusee);
-
-
 			//appel à la BDD
 			var museeFromDB = readMusee(idMusee);
 			//appel test
@@ -83,11 +80,10 @@ function readMusee(idMusee)
 	({
 		type: "POST",
 		url : "ConsulterMuseeServlet",
-		data : idMusee,
-		dataType : 'json',
+		data : {id : idMusee},
+		dataType : 'JSON',
 		error : function() 
 		{
-
 			alert("problème readMusee");
 		},
 		success : function(data) 
@@ -96,13 +92,12 @@ function readMusee(idMusee)
 
 			var museeFromDB = resultat.musee;
 			musee.init(museeFromDB);
-			//return museeFromDB;
-
-			
+			//return museeFromDB;	
 			
 		}
 	});
 }
+
 
 function testMusee(idMusee){
 	var museeExample = {
@@ -141,7 +136,6 @@ function GetURLParameter(sParam)
 $( document ).ready(function(){
 	var search = $(location).attr('search'); 
 	var idMusee = GetURLParameter('id_musee');
-	console.log("idmusee" + idMusee);
 
 
 	var mus = musee.init(idMusee);
