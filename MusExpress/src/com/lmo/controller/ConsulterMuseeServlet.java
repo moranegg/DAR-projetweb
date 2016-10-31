@@ -41,7 +41,7 @@ public class ConsulterMuseeServlet extends HttpServlet {
 		{
 			e.printStackTrace(); //local debug
 			request.setAttribute("error", e); //remote debug
-			request.getRequestDispatcher("index.html").forward(request, response);
+			//request.getRequestDispatcher("index.html").forward(request, response);
 		}
 	}
 }
