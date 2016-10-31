@@ -45,40 +45,7 @@ public class FavorisDao {
 	}*/
 
 
-	public static User addFavoris (int iduser, int idmusee)
-			throws JSONException
-	{
 
-		Session session = HibernateUtil.getSessionFactory().openSession();
-
-		Transaction tx = null;	
-		try {
-			tx = session.getTransaction();
-			tx.begin();
-			User user = UserDao.getUserById(String.valueOf(iduser));
-			Musee musee = MuseeDao.getMuseeById(String.valueOf(idmusee));
-		    Set<Musee> c = user.getMusees();
-		    c.add(musee);
-		    user.setMusees(c);	
-		    session.saveOrUpdate(user);	
-
-			tx.commit();
-			return user;
-		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
-			}
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-		return null;	
-
-
-
-
-
-	}
 
 
 }

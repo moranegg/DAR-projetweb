@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.lmo.dao.FavorisDao;
+import com.lmo.dao.UserDao;
 import com.lmo.model.Favoris;
 import com.lmo.model.User;
 import com.lmo.utils.Tools;
@@ -30,7 +31,7 @@ public class AjoutMuseeFavService
 			throws JSONException
 	{
 		JSONObject jo = new JSONObject();
-		User user = FavorisDao.addFavoris(iduser,idmusee);         
+		User user = UserDao.addFavoris(iduser,idmusee);         
 		if(user!=null)
 		{
 			jo.put("message", "1");

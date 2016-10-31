@@ -1,67 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
-  <display-name>MusExpress</display-name>
-  
-  	<welcome-file-list>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>MusExpress</display-name>
+
+	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
-	
-  <servlet>
-        <display-name>LoginServlet</display-name>
-        <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>com.lmo.controller.LoginServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/LoginServlet</url-pattern>
-    </servlet-mapping>
 
 	<servlet>
-        <display-name>InscriptionServlet</display-name>
-        <servlet-name>InscriptionServlet</servlet-name>
-        <servlet-class>com.lmo.controller.InscriptionServlet</servlet-class>
-    </servlet>
+		<display-name>LoginServlet</display-name>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>com.lmo.controller.LoginServlet</servlet-class>
+	</servlet>
 
-    <servlet-mapping>
-        <servlet-name>InscriptionServlet</servlet-name>
-        <url-pattern>/InscriptionServlet</url-pattern>
-    </servlet-mapping>
-    
-    	<servlet>
-        <display-name>UpdateUserServlet</display-name>
-        <servlet-name>UpdateUserServlet</servlet-name>
-        <servlet-class>com.lmo.controller.UpdateUserServlet</servlet-class>
-    </servlet>
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/LoginServlet</url-pattern>
+	</servlet-mapping>
 
-    <servlet-mapping>
-        <servlet-name>UpdateUserServlet</servlet-name>
-        <url-pattern>/UpdateUserServlet</url-pattern>
-    </servlet-mapping>
+	<servlet>
+		<display-name>InscriptionServlet</display-name>
+		<servlet-name>InscriptionServlet</servlet-name>
+		<servlet-class>com.lmo.controller.InscriptionServlet</servlet-class>
+	</servlet>
 
-     	<servlet>
-        <display-name>ConsulterUserServlet</display-name>
-        <servlet-name>ConsulterUserServlet</servlet-name>
-        <servlet-class>com.lmo.controller.ConsulterUserServlet</servlet-class>
-    </servlet>
+	<servlet-mapping>
+		<servlet-name>InscriptionServlet</servlet-name>
+		<url-pattern>/InscriptionServlet</url-pattern>
+	</servlet-mapping>
 
-    <servlet-mapping>
-        <servlet-name>ConsulterUserServlet</servlet-name>
-        <url-pattern>/ConsulterUserServlet</url-pattern>
-    </servlet-mapping>
-    
-     <servlet>
-        <display-name>ConsulterMuseeServlet</display-name>
-        <servlet-name>ConsulterMuseeServlet</servlet-name>
-        <servlet-class>com.lmo.controller.ConsulterMuseeServlet</servlet-class>
-    </servlet>
+	<servlet>
+		<display-name>UpdateUserServlet</display-name>
+		<servlet-name>UpdateUserServlet</servlet-name>
+		<servlet-class>com.lmo.controller.UpdateUserServlet</servlet-class>
+	</servlet>
 
-    <servlet-mapping>
-        <servlet-name>ConsulterMuseeServlet</servlet-name>
-        <url-pattern>/ConsulterMuseeServlet</url-pattern>
-    </servlet-mapping>
-    
-    	<servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateUserServlet</servlet-name>
+		<url-pattern>/UpdateUserServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<display-name>ConsulterUserServlet</display-name>
+		<servlet-name>ConsulterUserServlet</servlet-name>
+		<servlet-class>com.lmo.controller.ConsulterUserServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ConsulterUserServlet</servlet-name>
+		<url-pattern>/ConsulterUserServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<display-name>ConsulterMuseeServlet</display-name>
+		<servlet-name>ConsulterMuseeServlet</servlet-name>
+		<servlet-class>com.lmo.controller.ConsulterMuseeServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ConsulterMuseeServlet</servlet-name>
+		<url-pattern>/ConsulterMuseeServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
 		<description>
      	</description>
 		<display-name>AjoutMuseeFavServlet</display-name>
@@ -89,7 +92,22 @@
 		<url-pattern>/RechercherMuseeServlet</url-pattern>
 	</servlet-mapping>
 
-    
-    
- 
+	<servlet>
+		<description>
+		</description>
+		<display-name>AfficherFavorisServlet</display-name>
+		<servlet-name>AfficherFavorisServlet</servlet-name>
+		<servlet-class>com.lmo.controller.AfficherFavorisServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AfficherFavorisServlet</servlet-name>
+		<url-pattern>/AfficherFavorisServlet</url-pattern>
+	</servlet-mapping>
+
+
+
+
+
+
+
 </web-app>

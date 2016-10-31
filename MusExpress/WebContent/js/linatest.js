@@ -12,12 +12,16 @@ function enregistre(formulaire)
 	$.ajax({
 		type : "POST",
 		//url : "RechercherMuseeServlet",
-		//url : "AjoutMuseeFavServlet",
-		url : "ConsulterMuseeServlet",
+		url : "AjoutMuseeFavServlet",
+		//url : "ConsulterMuseeServlet",
+		//url : "AfficherFavorisServlet",
+
 
 		//data : "nom=" + iduser,
-		//data : "iduser=" + iduser + "&idmusee=" + idmusee,
-		data : "id=" + iduser,
+		data : "iduser=" + iduser + "&idmusee=" + idmusee,
+		//data : "id=" + iduser,
+		//data : "id=" + iduser,
+
 
 		dataType : "json",
 		success : traiteReponseEnregistrement,
