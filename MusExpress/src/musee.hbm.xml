@@ -7,65 +7,69 @@
 <hibernate-mapping>
 
 	<class name="com.lmo.model.Musee" table="musee">
-		
-		<id name="id" type="int" column="id" >
-			<generator class="increment"/>
+
+		<id name="id" type="int" column="id">
+			<generator class="increment" />
 		</id>
-		
-		<property name="nom"> 
-			<column name="nom"/>
+
+		<property name="nom">
+			<column name="nom" />
 		</property>
-		
-		<property name="adresse"> 
-			<column name="adresse"/>
+
+		<property name="adresse">
+			<column name="adresse" />
 		</property>
-		
-		<property name="ville"> 
-			<column name="ville"/>
+
+		<property name="ville">
+			<column name="ville" />
 		</property>
-		
-		<property name="departement"> 
-			<column name="departement"/>
+
+		<property name="departement">
+			<column name="departement" />
 		</property>
-		
-		<property name="codep"> 
-			<column name="codep"/>
+
+		<property name="codep">
+			<column name="codep" />
 		</property>
-		
-		<property name="ferme"> 
-			<column name="ferme"/>
+
+		<property name="ferme">
+			<column name="ferme" />
 		</property>
-		
-		<property name="siteweb"> 
-			<column name="siteweb"/>
+
+		<property name="siteweb">
+			<column name="siteweb" />
 		</property>
-		
-		
-		<property name="periode_ouvertue"> 
-			<column name="periode_ouvertue"/>
+
+
+		<property name="periode_ouvertue">
+			<column name="periode_ouvertue" />
 		</property>
-		
-		<property name="fermeture_annuelle"> 
-			<column name="fermeture_annuelle"/>
+
+		<property name="fermeture_annuelle">
+			<column name="fermeture_annuelle" />
 		</property>
-		
-		<property name="latitude"> 
-			<column name="latitude"/>
+
+		<property name="latitude">
+			<column name="latitude" />
 		</property>
-		
-		<property name="longitude"> 
-			<column name="longitude"/>
+
+		<property name="longitude">
+			<column name="longitude" />
 		</property>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
+		<property name="type">
+			<column name="type" />
+		</property>
+
+
+
+
+
+
+
+
+
+
 	</class>
 
 </hibernate-mapping>

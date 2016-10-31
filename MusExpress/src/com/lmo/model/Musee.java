@@ -1,6 +1,9 @@
 package com.lmo.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -24,7 +27,12 @@ public class Musee implements Serializable
     private String fermeture_annuelle;
     private double latitude; 
     private double longitude;
+    private String type;
+	private Set<User> userfav = new HashSet<User>(0);
+
     
+
+
 	public Musee() 
 	{
 		super();
@@ -32,7 +40,7 @@ public class Musee implements Serializable
 	}
 
 	public Musee(int id, String nom, String adresse, String ville, int departement, int codep, String ferme,
-			String siteweb, String periode_ouvertue, String fermeture_annuelle, double latitude, double longitude) {
+			String siteweb, String periode_ouvertue, String fermeture_annuelle, double latitude, double longitude, String type) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -46,10 +54,11 @@ public class Musee implements Serializable
 		this.fermeture_annuelle = fermeture_annuelle;
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.type=type;
 	}
 	
 	public Musee(String nom, String adresse, String ville, int departement, int codep, String ferme,
-			String siteweb, String periode_ouvertue, String fermeture_annuelle, double latitude, double longitude) {
+			String siteweb, String periode_ouvertue, String fermeture_annuelle, double latitude, double longitude, String type) {
 		super();
 		this.nom = nom;
 		this.adresse = adresse;
@@ -62,6 +71,7 @@ public class Musee implements Serializable
 		this.fermeture_annuelle = fermeture_annuelle;
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.type = type;
 	}
 
 
@@ -160,6 +170,22 @@ public class Musee implements Serializable
 
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
+	}
+	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public Set<User> getUserfav() {
+		return userfav;
+	}
+
+	public void setUserfav(Set<User> userfav) {
+		this.userfav = userfav;
 	}
 
 	

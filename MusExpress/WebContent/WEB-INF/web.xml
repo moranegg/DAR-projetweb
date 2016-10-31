@@ -61,5 +61,35 @@
         <url-pattern>/ConsulterMuseeServlet</url-pattern>
     </servlet-mapping>
     
+    	<servlet>
+		<description>
+     	</description>
+		<display-name>AjoutMuseeFavServlet</display-name>
+		<servlet-name>AjoutMuseeFavServlet</servlet-name>
+		<servlet-class>com.lmo.controller.AjoutMuseeFavServlet</servlet-class>
+	</servlet>
+
+
+	<servlet-mapping>
+		<servlet-name>AjoutMuseeFavServlet</servlet-name>
+		<url-pattern>/AjoutMuseeFavServlet</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<description>
+		</description>
+		<display-name>RechercherMuseeServlet</display-name>
+		<servlet-name>RechercherMuseeServlet</servlet-name>
+		<servlet-class>com.lmo.controller.RechercherMuseeServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>RechercherMuseeServlet</servlet-name>
+		<url-pattern>/RechercherMuseeServlet</url-pattern>
+	</servlet-mapping>
+
+    
+    
  
 </web-app>

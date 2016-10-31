@@ -119,7 +119,7 @@ public class ApiMusee
 							periode_ouverture, 							
 							fermeture_annuelle, 
 							latitude, 
-							longitude);
+							longitude,"musée");
 					
 
 					
@@ -218,7 +218,7 @@ public class ApiMusee
 
 					
 					MuseeDao.addMusee
-					(titre+"\n Parc " +parc, 
+					(titre+", Parc" +parc, 
 							adresse, 
 							ville, 
 							dept, 
@@ -228,7 +228,8 @@ public class ApiMusee
 							periode_ouverture, 							
 							fermeture_annuelle, 
 							latitude, 
-							longitude);
+							longitude,
+							"parc");
 					
 
 					

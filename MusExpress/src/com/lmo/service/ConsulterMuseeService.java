@@ -13,17 +13,16 @@ public class ConsulterMuseeService
 	{
 
 		Musee musee = MuseeDao.getMuseeById(id);
+		JSONObject response = new JSONObject();
+
 
 		if(musee!=null)
 		{
 
-			//on retourne le musée
-			//return Tools.serviceMessage(musee);
-			//return true;
 
-			
-            JSONObject museeJSON = new JSONObject();
-			
+
+			JSONObject museeJSON = new JSONObject();
+
 			museeJSON.put("id", musee.getId());
 			museeJSON.put("nom", musee.getNom());
 			museeJSON.put("adresse", musee.getAdresse());
@@ -36,28 +35,24 @@ public class ConsulterMuseeService
 			museeJSON.put("fermeture_annuelle", musee.getFermeture_annuelle());
 			museeJSON.put("latitude", musee.getLatitude());
 			museeJSON.put("longitude", musee.getLongitude());
-			
-			
-			
-			return museeJSON;
+			museeJSON.put("type", musee.getType());
 
 
 
-
-
-
-
+			response.put("message", "1");
+			response.put("musee", museeJSON);
+			return response;
 
 		}
 		else
 		{
-			return new JSONObject().put("musee","");
-
-			//return false;
+			response.put("message", "Problème!");
+			response.put("musee", "");
+			return response;
 		}
 
 	}
-	
-	
-	
+
+
+
 }

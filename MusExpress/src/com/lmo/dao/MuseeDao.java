@@ -1,5 +1,8 @@
 package com.lmo.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -15,7 +18,7 @@ public class MuseeDao
 
 
 	public static void addMusee	(String nom, String adresse, String ville, int departement, int codep, String ferme,
-			String siteweb, String periode_ouverture, String fermeture_annuelle, double latitude, double longitude)
+			String siteweb, String periode_ouverture, String fermeture_annuelle, double latitude, double longitude, String type)
 					throws JSONException
 	{
 
@@ -27,7 +30,7 @@ public class MuseeDao
 			tx = session.getTransaction();
 			tx.begin();
 			Musee musee = new Musee (nom, adresse, ville, departement,codep, ferme,
-					siteweb,periode_ouverture, fermeture_annuelle, latitude,longitude);
+					siteweb,periode_ouverture, fermeture_annuelle, latitude,longitude,type);
 			session.save(musee);		
 			tx.commit();
 		} catch (Exception e) {
@@ -68,5 +71,30 @@ public class MuseeDao
 	            session.close();
 	        }
 	        return musee;
+	    }
+	   
+	    public static List<Musee> getListOfMusees(String nom){
+	        List<Musee> list = new ArrayList<Musee>();
+	        Session session = HibernateUtil.getSessionFactory().openSession();
+	        Transaction tx = null; 
+
+
+	        try {
+
+	            tx = session.getTransaction();
+	            tx.begin();
+	            list = session.createQuery("from Musee m where m.nom like :searchKey")
+	        	        .setParameter("searchKey", "%" + nom + "%")
+	            		.list();                        
+	            tx.commit();
+	        } catch (Exception e) {
+	            if (tx != null) {
+	                tx.rollback();
+	            }
+	            e.printStackTrace();
+	        } finally {
+	            session.close();
+	        }
+	        return list;
 	    }
 }

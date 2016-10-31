@@ -1,35 +1,42 @@
 package com.lmo.controller;
 
 import java.io.IOException;
-import java.util.Map;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONObject;
-
 import com.lmo.service.ConsulterMuseeService;
+import com.lmo.service.RechercherMuseeService;
 
 
-public class ConsulterMuseeServlet extends HttpServlet {
+public class RechercherMuseeServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+    public RechercherMuseeServlet() {
+        super();
+    }
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);}
+		doPost(request, response);
+	}
 
-	@Override
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		try
 		{
 
-			if(!request.getParameter ("id").equals("") )
+
+			if(!request.getParameter ("nom").equals("") )
 
 			{  
+
 				
 				response.getWriter().print(
-						ConsulterMuseeService.getMusee(request.getParameter ("id")));
-				System.out.println(ConsulterMuseeService.getMusee(request.getParameter ("id")).toString());
+						RechercherMuseeService.getListOfMusees(request.getParameter ("nom")));
+				
+				System.out.println(RechercherMuseeService.getListOfMusees(request.getParameter ("nom")).toString());
+
 			}
 
 			else throw new Exception("Wrong Url! Missing parameters\n Il manque des parametres a l'URL!");
@@ -39,6 +46,6 @@ public class ConsulterMuseeServlet extends HttpServlet {
 			e.printStackTrace(); //local debug
 			request.setAttribute("error", e); //remote debug
 			//request.getRequestDispatcher("index.html").forward(request, response);
-		}
-	}
+		}	}
+
 }
