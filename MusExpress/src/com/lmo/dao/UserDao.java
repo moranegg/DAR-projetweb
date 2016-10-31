@@ -54,7 +54,7 @@ public class UserDao
 	        {
 	            tx = session.getTransaction();
 	            tx.begin();
-	            Query query = session.createQuery("from User where id="+id+";");
+	            Query query = session.createQuery("from User where id='"+id+"'");
 	            user = (User)query.uniqueResult();
 	            tx.commit();
 	        }

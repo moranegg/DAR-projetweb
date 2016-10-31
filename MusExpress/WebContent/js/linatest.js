@@ -11,13 +11,13 @@ function enregistre(formulaire)
 	
 	$.ajax({
 		type : "POST",
-		url : "RechercherMuseeServlet",
+		//url : "RechercherMuseeServlet",
 		//url : "AjoutMuseeFavServlet",
-		//url : "ConsulterMuseeServlet",
+		url : "ConsulterMuseeServlet",
 
-		data : "nom=" + iduser,
+		//data : "nom=" + iduser,
 		//data : "iduser=" + iduser + "&idmusee=" + idmusee,
-		//data : "id=" + iduser,
+		data : "id=" + iduser,
 
 		dataType : "json",
 		success : traiteReponseEnregistrement,
@@ -39,8 +39,9 @@ function traiteReponseEnregistrement(rep)
 	else if (rep.message!=undefined)
 	{
 		alert("message:"+ rep.message);
+		//alert("user :"+ rep.user)
 	}
-	else 
+	else  
 	{
 		alert("ok");
 	}

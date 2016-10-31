@@ -62,6 +62,16 @@
 		</property>
 
 
+		<set name="users" table="favoris" inverse="false"
+			lazy="false" fetch="select" cascade="all">
+			<key>
+				<column name="musee_id" not-null="true" />
+			</key>
+			<many-to-many entity-name="com.lmo.model.User">
+				<column name="user_id" not-null="true" />
+			</many-to-many>
+		</set>
+
 
 
 

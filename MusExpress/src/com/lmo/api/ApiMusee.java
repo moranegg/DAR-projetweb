@@ -218,7 +218,7 @@ public class ApiMusee
 
 					
 					MuseeDao.addMusee
-					(titre+", Parc" +parc, 
+					(titre+", Parc " +parc, 
 							adresse, 
 							ville, 
 							dept, 

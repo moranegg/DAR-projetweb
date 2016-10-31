@@ -4,9 +4,13 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,8 +32,7 @@ public class Musee implements Serializable
     private double latitude; 
     private double longitude;
     private String type;
-	private Set<User> userfav = new HashSet<User>(0);
-
+    private Set<User> users = new HashSet<User>(0);
     
 
 
@@ -73,6 +76,11 @@ public class Musee implements Serializable
 		this.longitude = longitude;
 		this.type = type;
 	}
+	
+    public void addUser(User user) 
+    {
+        this.users.add(user);
+    }
 
 
 
@@ -180,12 +188,18 @@ public class Musee implements Serializable
 		this.type = type;
 	}
 
-	public Set<User> getUserfav() {
-		return userfav;
+   /* @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "favoris",
+            joinColumns = @JoinColumn(name = "musee_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )*/
+	public Set<User> getUsers() {
+		return users;
 	}
 
-	public void setUserfav(Set<User> userfav) {
-		this.userfav = userfav;
+	public void setUsers(Set<User> userfav) {
+		this.users = userfav;
 	}
 
 	

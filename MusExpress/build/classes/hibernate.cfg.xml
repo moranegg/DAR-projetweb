@@ -22,7 +22,6 @@
 	    <property name="hibernate.format_sql">true</property>
 		<mapping resource="user.hbm.xml"/>
 		<mapping resource="musee.hbm.xml"/>
-		<mapping resource="favoris.hbm.xml"/>
 		
 		
 	</session-factory>

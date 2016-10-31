@@ -7,30 +7,41 @@
 <hibernate-mapping>
 
 	<class name="com.lmo.model.User" table="utilisateur">
-		
-		<id name="id" type="int" column="id" >
-			<generator class="increment"/>
+
+		<id name="id" type="int" column="id">
+			<generator class="increment" />
 		</id>
-		
-		<property name="nom"> 
-			<column name="nom"/>
+
+		<property name="nom">
+			<column name="nom" />
 		</property>
-		
-		<property name="prenom"> 
-			<column name="prenom"/>
+
+		<property name="prenom">
+			<column name="prenom" />
 		</property>
-		
-		<property name="email"> 
-			<column name="email"/>
+
+		<property name="email">
+			<column name="email" />
 		</property>
-		
-		<property name="password"> 
-			<column name="password"/>
+
+		<property name="password">
+			<column name="password" />
 		</property>
-		
-		<property name="codep"> 
-			<column name="codep"/>
+
+		<property name="codep">
+			<column name="codep" />
 		</property>
+
+		<set name="musees" table="favoris" inverse="false"
+			lazy="false" fetch="select" cascade="all">
+			<key>
+				<column name="user_id" not-null="true" />
+			</key>
+			<many-to-many entity-name="com.lmo.model.Musee">
+				<column name="musee_id" not-null="true" />
+			</many-to-many>
+		</set>
+
 	</class>
 
 </hibernate-mapping>

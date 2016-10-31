@@ -4,7 +4,10 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import java.util.HashSet;
+import java.util.Set;
  
 @Entity
 @Table(name="utilisateur")
@@ -19,6 +22,7 @@ public class User implements Serializable
     private String email;
     private String password;
     private String codep;
+	private Set<Musee> musees = new HashSet<Musee>(0);
  
     public User() {
     } 
@@ -40,6 +44,10 @@ public class User implements Serializable
         this.password = password;
         this.codep = codep;
 
+    }
+    
+    public void addMusee(Musee musee) {
+        this.musees.add(musee);
     }
  
  
@@ -90,7 +98,16 @@ public class User implements Serializable
  
     public void setPassword(String password) {
         this.password = password;
-    }    
+    }
+
+    //@ManyToMany(mappedBy = "users")
+	public Set<Musee> getMusees() {
+		return musees;
+	}
+
+	public void setMusees(Set<Musee> musees) {
+		this.musees = musees;
+	}    
     
  
 }

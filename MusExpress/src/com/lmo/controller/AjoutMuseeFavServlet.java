@@ -39,11 +39,9 @@ public class AjoutMuseeFavServlet extends HttpServlet {
 			if(!request.getParameter("iduser").equals("") && !request.getParameter("idmusee").equals(""))
 
 			{
-				System.out.println(request.getParameter ("iduser"));
-				System.out.println(request.getParameter ("idmusee"));
 				response.getWriter().print(AjoutMuseeFavService.ajoutFav(Integer.parseInt(request.getParameter ("iduser")), 
 						Integer.parseInt(request.getParameter ("idmusee"))));
-
+				
 
 			}
 
