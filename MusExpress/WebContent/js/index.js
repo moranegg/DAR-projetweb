@@ -1,111 +1,124 @@
 var index = {
- 
-    onReady: function() {
-    },
 
-    	
-    login: function(event){
-    	var email = $('#email_login').val();
-		var password = $('#password_login').val();
-		if(checkIsText(email)&& checkIsText(password) && isEmail(email)){
-			login(email,password);
-		}else{
-			alert("problème !!")
+		onReady: function() {
+		},
+
+
+		login: function(event){
+			//event.preventDefault();
+			var email = $('#email_login').val();
+			var password = $('#password_login').val();
+			if(checkIsText(email)&& checkIsText(password) && isEmail(email)){
+				console.log("serveur")
+				login(email,password);
+			}else{
+				printhtml("#notifier-login","champs non rempli");
+				console.log("problème !!")
+			}
+
+		},
+
+		createAccount: function(event){
+			//alert("account");
+			var email = $('#email_register').val();
+			var password = $('#password_register').val();
+			var nom = $('#nom').val();
+			var prenom = $('#prenom').val();
+			var codep = $('#codep').val();
+
+
+			var ok = verif(nom, prenom, codep, email, password);
+			if (ok) {
+				console.log("ok");
+				enregistre(nom, prenom, codep, email, password);
+			}else{
+				console.log("method verif retourne faux, champs non ou " +
+						"mal remplis");
+				//alert("problème !! ")
+			}
+
 		}
-		
-    },
-    
-    createAccount: function(event){
-    	//alert("account");
-    	var email = $('#email_register').val();
-		var password = $('#password_register').val();
-    	var nom = $('#nom').val();
-    	var prenom = $('#prenom').val();
-    	var codep = $('#codep').val();
-    	
 
-    	var ok = verif(nom, prenom, codep, email, password);
-    	if (ok) {
-    		console.log("ok");
-    		enregistre(nom, prenom, codep, email, password);
-    	}else{
-    		console.log("bad!!!");
-    		alert("problème !! ")
-    	}
-    	
-    }
- 
 };
- 
+
 $( document ).ready(function(){
 
-		$("#login-btn").click(index.login);
-		$("#register-btn").click(index.createAccount);
-		
-		
+	$("#login-btn").click(index.login);
+	$("#register-btn").click(index.createAccount);
+
+
 });
 
 
 function verif(nom, prenom, codep, email, password) 
 {
-	
+
 	if(prenom.length==0)
 	{
-		//printhtml('#notifier-register',"Prenom manquant");
-		//errorElement(prenom);
+
+		printhtml('#notifier-register',"Prenom manquant");
 		return false;
 	}
-	
+
 	if(nom.length==0)
 	{
-		//func_erreur_inscription("Nom manquant");
+		printhtml('#notifier-register',"Nom manquant");
 		return false;
 	}
-	
-	if(codep.length==0)
+
+	if(codep.length<5)
 	{
-		//func_erreur_inscription("Code postal manquant");
+		printhtml('#notifier-register',"Code postal manquant");
 		return false;
 	}
-	
+
 	if(email.length==0 && !isEmail(email))
 	{
-		//func_erreur_inscription("Email manquant");
+		printhtml('#notifier-register',"Email manquant");
 		return false;
 	}
 
 	if(password.length==0)
 	{
-		//func_erreur_inscription("Mot de passe manquant");
+		printhtml('#notifier-register',"Mot de passe manquant");
 		return false;
 	}
-	
+
 	if(password.length<8)
 	{
-		//func_erreur_inscription("Mot de passe trop court");
+		printhtml('#notifier-register',"Mot de passe trop court");
 		return false;
 	}
-	
+
 	return true;
 }
 function login(email,password){
+	$.ajax({
+		type : "POST",
+		url : "LoginServlet",
+		data :{
+			"email":email,
+			"password":password,
+		},
 
-	$.post("LoginServlet",
-			{ email: email, password:password},
-			function(data) 
+		dataType : "json",
+		success : function(data) { 
+			var resultat = $.parseJSON(data);
+			var user = resultat.user;
+			if (resultat.message=="1") 		
 			{
-	
-				var resultat = $.parseJSON(data);
-				var user = resultat.user;
-				if (resultat.message=="1") 		
-				{
-					//TODO: ajouter id utilisateur au path
-					$(location).attr('home.html'); 
-					//$(location).attr('home.html/'+user); 
-				}
-	
-	
-		});
+				console.log("success")
+				//TODO: ajouter id utilisateur au path
+				$(location).attr('templates/home.html?id_user='+user); 
+				//$(location).attr('home.html/'+user); 
+			} 
+		},
+		error : function(request,error) 
+		{
+			// alert("Erreur : responseText: "+request.responseText);
+			$(location).attr('/home.html?id_user='); 
+		}
+	});
 }
 
 function checkIsText(text){
@@ -129,13 +142,21 @@ function enregistre(prenom, nom, codep, email, password)
 	$.ajax({
 		type : "POST",
 		url : "InscriptionServlet",
-		data : "prenom=" + prenom + "&nom=" + nom + "&codep=" + codep + "&email="
-				+ email+ "&password=" + password,
+		data :{
+			"prenom": prenom,
+			"nom": nom,
+			"codep":codep,
+			"mail":email,
+			"password":password,
+		},
+
 		dataType : "json",
-		success : traiteReponseEnregistrement,
-		error : function(XHR, testStatus, errorThrown) 
+		success : function(data) { 
+			alert(data.responseText);  
+		},
+		error : function(request,error) 
 		{
-			alert(XHR + "" + testStatus + "" + errorThrown);
+			 alert("Erreur : responseText: "+request.responseText);
 		}
 	});
 }
@@ -159,25 +180,14 @@ function traiteReponseEnregistrement(rep)
 	}
 }
 
-function func_erreur_inscription(msg)
-{
-	printhtml('#notifier',msg);
-}
 
 function printhtml(dom,msg)
 {
 	$(dom).html(msg);
+	$(dom).removeClass('hide');
 }
 
-function validateElement(element){
 
-        element.text('OK!').addClass('valid')
-            .closest('.control-group').removeClass('error').addClass('success');
+function traiteResponse(){
+
 }
-
-function errorElement(element){
-	 var formGroup = $(element).closest('.control-group').addClass('has-error');
-	 formGroup.append("<span class=\"glyphicon glyphicon-remove form-control-feedback\" aria-hidden=\"true\"></span>")
-	 
-}
-

@@ -78,41 +78,37 @@ body {
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-md-10">
-
-
 								<form id="form_login">
-
-
 									<div class="form-group">
 										<div class="">
-											<input class="form-control login_input" id="email_login"
-												placeholder="Email" value="" name="email"
-												data-required="true" data-notblank="true" /> <span
-												class="help-block"></span>
+											<input class="form-control" id="email_login"
+												placeholder="Email" required="" autofocus="" type="email" />
 										</div>
+					
 
 									</div>
-									<div class="form-group mb20 ">
+									<div class="form-group">
 										<div class="">
 											<input type="password" id="password_login"
-												class="form-control login_input" placeholder="Mot de Passe"
-												name="password" value="" data-required="true"
-												data-notblank="true" data-rangelength="[5,25]"> <span
-												class="help-block"></span>
+												class="form-control" placeholder="Mot de Passe"
+												name="password" required="" type="password" data-rangelength="[5,25]">
 										</div>
 									</div>
+									
 									<div class="form-group ">
 										<div class="controls">
-											<input class="btn btn-success" name="login" value="Connexion"
-												id="login-btn" data-bypass />
+											<div class="btn btn-success btn-lg" name="login" value="Connexion"
+												id="login-btn" data-bypass > Valider
+												 </div>
 										</div>
 									</div>
-
-									<div id='notifier-login'></div>
+									<div class="alert alert-warning hide" id='notifier-login'></div>
 
 
 
 								</form>
+								
+
 
 							</div>
 						</div>
@@ -181,19 +177,23 @@ body {
 											</div>
 										</div>
 									</div>
-
-
-									<input class="btn btn-primary btn-lg" value="Valider"
-										id="register-btn" />
-									<div id='notifier-register'></div>
-
-
+								
+									
+									<div class="btn btn-primary btn-lg" value="Valider"
+										id="register-btn"> Valider 
+										
+									</div>
+									<br>
+									
+									<div class="alert alert-warning hide" role="alert" id='notifier-register'></div>
+									
 								</form>
 							</div>
 							<!--end col-lg-6-->
 						</div>
 						<!--end row-->
 					</div>
+					
 					<!--end container-- >
                 </div><!--panel body-->
 
