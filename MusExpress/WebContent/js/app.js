@@ -1,7 +1,15 @@
 $( document ).ready(function(){
 	displayTime();
+	var id_user = GetURLParameter('id_user');
+	routeur.init(id_user);
+
 	$("#go").click(home.recherche);
-	$("#account").click(routeur.account(id_user));
+	$("#account-btn").click(routeur.account);
+	
+
+	var idMusee = GetURLParameter('id_musee');
+	$(".musee").click(routeur.musee);
+
 });
 
 var home = {
@@ -11,12 +19,10 @@ var home = {
 
 
 		recherche: function(event){
+			console.log("home.recherche");
 			var elt = $("#recherche").val();
-			if(elt != ""){
-				alert("Je veux rechercher "+ elt);
-			}else{
-				alert("Pas de reherche demander");
-			}
+			console.log("home.recherche de: "+elt);
+			
 		},
 
 		readMeteo: function(){
@@ -34,25 +40,35 @@ var home = {
 };
 
 var routeur = {
+		idUser: "",
+
 		index: function(){
+			console.log("routeur.index");
 			window.location=('index.html'); 
 		},
-		
+
+		init: function(){
+			this.idUser = GetURLParameter('id_user');
+		},
+
 		home: function(){
-			window.location=('home.html?id_user'+id_user); 
+			console.log("routeur.home");
+			window.location=('home.html?id_user'+this.idUser);
+
+
 		},
-		
+
 		account: function(){
-			window.location=('account.html?id_user'+id_user); 
+			console.log("routeur.account");
+			window.location=('account.html?id_user'+this.idUser); 
+
 		},
-		
-		musee: function(id_musee){
-			window.location=('musee.html?id_user'+id_user+'&'+id_musee='+id_musee); 
+
+		musee: function(idMusee){
+			console.log("routeur.musee");
+			window.location=('musee.html?id_user'+this.idUser+'&id_musee='+idMusee); 
+
 		},
-		
-		affluance: function(id_musee){
-			window.location=('affluance.html?id_user'+id_user+'&'+id_musee='+id_musee); 
-		}
 }
 
 function displayTime(){
@@ -60,4 +76,18 @@ function displayTime(){
 	var now  = new Date();
 	elt.innerHTML = now.getDate()+"/"+(now.getMonth()+1) + "/"+now.getFullYear();
 
+}
+
+function GetURLParameter(sParam)
+{
+	var sPageURL = window.location.search.substring(1);
+	var sURLVariables = sPageURL.split('&');
+	for (var i = 0; i < sURLVariables.length; i++) 
+	{
+		var sParameterName = sURLVariables[i].split('=');
+		if (sParameterName[0] == sParam) 
+		{
+			return sParameterName[1];
+		}
+	}
 }

@@ -2,12 +2,10 @@
 <html>
 <head>
 
-
 <meta charset="utf-8">
 <title>MusExpress</title>
 <meta name="description" content="MusExpress">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
 <!-- Libs -->
@@ -20,56 +18,22 @@
 <script type="text/javascript" src="/MusExpress/js/index.js"></script>
 
 
-
-
-<style>
-body {
-	padding-top: 20px;
-	/* 60px to make the container go all the way to the bottom of the topbar */
-}
-</style>
-
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
-
-
-
-
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-
-
-<!--[if lt IE 9]>
-    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-<!--[if !IE 7]>
-    <style type="text/css">
-        #wrap {display:table;height:100%}
-    </style>
-    <![endif]-->
-
-
-
+<link rel="stylesheet" href="/MusExpress/js/lib/css/bootstrap.min.css">
 
 </head>
 
-<body data-spy="scroll" data-target=".subnav" data-offset="50">
-
+<body>
 	<nav class="navbar navbar-default navbar-static-top header-template"
 		role="navigation" style="margin-bottom: 0">
-	<div class="container">
-		<div class="navbar-header">
-			<h1 class="navbar-brand">MusExpress</h1>
+		<div class="row">
+		<div class="col-md-3">
+			<a class="navbar-brand" href="#"> MusExpress</a>
 		</div>
-	</div>
+		</div>
 	</nav>
-
 	<!-- /.navbar-header -->
-	<div class="container-fluid">
+	<div class="container">
 		<div class="row">
 			<div class="col-md-6">
 				<div class="panel panel-default">
@@ -83,22 +47,22 @@ body {
 											<input class="form-control" id="email_login"
 												placeholder="Email" required="" autofocus="" type="email" />
 										</div>
-					
+
 
 									</div>
 									<div class="form-group">
 										<div class="">
 											<input type="password" id="password_login"
 												class="form-control" placeholder="Mot de Passe"
-												name="password" required="" type="password" data-rangelength="[5,25]">
+												name="password" required="" type="password"
+												data-rangelength="[5,25]">
 										</div>
 									</div>
-									
+
 									<div class="form-group ">
 										<div class="controls">
-											<div class="btn btn-success btn-lg" name="login" value="Connexion"
-												id="login-btn" data-bypass > Valider
-												 </div>
+											<div class="btn btn-success btn-lg" name="login"
+												value="Connexion" id="login-btn" data-bypass>Valider</div>
 										</div>
 									</div>
 									<div class="alert alert-warning hide" id='notifier-login'></div>
@@ -117,7 +81,9 @@ body {
 					<p>La meilleure fa&ccedil;on de visiter en IDF. Chaque week-end
 						je trouve le mus&eacute;e avec le moins d'attente et j'y vais! Et
 						je sais si je dois prendre mon parapluie...</p>
-					<footer>Hugo de <cite title="Source Title">Timeout</cite></footer>
+					<footer>
+						Hugo de <cite title="Source Title">Timeout</cite>
+					</footer>
 				</blockquote>
 			</div>
 
@@ -175,41 +141,42 @@ body {
 											</div>
 										</div>
 									</div>
-											
+
 									<div class="form-group ">
 										<div class="controls">
-											<div class="btn btn-primary btn-lg" 
-												id="register-btn" data-bypass > Valider
-												 </div>
+											<div class="btn btn-primary btn-lg" id="register-btn"
+												data-bypass>Valider</div>
 										</div>
 									</div>
 									<div class="hide" role="alert" id='loader-register'>
 										<img src="images/loader.gif">
 									</div>
-									<div class="alert alert-warning hide" role="alert" id='notifier-register'></div>
-									
+									<div class="alert alert-warning hide" role="alert"
+										id='notifier-register'></div>
+
 								</form>
 							</div>
 							<!--end col-lg-6-->
 						</div>
 						<!--end row-->
 					</div>
-					
-					<!--end container-->
-                </div><!--panel body-->
 
+					<!--end container-->
 				</div>
-				<!--end panel-->
+				<!--panel body-->
 
 			</div>
+			<!--end panel-->
 
 		</div>
+
+	</div>
 	<footer class="footer">
-	<p class="text-center">
-		The source code for this application is available in <a
-			href="https://github.com/moranegg/DAR-projetweb">this repository</a>
-		on GitHub.
-	</p>
+		<p class="text-center">
+			The source code for this application is available in <a
+				href="https://github.com/moranegg/DAR-projetweb">this repository</a>
+			on GitHub.
+		</p>
 	</footer>
 </body>
 </html>

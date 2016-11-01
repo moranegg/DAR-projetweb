@@ -5,47 +5,45 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Compte</title>
 
+<link rel="stylesheet" href="/MusExpress/js/lib/css/bootstrap.min.css">
 
-<!-- TODO: changer les liens en local -->
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
 
 <!-- Libs -->
 <script type="text/javascript"
 	src="/MusExpress/js/lib/jquery-3.1.1.min.js"></script>
-<script type="text/javascript"
-	src="/MusExpress/js/lib/tether.min.js"></script>
-<script type="text/javascript"
-	src="../../MusExpress/js/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="/MusExpress/js/lib/tether.min.js"></script>
+<script type="text/javascript" src="/MusExpress/js/lib/bootstrap.min.js"></script>
 
-<script type="text/javascript" src="../../MusExpress/js/app.js"></script>
-<script type="text/javascript" src="../../MusExpress/js/account.js"></script>
+<script type="text/javascript" src="/MusExpress/js/app.js"></script>
+<script type="text/javascript" src="/MusExpress/js/account.js"></script>
 
 </head>
-<body >
+<body>
 
 	<nav class="navbar navbar-default navbar-static-top header-template"
 		role="navigation" style="margin-bottom: 0">
-		<a class="navbar-brand" href="#">MusExpress</a>
-
-		<form class="navbar-form navbar-left">
-			<div class="form-group">
-				<input type="text" class="form-control"
-					placeholder="Recherche par nom">
+		<div class="row">
+			<div class="col-md-3">
+				<a class="navbar-brand" href="#"> MusExpress</a>
 			</div>
-			<button type="submit" class="btn btn-default">Go!</button>
-			<span id="day"></span>
-		</form>
 
-		<p class="navbar-text navbar-right">
-			<a href="#" class="navbar-link"> <span
-				class="glyphicon glyphicon-user" aria-hidden="true"></span>Signed in
-				as
-			</a>
-		</p>
+			<form class="navbar-form navbar-left">
+				<div class="form-group">
+					<input type="text" class="form-control"
+						placeholder="Recherche par nom" id="recherche-input">
+				</div>
+				<div class="btn btn-default" id="recherche-btn">
+					<span class="glyphicon glyphicon-search"></span> Go!
+				</div>
+				<span id="day"></span>
+			</form>
+
+			<div class="col-md-3 pull-right">
+				<div class="btn btn-default" id="account-btn">
+					<span class="glyphicon glyphicon-user"></span> Mon compte
+				</div>
+			</div>
+		</div>
 	</nav>
 
 	<div class="container">

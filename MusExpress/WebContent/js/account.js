@@ -20,10 +20,12 @@ function readUser(){
 	//readUser avec UserServlet/AccountServlet dans l'approche REST
 	//ou ReadUserServlet dans l'approche SOAP
 	$.ajax({
-		type: "POST",
-        url : "../ConsulterUserServlet",
+		type: "GET",
+        url : "ConsulterUserServlet",
         dataType : 'json',
-        data : {id : "1"},
+        data : {
+        	id_user : "1"
+        },
         success : function(data) {
         	
         	var resultat = $.parseJSON(data);
@@ -41,14 +43,14 @@ function readUser(){
         },
         error : function(XHR, testStatus, errorThrown) 
 		{
-        	 alert("status: " + XHR.status + ", erreur: " + XHR.responseText);
+        	 console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
 		}
     });
 }
 function updateUser(id, nom,prenom,codep,email, password){
 	$.ajax({
-		type : "POST",
-		url : "../UpdateUserServlet",
+		type : "GET",
+		url : "UpdateUserServlet",
 		data : {
 			"id": id,
 			"prenom" : prenom,
@@ -71,10 +73,10 @@ function updateUser(id, nom,prenom,codep,email, password){
 function readFavoris(){
 	//favoris par FavorisSerrvlet
 	$.ajax({
-		type: "POST",
-        url : "../AfficherFavorisServlet",
+		type: "GET",
+        url : "AfficherFavorisServlet",
         data : {
-        	id:"1", 
+        	id_user:"1", 
         },
         dataType : 'json',
 

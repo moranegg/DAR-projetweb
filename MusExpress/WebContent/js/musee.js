@@ -86,10 +86,6 @@ function readMusee(idMusee)
 		url : "ConsulterMuseeServlet",
 		data : {id : idMusee},
 		dataType : 'JSON',
-		error : function() 
-		{
-			alert("problème readMusee");
-		},
 		success : function(data) 
 		{
 			var resultat = $.parseJSON(data);
@@ -98,6 +94,11 @@ function readMusee(idMusee)
 			musee.init(museeFromDB);
 			//return museeFromDB;	
 			
+		},
+		error : function(XHR, testStatus, errorThrown) 
+		{
+			console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
+			resetForm('#loader-login','#login-btn');
 		}
 	});
 }
