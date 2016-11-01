@@ -1,6 +1,7 @@
 $( document ).ready(function(){
 		displayTime();
 		readUser();
+		readFavoris();
 		$("#update-btn").click(account.updateUser);		
 	});
 
@@ -23,14 +24,10 @@ function readUser(){
         url : "../ConsulterUserServlet",
         dataType : 'json',
         data : {id : "1"},
-        error : function() {
-
-            alert("problème :(");
-        },
         success : function(data) {
         	
         	var resultat = $.parseJSON(data);
-        	alert(resultat);
+        	//alert(resultat);
 //			var nom = resultat.nom;
 //			var prenom = resultat.prenom;
 //			var codep = resultat.codep;
@@ -39,18 +36,27 @@ function readUser(){
         	$("#nom").append(resultat.nom);
         	$("#prenom").append(resultat.prenom);
         	$("#codep").append(resultat.codep);
-        	$("#email_register").append(resultat.email_register);
-        	$("#password_register").append(resultat.password_register);
+        	$("#email_register").append(resultat.email);
 			
-        }
+        },
+        error : function(XHR, testStatus, errorThrown) 
+		{
+        	 alert("status: " + XHR.status + ", erreur: " + XHR.responseText);
+		}
     });
 }
 function updateUser(id, nom,prenom,codep,email, password){
 	$.ajax({
 		type : "POST",
-		url : "UpdateUserServlet",
-		data : "id="+id+"&&prenom=" + prenom + "&nom=" + nom + "&codep=" + codep + "&email="
-				+ email+ "&password=" + password,
+		url : "../UpdateUserServlet",
+		data : {
+			"id": id,
+			"prenom" : prenom,
+			"nom" : nom,
+			"codep" : codep, 
+			"email": email,
+		},
+				
 		dataType : "json",
 		success : function(){
 			alert("updated!");
@@ -58,7 +64,7 @@ function updateUser(id, nom,prenom,codep,email, password){
 		},
 		error : function(XHR, testStatus, errorThrown) 
 		{
-			alert(XHR + "" + testStatus + "" + errorThrown);
+			alert("status: " + XHR.status + ", erreur: " + XHR.responseText);
 		}
 	});
 }
@@ -66,25 +72,28 @@ function readFavoris(){
 	//favoris par FavorisSerrvlet
 	$.ajax({
 		type: "POST",
-        url : "NameServlet",
-        data : userId,
-        dataType : 'json',
-        error : function() {
-
-            alert("problème");
+        url : "../AfficherFavorisServlet",
+        data : {
+        	id:"1", 
         },
+        dataType : 'json',
+
         success : function(data) {
         	var resultat = $.parseJSON(data);
-        	
         	var musees = resultat.musees;
-        	var musee;
-        	for(musee in musees){
-        		afficheMusee(musee);
-        	}
-        }
+        	
+        },
+        error : function(XHR, testStatus, errorThrown) 
+		{
+        	console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
+		}
     });
 }
 
-function afficheMusee(musee){
+function afficheMusee(musees){
 	//ajout de div dans la liste des musee
+	var musee;
+	for(musee in musees){
+		afficheMusee(musee);
+	}
 }

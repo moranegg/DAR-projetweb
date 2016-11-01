@@ -2,23 +2,27 @@ var index = {
 
 		onReady: function() {
 		},
-
-
 		login: function(event){
-			//event.preventDefault();
+			hideDom('#login-btn')
+			hideDom("#notifier-login");
+			showDom('#loader-login');
+			
 			var email = $('#email_login').val();
 			var password = $('#password_login').val();
 			if(checkIsText(email)&& checkIsText(password) && isEmail(email)){
-				console.log("serveur")
+				console.log("form checked")
 				login(email,password);
 			}else{
+				resetForm('#loader-login','#login-btn');
 				printhtml("#notifier-login","champs non rempli");
-				console.log("problème !!")
+				console.log("form not checked")
 			}
-
 		},
-
 		createAccount: function(event){
+			hideDom('#register-btn')
+			hideDom("#notifier-register");
+			showDom('#loader-register');
+			
 			//alert("account");
 			var email = $('#email_register').val();
 			var password = $('#password_register').val();
@@ -32,23 +36,20 @@ var index = {
 				console.log("ok");
 				enregistre(nom, prenom, codep, email, password);
 			}else{
+				resetForm('#loader-register','#register-btn');
 				console.log("method verif retourne faux, champs non ou " +
-						"mal remplis");
+				"mal remplis");
 				//alert("problème !! ")
 			}
 
 		}
-
 };
 
 $( document ).ready(function(){
 
 	$("#login-btn").click(index.login);
 	$("#register-btn").click(index.createAccount);
-
-
 });
-
 
 function verif(nom, prenom, codep, email, password) 
 {
@@ -93,6 +94,7 @@ function verif(nom, prenom, codep, email, password)
 	return true;
 }
 function login(email,password){
+	console.log("send to LoginServlet");
 	$.ajax({
 		type : "POST",
 		url : "LoginServlet",
@@ -103,23 +105,75 @@ function login(email,password){
 
 		dataType : "json",
 		success : function(data) { 
-			var resultat = $.parseJSON(data);
-			var user = resultat.user;
-			if (resultat.message=="1") 		
-			{
-				console.log("success")
-				//TODO: ajouter id utilisateur au path
-				$(location).attr('templates/home.html?id_user='+user); 
-				//$(location).attr('home.html/'+user); 
-			} 
-		},
-		error : function(request,error) 
+			console.log("success from LoginServlet");
+		var resultat = $.parseJSON(data);
+		var user = resultat.user;
+		console.log("resultat.message: "+resultat.message);
+		if (resultat.message=="1") 		
 		{
-			// alert("Erreur : responseText: "+request.responseText);
-			$(location).attr('/home.html?id_user='); 
+			console.log("resultat.idUser: "+resultat.idUser)
+			//TODO: ajouter id utilisateur au path
+			$(location).attr('templates/home.html?id_user='+resultat.idUser); 
+			//$(location).attr('home.html/'+user); 
+		} 
+		},
+		error : function(XHR, testStatus, errorThrown) 
+		{
+			console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
+			resetForm('#loader-login','#login-btn');
 		}
 	});
 }
+
+function enregistre(prenom, nom, codep, email, password) 
+{
+	console.log("send to InscriptionServlet");
+	$.ajax({
+		type : "GET",
+		url : "InscriptionServlet",
+		data :{
+			"prenom": prenom,
+			"nom": nom,
+			"codep":codep,
+			"mail":email,
+			"password":password,
+		},
+
+		dataType : "json",
+		success : function(data) { 
+			console.log("success from InscriptionServlet");
+			var resultat = $.parseJSON(data);
+			var user = resultat.user;
+			
+			console.log("resultat.idUser: "+resultat.idUser)
+			$(location).attr('templates/home.html?id_user='+resultat.idUser); 
+			
+		},
+		error : function(XHR, testStatus, errorThrown) 
+		{
+			resetForm('#loader-register','#register-btn');
+			console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
+		}
+	});
+}
+
+function printhtml(dom,msg)
+{
+	$(dom).html(msg);
+	$(dom).removeClass('hide');
+}
+
+
+function hideDom(dom)
+{
+	$(dom).addClass('hide');
+}
+
+function showDom(dom)
+{
+	$(dom).removeClass('hide');
+}
+
 
 function checkIsText(text){
 	if(text.length==0)
@@ -135,59 +189,7 @@ function isEmail(email){
 	return re.test(email);
 
 }
-
-
-function enregistre(prenom, nom, codep, email, password) 
-{
-	$.ajax({
-		type : "POST",
-		url : "InscriptionServlet",
-		data :{
-			"prenom": prenom,
-			"nom": nom,
-			"codep":codep,
-			"mail":email,
-			"password":password,
-		},
-
-		dataType : "json",
-		success : function(data) { 
-			alert(data.responseText);  
-		},
-		error : function(request,error) 
-		{
-			 alert("Erreur : responseText: "+request.responseText);
-		}
-	});
-}
-
-function traiteReponseEnregistrement(rep) 
-{
-	if (rep.error != undefined)  
-	{
-		func_erreur_inscription(rep.error);
-	}
-	else if (rep.message!=undefined)
-	{
-		if (rep.message!="1") func_erreur_inscription(rep.message);
-		else {
-			//$(location).attr('home.html'); 
-		}
-	}
-	else 
-	{
-		$(location).attr('home.html'); 
-	}
-}
-
-
-function printhtml(dom,msg)
-{
-	$(dom).html(msg);
-	$(dom).removeClass('hide');
-}
-
-
-function traiteResponse(){
-
+function resetForm(loader, btn){
+	hideDom(loader);
+	showDom(btn);
 }

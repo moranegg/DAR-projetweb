@@ -69,6 +69,12 @@ CREATE TABLE `utilisateur` (
   `codep` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `utilisateur`
+--
+
+INSERT INTO `utilisateur` (`id`, `email`, `password`, `codep`) VALUES
+(1, 'mo@gmail.com', '123456789', 75014);
 
 -- Indexes for dumped tables
 --
