@@ -67,6 +67,10 @@ var musee = {
 		},
 		getLocalisation: function(){
 
+		},
+		addComment: function(){
+			this.id;
+			//open 
 		}
 }
 

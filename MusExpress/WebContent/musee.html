@@ -8,36 +8,216 @@
 
 <!-- TODO: changer les liens en local -->
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
+<link rel="stylesheet" href="/MusExpress/js/lib/css/bootstrap.min.css">
 
 <!-- Libs -->
 <script type="text/javascript"
 	src="/MusExpress/js/lib/jquery-3.1.1.min.js"></script>
-<script type="text/javascript"
-	src="/MusExpress/js/lib/tether.min.js"></script>
-<script type="text/javascript"
-	src="/MusExpress/js/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="/MusExpress/js/lib/tether.min.js"></script>
+<script type="text/javascript" src="/MusExpress/js/lib/bootstrap.min.js"></script>
 
 <script type="text/javascript" src="/MusExpress/js/musee.js"></script>
 
 </head>
 <body>
-			<div id = "id_musee">Id: </div>
-			<div id = "nom_musee">Nom: </div>
-			<div id = "adresse_musee">Adresse: </div>
-			<div id = "ville_musee">Ville: </div>
-			<div id = "departement_musee">Departement: </div>
-			<div id = "codep_musee">Code postal: </div>
-			
-			<div id = "ferme_musee">Ouvert?: </div>
-			<div id = "siteweb_musee">Site: </div>
-			<div id = "periode_ouvertue_musee">Periode: </div>
-			<div id = "fermeture_annuelle_musee">Fermeture: </div>
-			<div id = "latitude_musee">Latitude: </div>
-			<div id = "longitude_musee">Longitude: </div>
 
+	<nav class="navbar navbar-default navbar-static-top header-template"
+		role="navigation" style="margin-bottom: 0">
+		<div class="row">
+			<a class="navbar-brand" href="#">MusExpress</a>
+
+			<form class="navbar-form navbar-left">
+				<div class="form-group">
+					<input type="text" class="form-control"
+						placeholder="Recherche par nom" id="recherche-input">
+				</div>
+				<div class="btn btn-default" id="recherche-btn">
+					<span class="glyphicon glyphicon-search"></span> Go!
+				</div>
+				<span id="day"></span>
+			</form>
+
+			<div class="col-md-3 pull-right">
+				<div class="btn btn-default" id="account-btn">
+					<span class="glyphicon glyphicon-user"></span> Mon compte
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+
+				<div class="row">
+					<!-- info -->
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<h3 id="nom_musee">
+								Nom: <span class="btn btn-default glyphicon glyphicon-star"
+									id="favorits-btn"> </span>
+
+
+							</h3>
+						</div>
+						<div class="panel-body">
+							<div id="id_musee">Id:</div>
+
+							<div id="adresse_musee">Adresse:</div>
+							<div id="ville_musee">Ville:</div>
+							<div id="departement_musee">Departement:</div>
+							<div id="codep_musee">Code postal:</div>
+
+							<div id="ferme_musee">Ouvert?:</div>
+							<div id="siteweb_musee">Site:</div>
+							<div id="periode_ouvertue_musee">Periode:</div>
+							<div id="fermeture_annuelle_musee">Fermeture:</div>
+						</div>
+					</div>
+
+
+
+
+
+				</div>
+				<!-- localisation -->
+				<div class="row">
+					<div class="panel panel-success">
+						<div class="panel-heading">
+							<h3>Localisation</h3>
+						</div>
+						<div class="panel-body">
+							<div id="latitude_musee">Latitude:</div>
+							<div id="longitude_musee">Longitude:</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<!-- affluance -->
+			<div class="col-md-8">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3>
+							Affluance actuelle: <span id="affluance_actuelle"
+								class="label label-default"> <span
+								class="glyphicon glyphicon-flag"></span>
+							</span>
+						</h3>
+						<div>
+							<span class="label label-default">pas d'info</span> <span
+								class="label label-success">10 min</span> <span
+								class="label label-primary">10-30 min</span> <span
+								class="label label-warning">30-60 min</span> <span
+								class="label label-danger">+60 min</span>
+
+						</div>
+					</div>
+					<div class="panel-body">
+
+						<ul class="list-group">
+							<li class="list-group-item"><span
+								class="label label-success "><span
+									class="glyphicon glyphicon-flag"></span></span> <span
+								class="commentaire">"Example d'un commentaire"</span> <span
+								class="text-info ext">intérieur</span> <span class="badge temps">15h15</span>
+							</li>
+							<li class="list-group-item"><span
+								class="label label-primary"><span
+									class="glyphicon glyphicon-flag"></span></span> <span
+								class="commentaire">"Example d'un commentaire"</span> <span
+								class="text-info ext">intérieur</span> <span class="badge temps">12h02</span>
+
+							</li>
+
+						</ul>
+
+						<!-- Button trigger modal -->
+						<button type="button" class="btn btn-primary btn-lg"
+							data-toggle="modal" data-target="#myModal">Ajouter
+							commentaire</button>
+
+						<!-- Modal -->
+						<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+							aria-labelledby="myModalLabel">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+										<h4 class="modal-title" id="myModalLabel">Commentaire
+											d'affluance</h4>
+									</div>
+									<div class="modal-body">
+										<form>
+											<div class="form-group">
+												<label for="recipient-name" class="control-label">Temps
+													d'attente:</label> <label class="radio-inline"> <input
+													type="radio" name="inlineRadioOptions" id="inlineRadio1"
+													value="option1"> <span class="label label-success">10
+														min</span>
+												</label> <label class="radio-inline"> <input type="radio"
+													name="inlineRadioOptions" id="inlineRadio2" value="option2">
+													<span class="label label-primary">10-30 min</span>
+												</label> <label class="radio-inline"> <input type="radio"
+													name="inlineRadioOptions" id="inlineRadio3" value="option3">
+													<span class="label label-warning">30-60 min</span> 
+												</label>
+												<label class="radio-inline"> <input type="radio"
+													name="inlineRadioOptions" id="inlineRadio4" value="option3">
+													 <span	class="label label-danger">+60 min</span>
+												</label>
+											</div>
+											<div class="form-group">
+												<label for="message-text" class="control-label">Commentaire:</label>
+												<textarea class="form-control" id="commentaire-text"></textarea>
+											</div>
+											<div class="form-group">
+												<label for="message-text" class="control-label">Emplacement file d'attente:</label>
+												</label> <label class="radio-inline"> <input type="radio"
+													name="inlineRadioOptions" id="inside" value="option3">
+													intérieur
+												</label>
+												<label class="radio-inline"> <input type="radio"
+													name="inlineRadioOptions" id="outside" value="option3">
+													 extérieur
+												</label>
+											</div>
+										</form>
+
+
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">Fermer</button>
+										<button type="button" class="btn btn-primary" id="addComment-btn">Valider</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+
+
+
+
+
+
+					</div>
+
+
+
+
+
+				</div>
+
+
+			</div>
+
+
+		</div>
 </body>
 </html>
