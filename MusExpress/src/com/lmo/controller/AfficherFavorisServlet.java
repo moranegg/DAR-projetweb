@@ -31,6 +31,7 @@ public class AfficherFavorisServlet extends HttpServlet {
 			if(!request.getParameter ("id").equals("") )
 
 			{  
+
 				
 				response.getWriter().print(
 						AfficherFavorisService.listFavoris(request.getParameter ("id")));
