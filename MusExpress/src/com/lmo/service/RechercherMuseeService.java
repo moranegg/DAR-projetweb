@@ -46,7 +46,7 @@ public class RechercherMuseeService
 				array.put(museeJSON);
 			}
 			
-			response.put("musee",array);
+			response.put("musees",array);
 			return response;
 
 			
