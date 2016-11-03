@@ -34,7 +34,7 @@ public class InscriptionServlet extends HttpServlet
 					)
 
 			{
-				JSONObject jo = InscriptionService.createUser(request.getParameter ("nom"), request.getParameter ("prenom"),
+				JSONObject jo = InscriptionService.createUser(request.getParameter ("prenom"), request.getParameter ("nom"),
 						request.getParameter ("codep"), request.getParameter ("email"),
 						request.getParameter("password")
 						);

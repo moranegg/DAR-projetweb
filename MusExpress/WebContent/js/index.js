@@ -140,18 +140,22 @@ function enregistre(prenom, nom, codep, email, password)
 			"prenom": prenom,
 			"nom": nom,
 			"codep":codep,
-			"mail":email,
+			"email":email,
 			"password":password,
 		},
 
 		dataType : "json",
 		success : function(data) { 
 			console.log("success from InscriptionServlet");
-			var resultat = $.parseJSON(data);
-			var user = resultat.user;
+			//var resultat = $.parseJSON(data);
+		    var resultat = data;
+			var user = resultat.id_user;
 			
-			console.log("resultat.idUser: "+resultat.idUser)
-			$(location).attr('templates/home.html?id_user='+resultat.idUser); 
+			console.log("resultat.message: "+resultat.message)
+			console.log("resultat.id_user: "+resultat.id_user)
+			
+			//Redirection uniquement si resultat.message=1
+			$(location).attr('templates/home.html?id_user='+resultat.id_user); 
 			
 		},
 		error : function(XHR, testStatus, errorThrown) 
