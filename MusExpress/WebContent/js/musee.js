@@ -15,18 +15,16 @@ var musee = {
 		longitude: "",
 
 
-		init: function(idMusee){
+		init: function(idMusee)
+		{
 			this.id = idMusee;
 			//appel à la BDD
 			var museeFromDB = readMusee(idMusee);
-			//appel test
-			//var museeFromDB = testMusee(idMusee);
 
-			console.log("musee.init.avant :"+museeFromDB.toString());
-			if(museeFromDB == undefined){
-				console.log("appel serveur museeFromDB pas retourné");
-			}
+		},
 
+		setmusee: function(museeFromDB)
+		{				
 			this.nom = museeFromDB.nom;
 			this.adresse = museeFromDB.adresse;
 			this.ville = museeFromDB.ville;
@@ -38,9 +36,9 @@ var musee = {
 			this.fermeture_annuelle = museeFromDB.fermeture_annuelle;
 			this.latitude =museeFromDB.latitude;
 			this.longitude =museeFromDB.longitude;
-			console.log("musee.init.après :"+this);
-			this.showMusee();
-
+			//console.log(museeFromDB.periode_ouvertue);			
+			//console.log("musee.init.après :"+this);
+			this.showMusee()
 		},
 
 		showMusee: function(){
@@ -77,23 +75,33 @@ var musee = {
 
 
 
+
 //TODO: change NameServlet
 function readMusee(idMusee)
 {
 	$.ajax
 	({
-		type: "POST",
+		type: "GET",
 		url : "ConsulterMuseeServlet",
 		data : {id : idMusee},
 		dataType : 'JSON',
 		success : function(data) 
 		{
-			var resultat = $.parseJSON(data);
+			//var resultat = JSON.parse(JSON.stringify(data));
+			
+			var resultat = data;
+
+
 
 			var museeFromDB = resultat.musee;
-			musee.init(museeFromDB);
+			//alert (museeFromDB.nom);
+			if (resultat.message==1)
+			{
+				musee.setmusee(museeFromDB);
+
+			}
 			//return museeFromDB;	
-			
+
 		},
 		error : function(XHR, testStatus, errorThrown) 
 		{

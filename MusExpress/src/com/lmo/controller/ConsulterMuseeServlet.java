@@ -15,13 +15,14 @@ import com.lmo.service.ConsulterMuseeService;
 
 public class ConsulterMuseeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);}
+		doPost(request, response);}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		try
 		{
+	        response.setContentType("application/json");
 
 			if(!request.getParameter ("id").equals("") )
 
