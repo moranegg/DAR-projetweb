@@ -27,14 +27,16 @@ public class AfficherFavorisServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try
 		{
+	        response.setContentType("application/json");
 
-			if(!request.getParameter ("id").equals("") )
+
+			if(!request.getParameter ("id_user").equals("") )
 
 			{  
 
 				
 				response.getWriter().print(
-						AfficherFavorisService.listFavoris(request.getParameter ("id")));
+						AfficherFavorisService.listFavoris(request.getParameter ("id_user")));
 				System.out.println(AfficherFavorisService.listFavoris(request.getParameter ("id")).toString());
 			}
 

@@ -33,7 +33,7 @@ public class AfficherFavorisService {
 
 				museeJSON.put("id", m.getId());
 				museeJSON.put("nom", m.getNom());
-				museeJSON.put("adresse", m.getAdresse());
+				/*museeJSON.put("adresse", m.getAdresse());
 				museeJSON.put("ville", m.getVille());
 				museeJSON.put("departement", m.getDepartement());
 				museeJSON.put("codep", m.getCodep());
@@ -43,7 +43,7 @@ public class AfficherFavorisService {
 				museeJSON.put("fermeture_annuelle", m.getFermeture_annuelle());
 				museeJSON.put("latitude", m.getLatitude());
 				museeJSON.put("longitude", m.getLongitude());	
-				museeJSON.put("type", m.getType());
+				museeJSON.put("type", m.getType());*/
 
 
 

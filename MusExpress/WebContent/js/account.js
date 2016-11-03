@@ -24,11 +24,12 @@ function readUser(){
         url : "ConsulterUserServlet",
         dataType : 'json',
         data : {
-        	id_user : "1"
+        	id_user : GetURLParameter('id_user')
         },
         success : function(data) {
         	
-        	var resultat = $.parseJSON(data);
+        	//var resultat = $.parseJSON(data);
+        	var resultat = data;
         	//alert(resultat);
 //			var nom = resultat.nom;
 //			var prenom = resultat.prenom;
@@ -52,7 +53,7 @@ function updateUser(id, nom,prenom,codep,email, password){
 		type : "GET",
 		url : "UpdateUserServlet",
 		data : {
-			"id": id,
+			"id": GetURLParameter('id_user'),
 			"prenom" : prenom,
 			"nom" : nom,
 			"codep" : codep, 
@@ -76,13 +77,24 @@ function readFavoris(){
 		type: "GET",
         url : "AfficherFavorisServlet",
         data : {
-        	id_user:"1", 
+        	id_user:GetURLParameter('id_user'), 
         },
         dataType : 'json',
 
         success : function(data) {
-        	var resultat = $.parseJSON(data);
-        	var musees = resultat.musees;
+        	//var resultat = $.parseJSON(data);
+        	var resultat = data;
+        	if (resultat.message==1)
+        		{
+            	   var musees = resultat.musee;
+            	   //afficheMusee(musees);
+            	   if (musees.length!=0)
+            		   {
+                	      //alert ("coucou");
+            		      afficheMusee(musees);
+
+            		   }
+        		}
         	
         },
         error : function(XHR, testStatus, errorThrown) 
@@ -94,8 +106,10 @@ function readFavoris(){
 
 function afficheMusee(musees){
 	//ajout de div dans la liste des musee
-	var musee;
-	for(musee in musees){
-		afficheMusee(musee);
+	for(i=0; i<musees.length; i++)
+	{
+		$("#liste_fav").append('<li class="list-group-item">'+musees[i].nom+'</li>');
+		//console.log(musees[i].nom);
+
 	}
 }
