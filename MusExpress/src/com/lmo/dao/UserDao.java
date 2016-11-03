@@ -107,8 +107,7 @@ public class UserDao
 	    public static void updateUser(User olduser,
 	    		String nom, String prenom, String codep, String email, String password)
 	    {
-	        User user = null;
-
+	    	
 	    	SessionFactory sessFact = new 
 	    			Configuration().configure().buildSessionFactory();
 	    	Session sess = sessFact.openSession();
@@ -125,7 +124,7 @@ public class UserDao
 	    	if(password!="")
 	        	olduser.setPassword(password);
 	    	
-	        	sess.save(user);
+	        	sess.saveOrUpdate(olduser);
 	        	tran.commit();   	
 	    	
 	    }
