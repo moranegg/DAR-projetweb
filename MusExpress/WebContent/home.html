@@ -30,9 +30,13 @@
 					<input type="text" class="form-control"
 						placeholder="Recherche par nom" id="recherche-input">
 				</div>
-				<div class="btn btn-default" id="recherche-btn">
+
+				<!-- Button trigger modal -->
+				<div type="button" class="btn btn-default " data-toggle="modal"
+					data-target="#myModal" id="recherche-btn">
 					<span class="glyphicon glyphicon-search"></span> Go!
 				</div>
+
 				<span id="day"></span>
 			</form>
 
@@ -114,64 +118,37 @@
 		</div>
 		<!-- fin row-->
 
-								<!-- Modal -->
-						<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-							aria-labelledby="myModalLabel">
-							<div class="modal-dialog" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal"
-											aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-										<h4 class="modal-title" id="myModalLabel">Commentaire
-											d'affluance</h4>
-									</div>
-									<div class="modal-body">
-										<form>
-											<div class="form-group">
-												<label for="recipient-name" class="control-label">Temps
-													d'attente:</label> <label class="radio-inline"> <input
-													type="radio" name="duree" id="10min" value="10min">
-													<span class="label label-success">10 min</span>
-												</label> <label class="radio-inline"> <input type="radio"
-													name="duree" id="30min" value="30min"> <span
-													class="label label-primary">10-30 min</span>
-												</label> <label class="radio-inline"> <input type="radio"
-													name="duree" id="60min" value="60min"> <span
-													class="label label-warning">30-60 min</span>
-												</label> <label class="radio-inline"> <input type="radio"
-													name="duree" id="max" value="max"> <span
-													class="label label-danger">+60 min</span>
-												</label>
-											</div>
-											<div class="form-group">
-												<label for="commentaire-text" class="control-label">Commentaire:</label>
-												<textarea class="form-control" id="commentaire-text"></textarea>
-											</div>
-											<div class="form-group">
-												<label for="emplacement" class="control-label">Emplacement
-													file d'attente:</label> <label class="radio-inline"> <input
-													type="radio" name="emplacement" id="inside" value="inside">
-													intérieur
-												</label> <label class="radio-inline"> <input type="radio"
-													name="emplacement" id="outside" value="outside">
-													extérieur
-												</label>
-											</div>
-										</form>
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">Résultat de la
+							recherche</h4>
+					</div>
+					<div class="modal-body">
+						
+						<div class="panel panel-default">
 
+							<!-- List group à partir du résultat serveur à injecter dans les items-->
+							<ul class="list-group" id="liste_recherche">
 
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default"
-											data-dismiss="modal">Fermer</button>
-										<button type="button" class="btn btn-primary"
-											id="addComment-btn">Valider</button>
-									</div>
-								</div>
-							</div>
-						</div> <!-- fin modal -->
+							</ul>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+						<button type="button" class="btn btn-primary" id="addComment-btn">Valider</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- fin modal -->
 
 	</div>
 	<!-- fin container -->

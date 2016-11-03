@@ -3,12 +3,11 @@ $( document ).ready(function(){
 	var id_user = GetURLParameter('id_user');
 	routeur.init(id_user);
 
-	$("#go").click(home.recherche);
+	$("#recherche-btn").click(home.recherche);
 	$("#account-btn").click(routeur.account);
-	
+
 
 	var idMusee = GetURLParameter('id_musee');
-	$(".musee").click(routeur.musee);
 	$(".navbar-brand").click(routeur.index);
 
 });
@@ -21,10 +20,14 @@ var home = {
 
 		recherche: function(event){
 			console.log("home.recherche");
-			var textRecherche = $("#recherche").val();
+			var textRecherche = $("#recherche-input").val();
 			console.log("home.recherche de: "+textRecherche);
-			sendRecherche(textRecherche);
+			//var musees = sendRecherche(textRecherche);
 			
+			var musees = testRechercheMusee().musees;
+			var eltDomList = "#liste_recherche";
+			afficheMusee(musees, eltDomList)
+
 		},
 
 		readMeteo: function(){
@@ -93,16 +96,16 @@ function sendRecherche(textRecherche){
 
 		console.log("resultat.message: "+resultat.message);
 		if (resultat.message=="1") 		
-		{
-			console.log("resultat.musees: "+resultat.musees)
-            //affichage de la modal avec les résultat
-			showDom("#recherche-modal");
-		} 
+			{
+				console.log("resultat.musees: "+resultat.musees);
+				//affichage de la modal avec les résultat
+				return result;
+			} 
 		},
 		error : function(XHR, testStatus, errorThrown) 
 		{
 			console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
-			
+
 		}
 	});
 }
@@ -166,6 +169,32 @@ function resetForm(loader, btn){
 }
 
 function testRechercheMusee(){
-	
+	var messageSserveur = {"message":"1",
+			"musees":[
+			         {"id":4,
+			        	 "nom":"Galerie d\u2019entomologie (Muséum national d'histoire naturelle)"
+			         },
+			         {"id":150,
+			        	 "nom":"Musée des traditions, ParcGâtinais français"
+			        }]}
+	return messageSserveur;
 }
+
+function afficheMusee(musees, eltDomList){
+	//ajout de div dans la liste des musee
+	var liste = "#liste_recherche";
+	//var liste = eltDomList;
+	for(i=0; i<musees.length; i++)
+	{
+		$(liste).append('<li class="list-group-item musee btn btn-default" id="'+musees[i].id+'">'+musees[i].nom+'</li>');
+		console.log(musees[i].id);
+
+	}
+	
+	$(".musee").click(function(event) {
+		
+        $(".navbar-brand").click(routeur.musee(event.target.id));
+	   });
+}
+
 
