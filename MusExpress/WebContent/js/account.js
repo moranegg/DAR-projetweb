@@ -1,19 +1,27 @@
 $( document ).ready(function(){
-		displayTime();
-		readUser();
-		readFavoris();
-		$("#update-btn").click(account.updateUser);		
-	});
+	displayTime();
+	readUser();
+	readFavoris();
+	$("#update-btn").click(account.updateUser);		
+});
 
 var account = {
 		readUser: function(){
-			
+
 		},
-		updateUser: function(){
-			
+		updateUser: function()
+		{
+			var email = $('#email_register').val();
+			var password = $('#password_register').val();
+			var nom = $('#nom').val();
+			var prenom = $('#prenom').val();
+			var codep = $('#codep').val();
+
+			updateProfil(nom,prenom,codep,email, password);
+
 		},
 		readFavoris: function(){
-			
+
 		}
 }
 function readUser(){
@@ -21,34 +29,51 @@ function readUser(){
 	//ou ReadUserServlet dans l'approche SOAP
 	$.ajax({
 		type: "GET",
-        url : "ConsulterUserServlet",
-        dataType : 'json',
-        data : {
-        	id_user : GetURLParameter('id_user')
-        },
-        success : function(data) {
-        	
-        	//var resultat = $.parseJSON(data);
-        	var resultat = data;
-        	//alert(resultat);
-//			var nom = resultat.nom;
-//			var prenom = resultat.prenom;
-//			var codep = resultat.codep;
-//			var email = resultat.email;
-			//var photo = ...
-        	$("#nom").append(resultat.nom);
-        	$("#prenom").append(resultat.prenom);
-        	$("#codep").append(resultat.codep);
-        	$("#email_register").append(resultat.email);
-			
-        },
-        error : function(XHR, testStatus, errorThrown) 
+		url : "ConsulterUserServlet",
+		dataType : 'json',
+		data : {
+			id_user : GetURLParameter('id_user')
+		},
+		success : function(data) {
+
+			var resultat = data;
+			if (resultat.message==1)
+			{
+
+				showprofil(resultat);
+
+			}
+
+
+
+
+		},
+		error : function(XHR, testStatus, errorThrown) 
 		{
-        	 console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
+			console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
 		}
-    });
+	});
 }
-function updateUser(id, nom,prenom,codep,email, password){
+
+function showprofil (resultat)
+{
+
+	console.log(resultat.nom);
+	var input = $("#nom");
+	input.val(input.val() + resultat.nom);
+
+	var input = $("#prenom");
+	input.val(input.val() + resultat.prenom);
+
+	var input = $("#codep");
+	input.val(input.val() + resultat.codep);
+
+	var input = $("#email_register");
+	input.val(input.val() + resultat.email);
+
+
+}
+function updateProfil(nom,prenom,codep,email, password){
 	$.ajax({
 		type : "GET",
 		url : "UpdateUserServlet",
@@ -58,12 +83,20 @@ function updateUser(id, nom,prenom,codep,email, password){
 			"nom" : nom,
 			"codep" : codep, 
 			"email": email,
+			"password": password,
+
 		},
-				
+
+
 		dataType : "json",
-		success : function(){
-			alert("updated!");
-			
+		success : function(data)
+		{
+			if (data.message==1)
+			{
+				alert("updated!");
+
+			}
+
 		},
 		error : function(XHR, testStatus, errorThrown) 
 		{
@@ -75,33 +108,33 @@ function readFavoris(){
 	//favoris par FavorisSerrvlet
 	$.ajax({
 		type: "GET",
-        url : "AfficherFavorisServlet",
-        data : {
-        	id_user:GetURLParameter('id_user'), 
-        },
-        dataType : 'json',
+		url : "AfficherFavorisServlet",
+		data : {
+			id_user:GetURLParameter('id_user'), 
+		},
+		dataType : 'json',
 
-        success : function(data) {
-        	//var resultat = $.parseJSON(data);
-        	var resultat = data;
-        	if (resultat.message==1)
-        		{
-            	   var musees = resultat.musee;
-            	   //afficheMusee(musees);
-            	   if (musees.length!=0)
-            		   {
-                	      //alert ("coucou");
-            		      afficheMusee(musees);
+		success : function(data) {
+			//var resultat = $.parseJSON(data);
+			var resultat = data;
+			if (resultat.message==1)
+			{
+				var musees = resultat.musee;
+				//afficheMusee(musees);
+				if (musees.length!=0)
+				{
+					//alert ("coucou");
+					afficheMusee(musees);
 
-            		   }
-        		}
-        	
-        },
-        error : function(XHR, testStatus, errorThrown) 
+				}
+			}
+
+		},
+		error : function(XHR, testStatus, errorThrown) 
 		{
-        	console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
+			console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
 		}
-    });
+	});
 }
 
 function afficheMusee(musees){
