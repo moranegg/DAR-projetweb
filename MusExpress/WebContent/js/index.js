@@ -115,11 +115,7 @@ function login(email,password){
 		if (resultat.message=="1") 		
 		{
 			console.log("resultat.idUser: "+resultat.id_user)
-			//TODO: ajouter id utilisateur au path
-			//$(location).attr('templates/home.html?id_user='+resultat.id_user); 
-			//$(location).attr('home.html/'+user); 
-			
-             routeur.home;
+            routeur.home(resultat.id_user);
 		} 
 		},
 		error : function(XHR, testStatus, errorThrown) 
@@ -153,9 +149,14 @@ function enregistre(prenom, nom, codep, email, password)
 			
 			console.log("resultat.message: "+resultat.message)
 			console.log("resultat.id_user: "+resultat.id_user)
+			if(resultat.message==1){
+				routeur.home(resultat.id_user);
+			}else{
+				resetForm('#loader-register','#register-btn');
+				console.log("else.resultat.message: "+resultat.message);
+				printhtml('#notifier-register',"Email existant dans la BDD, veuillez choisir un autre mail");
+			}
 			
-			//Redirection uniquement si resultat.message=1
-			$(location).attr('templates/home.html?id_user='+resultat.id_user); 
 			
 		},
 		error : function(XHR, testStatus, errorThrown) 
