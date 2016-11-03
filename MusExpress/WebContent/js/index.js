@@ -96,7 +96,7 @@ function verif(nom, prenom, codep, email, password)
 function login(email,password){
 	console.log("send to LoginServlet");
 	$.ajax({
-		type : "POST",
+		type : "GET",
 		url : "LoginServlet",
 		data :{
 			"email":email,
@@ -106,15 +106,20 @@ function login(email,password){
 		dataType : "json",
 		success : function(data) { 
 			console.log("success from LoginServlet");
-		var resultat = $.parseJSON(data);
+		//var resultat = $.parseJSON(data);
+		//var resultat = JSON.parse(JSON.stringify(data));
+		var resultat=data;
+
 		var user = resultat.user;
 		console.log("resultat.message: "+resultat.message);
 		if (resultat.message=="1") 		
 		{
-			console.log("resultat.idUser: "+resultat.idUser)
+			console.log("resultat.idUser: "+resultat.id_user)
 			//TODO: ajouter id utilisateur au path
-			$(location).attr('templates/home.html?id_user='+resultat.idUser); 
+			//$(location).attr('templates/home.html?id_user='+resultat.id_user); 
 			//$(location).attr('home.html/'+user); 
+			
+             routeur.home;
 		} 
 		},
 		error : function(XHR, testStatus, errorThrown) 

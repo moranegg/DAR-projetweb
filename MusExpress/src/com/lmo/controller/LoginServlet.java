@@ -42,6 +42,9 @@ public class LoginServlet extends HttpServlet
 			String password = request.getParameter("password");
 			if (!email.equals("") && !password.equals(""))
 			{
+				System.out.println(request.getParameter("email"));
+				System.out.println(request.getParameter("password"));
+
 				LoginService loginService = new LoginService();
 				JSONObject jo = loginService.authenticateUser(email, password);
 				if (!jo.equals("Invalid email or password")) 
@@ -57,7 +60,7 @@ public class LoginServlet extends HttpServlet
 			else 
 
 			{
-				response.getWriter().print("Wrong Url! Missing parameters\n Il manque des parametres à l'URL!");
+				response.getWriter().print("Wrong Url! Missing parameters\n Il manque des parametres ï¿½ l'URL!");
 			}
 
 		}
