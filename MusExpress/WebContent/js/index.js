@@ -1,3 +1,9 @@
+$( document ).ready(function(){
+
+	$("#login-btn").click(index.login);
+	$("#register-btn").click(index.createAccount);
+});
+
 var index = {
 
 		onReady: function() {
@@ -45,11 +51,6 @@ var index = {
 		}
 };
 
-$( document ).ready(function(){
-
-	$("#login-btn").click(index.login);
-	$("#register-btn").click(index.createAccount);
-});
 
 function verif(nom, prenom, codep, email, password) 
 {
@@ -167,39 +168,3 @@ function enregistre(prenom, nom, codep, email, password)
 	});
 }
 
-function printhtml(dom,msg)
-{
-	$(dom).html(msg);
-	$(dom).removeClass('hide');
-}
-
-
-function hideDom(dom)
-{
-	$(dom).addClass('hide');
-}
-
-function showDom(dom)
-{
-	$(dom).removeClass('hide');
-}
-
-
-function checkIsText(text){
-	if(text.length==0)
-	{
-		return false;
-	}else{
-		return true;
-	}
-}
-function isEmail(email){
-
-	var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	return re.test(email);
-
-}
-function resetForm(loader, btn){
-	hideDom(loader);
-	showDom(btn);
-}

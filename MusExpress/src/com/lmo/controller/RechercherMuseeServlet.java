@@ -13,9 +13,9 @@ import com.lmo.service.RechercherMuseeService;
 public class RechercherMuseeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public RechercherMuseeServlet() {
-        super();
-    }
+	public RechercherMuseeServlet() {
+		super();
+	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
@@ -27,14 +27,14 @@ public class RechercherMuseeServlet extends HttpServlet {
 		{
 
 
-			if(!request.getParameter ("nom").equals("") )
+			if(!request.getParameter ("nom_musee").equals("") )
 
 			{  
 
-				
+
 				response.getWriter().print(
 						RechercherMuseeService.getListOfMusees(request.getParameter ("nom")));
-				
+
 				System.out.println(RechercherMuseeService.getListOfMusees(request.getParameter ("nom")).toString());
 
 			}

@@ -9,6 +9,7 @@ $( document ).ready(function(){
 
 	var idMusee = GetURLParameter('id_musee');
 	$(".musee").click(routeur.musee);
+	$(".navbar-brand").click(routeur.index);
 
 });
 
@@ -20,8 +21,9 @@ var home = {
 
 		recherche: function(event){
 			console.log("home.recherche");
-			var elt = $("#recherche").val();
-			console.log("home.recherche de: "+elt);
+			var textRecherche = $("#recherche").val();
+			console.log("home.recherche de: "+textRecherche);
+			sendRecherche(textRecherche);
 			
 		},
 
@@ -72,6 +74,39 @@ var routeur = {
 		},
 }
 
+function sendRecherche(textRecherche){
+	console.log("send to RechercherMuseeServlet");
+	$.ajax({
+		type : "GET",
+		url : "RechercherMuseeServlet",
+		data :{
+			"nom_musee":textRecherche,
+		},
+
+		dataType : "json",
+		success : function(data) { 
+			console.log("success from RechercherMuseeServlet");
+		//var resultat = $.parseJSON(data);
+		//var resultat = JSON.parse(JSON.stringify(data));
+		var resultat=data;
+
+
+		console.log("resultat.message: "+resultat.message);
+		if (resultat.message=="1") 		
+		{
+			console.log("resultat.musees: "+resultat.musees)
+            //affichage de la modal avec les résultat
+			showDom("#recherche-modal");
+		} 
+		},
+		error : function(XHR, testStatus, errorThrown) 
+		{
+			console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
+			
+		}
+	});
+}
+
 function displayTime(){
 	var elt = document.getElementById("day");
 	var now  = new Date();
@@ -92,3 +127,45 @@ function GetURLParameter(sParam)
 		}
 	}
 }
+
+function printhtml(dom,msg)
+{
+	$(dom).html(msg);
+	$(dom).removeClass('hide');
+}
+
+
+function hideDom(dom)
+{
+	$(dom).addClass('hide');
+}
+
+function showDom(dom)
+{
+	$(dom).removeClass('hide');
+}
+
+
+function checkIsText(text){
+	if(text.length==0)
+	{
+		return false;
+	}else{
+		return true;
+	}
+}
+function isEmail(email){
+
+	var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	return re.test(email);
+
+}
+function resetForm(loader, btn){
+	hideDom(loader);
+	showDom(btn);
+}
+
+function testRechercheMusee(){
+	
+}
+
