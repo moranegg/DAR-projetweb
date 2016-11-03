@@ -30,9 +30,9 @@ public class ConsulterUserServlet extends HttpServlet {
 		try
 		{
 			Map<String,String[]> map=request.getParameterMap();
-			if( map.containsKey("id")   && !request.getParameter ("id").equals("") )
+			if( map.containsKey("id_user")   && !request.getParameter ("id_user").equals("") )
 			{  
-				jo = ConsulterUserService.getUser(request.getParameter ("id"));
+				jo = ConsulterUserService.getUser(request.getParameter ("id_user"));
 
 
 			} else {
