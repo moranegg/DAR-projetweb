@@ -16,8 +16,6 @@ var home = {
 
 		onReady: function() {
 		},
-
-
 		recherche: function(event){
 			console.log("home.recherche");
 			var textRecherche = $("#recherche-input").val();
@@ -26,6 +24,8 @@ var home = {
 			
 			var musees = testRechercheMusee().musees;
 			var eltDomList = "#liste_recherche";
+			//vider la liste avant recherche
+			$(eltDomList).empty();
 			afficheMusee(musees, eltDomList)
 
 		},
@@ -179,21 +179,24 @@ function testRechercheMusee(){
 			        }]}
 	return messageSserveur;
 }
-
+/**
+ * 
+ * @param musees
+ * @param eltDomList
+ */
 function afficheMusee(musees, eltDomList){
-	//ajout de div dans la liste des musee
-	var liste = "#liste_recherche";
-	//var liste = eltDomList;
+	console.log("afficheMusee");
+	var liste = eltDomList;
 	for(i=0; i<musees.length; i++)
 	{
-		$(liste).append('<li class="list-group-item musee btn btn-default" id="'+musees[i].id+'">'+musees[i].nom+'</li>');
+		$(liste).append('<li class="list-group-item musee btn " id="'+musees[i].id+'">'+musees[i].nom+'</li>');
 		console.log(musees[i].id);
 
 	}
 	
 	$(".musee").click(function(event) {
 		
-        $(".navbar-brand").click(routeur.musee(event.target.id));
+        $(".musee").click(routeur.musee(event.target.id));
 	   });
 }
 

@@ -13,8 +13,9 @@
 <script type="text/javascript" src="/MusExpress/js/lib/tether.min.js"></script>
 <script type="text/javascript" src="/MusExpress/js/lib/bootstrap.min.js"></script>
 
-<script type="text/javascript" src="/MusExpress/js/musee.js"></script>
 <script type="text/javascript" src="/MusExpress/js/app.js"></script>
+<script type="text/javascript" src="/MusExpress/js/musee.js"></script>
+
 
 </head>
 <body>
@@ -31,7 +32,9 @@
 					<input type="text" class="form-control"
 						placeholder="Recherche par nom" id="recherche-input">
 				</div>
-				<div class="btn btn-default" id="recherche-btn">
+				<!-- Button trigger modal -->
+				<div type="button" class="btn btn-default " data-toggle="modal"
+					data-target="#rechercheModal" id="recherche-btn">
 					<span class="glyphicon glyphicon-search"></span> Go!
 				</div>
 				<span id="day"></span>
@@ -53,14 +56,16 @@
 					<!-- info -->
 					<div class="panel panel-primary">
 						<div class="panel-heading">
-							<h3 id="nom_musee">
-								Nom: <span class="btn btn-default glyphicon glyphicon-star"
-									id="favorits-btn"> </span> <span
-									class="btn btn-default glyphicon glyphicon-minus hide"
-									id="favorits-btn"> </span>
-
-
-							</h3>
+							
+								<h3 id="nom_musee">
+									Nom: 
+								</h3>
+							
+								<span class="col-md-offset-8 btn btn-default glyphicon glyphicon-star"
+										id="favorits-btn"> </span> <span
+										class="btn btn-default glyphicon glyphicon-minus hide"
+										id="favorits-btn"> </span>
+							
 						</div>
 						<div class="panel-body">
 							<div id="id_musee">Id:</div>
@@ -76,10 +81,6 @@
 							<div id="fermeture_annuelle_musee">Fermeture:</div>
 						</div>
 					</div>
-
-
-
-
 
 				</div>
 				<!-- localisation -->
@@ -117,7 +118,13 @@
 						</div>
 					</div>
 					<div class="panel-body">
-
+						
+						<!-- Button trigger modal -->
+						<button type="button" class="btn btn-primary btn-lg"
+							data-toggle="modal" data-target="#myModal">Ajouter
+							commentaire</button>
+						
+						
 						<ul class="list-group">
 							<li class="list-group-item"><span
 								class="label label-success "><span
@@ -135,10 +142,7 @@
 
 						</ul>
 
-						<!-- Button trigger modal -->
-						<button type="button" class="btn btn-primary btn-lg"
-							data-toggle="modal" data-target="#myModal">Ajouter
-							commentaire</button>
+						
 
 						<!-- Modal -->
 						<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
@@ -209,16 +213,43 @@
 					</div>
 
 
-
-
-
 				</div>
-
-
 			</div>
-
-
 		</div>
+		
+		
+		
+		<!-- Recherche Modal -->
+		<div class="modal fade" id="rechercheModal" tabindex="-1" role="dialog"
+			aria-labelledby="rechercheModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="rechercheModalLabel">Résultat de la
+							recherche</h4>
+					</div>
+					<div class="modal-body">
+						
+						<div class="panel panel-default">
+
+							<!-- List group à partir du résultat serveur à injecter dans les items-->
+							<ul class="list-group" id="liste_recherche">
+
+							</ul>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- fin modal -->
 	</div>
 </body>
 </html>
