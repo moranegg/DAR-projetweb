@@ -199,10 +199,12 @@ function testRechercheMusee(){
  */
 function afficheMusee(musees, eltDomList){
 	console.log("afficheMusee");
+
 	var liste = eltDomList;
-	for(i=0; i<musees.length; i++)
+	$(liste).empty();
+	for(i=0; i<musees.length || i<5; i++)
 	{
-		$(liste).append('<li class="list-group-item musee btn " id="'+musees[i].id+'">'+musees[i].nom+'</li>');
+		$(liste).append('<li class="list-group-item musee btn " id="'+musees[i].id+'">'+musees[i].nomMusee+'</li>');
 		console.log(musees[i].id);
 
 	}
@@ -254,26 +256,113 @@ function initMap() {
 
 
 	google.maps.event.addDomListener(window, 'load', initMap);
-	var aProximite = [{
-		nomMusee: 'test1',
-		localisation : {
-			lat: 48.8592, 
-			lng: 2.3379
-		},
-	},{
-		nomMusee: 'test2',
-		localisation : {
-			lat: 48.8567, 
-			lng: 2.3359
-		}
-	},{
-		nomMusee: 'test3',
-		localisation : {
-			lat: 48.8567, 
-			lng: 2.3349
-		}
-	}];
+	var aProximite = [
+{
+    nomMusee: 'Institut du Monde Arabe',
+    id: 1,
+    localisation : 
+    {
+        lat: 48.8489231,
+        lng: 2.35749301052036
+    },
+},
 
+{
+    nomMusee: 'Musée de la Chasse et de la Nature',
+    id: 2,
+    localisation : 
+    {
+        lat: 48.8613464,
+        lng: 2.3584276
+    },
+},
+
+{
+    nomMusee: 'Galerie d\'Anatomie Comparée et de Paléontologie (Muséum d\'Histoire Naturelle)',
+    id: 3,
+    localisation : 
+    {
+        lat: 48.8432434,
+        lng: 2.35954535401297
+    },
+},
+
+
+{
+    nomMusee: 'Galerie d’entomologie (Muséum national d\'histoire naturelle)',
+    id: 4,
+    localisation : 
+    {
+        lat: 48.8443464,
+        lng: 2.3562118
+    },
+},
+
+{
+    nomMusee: 'Musée Hébert',
+    id: 5,
+    localisation : 
+    {
+        lat: 48.8474495,
+        lng: 2.3227049
+    },
+},
+
+{
+    nomMusee: 'Musée Zadkine',
+    id: 6,
+    localisation : 
+    {
+        lat: 48.8443793,
+        lng: 2.3328737
+    },
+},
+
+{
+    nomMusee: 'Etablissement Public du Musée d\'Orsay',
+    id: 7,
+    localisation : 
+    {
+        lat: 48.8597437,
+        lng: 2.3259203
+    },
+},
+
+{
+    nomMusee: 'Musée National Auguste Rodin',
+    id: 8,
+    localisation : 
+    {
+        lat: 48.8513447,
+        lng: 2.3272485
+    },
+},
+
+{
+    nomMusee: 'Musée National de la Légion d\'Honneur et des Ordres de Chevalerie',
+    id: 9,
+    localisation : 
+    {
+        lat:  48.860275,
+        lng: 2.3247399
+    },
+},
+
+{
+    nomMusee: 'Musée Lénine',
+    id: 10,
+    localisation : 
+    {
+        lat:  48.8263909,
+        lng: 2.3306427
+    },
+},
+
+
+
+];
+	afficheMusee(aProximite, "#list-meteo");
+	
 	for(i=0; i<aProximite.length; i++)
 	{
 		new google.maps.Marker({
@@ -282,6 +371,7 @@ function initMap() {
 			    title: aProximite[i].nomMusee,
 			icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
 				  });
+		
 	}
 
 
