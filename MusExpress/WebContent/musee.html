@@ -6,6 +6,7 @@
 <title>Musee</title>
 
 <link rel="stylesheet" href="/MusExpress/js/lib/css/bootstrap.min.css">
+<link rel="stylesheet" href="/MusExpress/images/custom.css">
 
 <!-- Libs -->
 <script type="text/javascript"
@@ -13,8 +14,14 @@
 <script type="text/javascript" src="/MusExpress/js/lib/tether.min.js"></script>
 <script type="text/javascript" src="/MusExpress/js/lib/bootstrap.min.js"></script>
 
-<script type="text/javascript" src="/MusExpress/js/musee.js"></script>
+
 <script type="text/javascript" src="/MusExpress/js/app.js"></script>
+<script type="text/javascript" src="/MusExpress/js/musee.js"></script>
+<script
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCe93cFKDIuRBIqC2DQP4sUuhP3jguAOvw&callback=initMap"
+	async defer></script>
+
+
 
 </head>
 <body>
@@ -31,14 +38,16 @@
 					<input type="text" class="form-control"
 						placeholder="Recherche par nom" id="recherche-input">
 				</div>
-				<div class="btn btn-default" id="recherche-btn">
+				<!-- Button trigger modal -->
+				<div type="button" class="btn btn-default " data-toggle="modal"
+					data-target="#rechercheModal" id="recherche-btn">
 					<span class="glyphicon glyphicon-search"></span> Go!
 				</div>
 				<span id="day"></span>
 			</form>
 
 			<div class="col-md-3 pull-right">
-				<div class="btn btn-default" id="account-btn">
+				<div class="btn btn-default " id="account-btn">
 					<span class="glyphicon glyphicon-user"></span> Mon compte
 				</div>
 			</div>
@@ -53,14 +62,15 @@
 					<!-- info -->
 					<div class="panel panel-primary">
 						<div class="panel-heading">
-							<h3 id="nom_musee">
-								Nom: <span class="btn btn-default glyphicon glyphicon-star"
-									id="favorits-btn"> </span> <span
-									class="btn btn-default glyphicon glyphicon-minus hide"
-									id="favorits-btn"> </span>
 
+							<h3 id="nom_musee">Nom:</h3>
 
-							</h3>
+							<span
+								class="col-md-offset-8 btn btn-default glyphicon glyphicon-star"
+								id="favorits-btn"> </span> <span
+								class="btn btn-default glyphicon glyphicon-minus hide"
+								id="favorits-btn"> </span>
+
 						</div>
 						<div class="panel-body">
 							<div id="id_musee">Id:</div>
@@ -77,13 +87,9 @@
 						</div>
 					</div>
 
-
-
-
-
 				</div>
 				<!-- localisation -->
-				<div class="row">
+				<div class="row hide">
 					<div class="panel panel-success">
 						<div class="panel-heading">
 							<h3>Localisation</h3>
@@ -91,6 +97,8 @@
 						<div class="panel-body">
 							<div id="latitude_musee">Latitude:</div>
 							<div id="longitude_musee">Longitude:</div>
+
+
 						</div>
 					</div>
 
@@ -101,22 +109,38 @@
 			<div class="col-md-8">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3>
-							Affluance actuelle: <span id="affluance_actuelle"
-								class="label label-default"> <span
-								class="glyphicon glyphicon-flag"></span>
-							</span>
-						</h3>
-						<div>
-							<span class="label label-default">pas d'info</span> <span
-								class="label label-success">10 min</span> <span
-								class="label label-primary">10-30 min</span> <span
-								class="label label-warning">30-60 min</span> <span
-								class="label label-danger">+60 min</span>
+						<div class="row">
+							<div class="col-md-9">
+								<h3>
+									Affluance actuelle: <span id="affluance_actuelle"
+										class="label label-default"> <span
+										class="glyphicon glyphicon-flag"></span>
+									</span>
+								</h3>
+							</div>
+							<div class="col-md-3">
+								<!-- Button trigger modal -->
+								<button type="button" class=" btn btn-primary "
+									data-toggle="modal" data-target="#affluanceModal">Ajouter
+									commentaire</button>
+							</div>
 
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<span class="label label-default">pas d'info</span> <span
+									class="label label-success">10 min</span> <span
+									class="label label-primary">10-30 min</span> <span
+									class="label label-warning">30-60 min</span> <span
+									class="label label-danger">+60 min</span>
+
+							</div>
 						</div>
 					</div>
 					<div class="panel-body">
+
+
+
 
 						<ul class="list-group">
 							<li class="list-group-item"><span
@@ -135,14 +159,11 @@
 
 						</ul>
 
-						<!-- Button trigger modal -->
-						<button type="button" class="btn btn-primary btn-lg"
-							data-toggle="modal" data-target="#myModal">Ajouter
-							commentaire</button>
+
 
 						<!-- Modal -->
-						<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-							aria-labelledby="myModalLabel">
+						<div class="modal fade" id="affluanceModal" tabindex="-1"
+							role="dialog" aria-labelledby="affluanceModalLabel">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
@@ -150,7 +171,7 @@
 											aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										</button>
-										<h4 class="modal-title" id="myModalLabel">Commentaire
+										<h4 class="modal-title" id="affluanceModalLabel">Commentaire
 											d'affluance</h4>
 									</div>
 									<div class="modal-body">
@@ -192,33 +213,58 @@
 									<div class="modal-footer">
 										<button type="button" class="btn btn-default"
 											data-dismiss="modal">Fermer</button>
-										<button type="button" class="btn btn-primary"
-											id="addComment-btn">Valider</button>
+										<div type="button" class="btn btn-primary" id="addComment-btn">Valider</div>
 									</div>
 								</div>
 							</div>
-						</div><!-- fin modal -->
-
-
-
-
-
-
-
+						</div>
+						<!-- fin modal -->
 
 					</div>
 
 
-
-
-
 				</div>
-
-
 			</div>
-
-
 		</div>
+
+
+
+		<!-- Recherche Modal -->
+		<div class="modal fade" id="rechercheModal" tabindex="-1"
+			role="dialog" aria-labelledby="rechercheModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="rechercheModalLabel">Résultat de
+							la recherche</h4>
+					</div>
+					<div class="modal-body">
+
+						<div class="panel panel-default">
+
+							<!-- List group à partir du résultat serveur à injecter dans les items-->
+							<ul class="list-group" id="liste_recherche">
+
+							</ul>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- fin modal -->
+		
 	</div>
+	<div id="map" style="width: 100%; height: 400px; margin-top: 40px; margin-bottom: 40px; position: absolute;">
+				<div id="map-canvas"></div>
+			</div>
+	
 </body>
 </html>

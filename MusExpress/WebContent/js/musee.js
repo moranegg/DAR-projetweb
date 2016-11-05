@@ -67,8 +67,9 @@ var musee = {
 
 		},
 		addComment: function(){
+			console.log("add comment");
 			this.id;
-			//open 
+			$("#affluanceModal").modal('hide');
 		}
 }
 
@@ -88,7 +89,7 @@ function readMusee(idMusee)
 		success : function(data) 
 		{
 			//var resultat = JSON.parse(JSON.stringify(data));
-			
+
 			var resultat = data;
 
 
@@ -152,9 +153,9 @@ $( document ).ready(function(){
 
 
 	var mus = musee.init(idMusee);
+	$("#addComment-btn").click(musee.addComment);
 
 
 
 
 });
-
