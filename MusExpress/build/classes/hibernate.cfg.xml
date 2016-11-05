@@ -9,10 +9,12 @@
 			com.mysql.jdbc.Driver
 		</property>
 		<property name="hibernate.connection.url">
-			jdbc:mysql://localhost:3306/musexpress 
+<!-- 			jdbc:mysql://localhost:3306/musexpress  -->
+            jdbc:mysql://mysql-musexpress.alwaysdata.net:3306/musexpress_musexpress
 		</property>
 		<property name="hibernate.connection.username">
-			musexpadmin 
+<!-- 			musexpadmin  -->
+             129454_musexpadm 
 		</property>
 		<property name="hibernate.connection.password">
 			password123 

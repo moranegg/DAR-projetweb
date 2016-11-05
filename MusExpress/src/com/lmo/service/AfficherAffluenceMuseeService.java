@@ -55,14 +55,14 @@ public class AfficherAffluenceMuseeService
 
 	}
 	
-	/*public static void main(String[] args) throws Exception 
+	public static void main(String[] args) throws Exception 
 	{
 
          System.out.println(listAffluence("1"));
 
 
 
-	}*/
+	}
 
 
 }
