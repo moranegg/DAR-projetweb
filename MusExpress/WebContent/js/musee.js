@@ -69,6 +69,7 @@ var musee = {
 		addComment: function(){
 			console.log("add comment");
 			this.id;
+			addAffluence();
 			$("#affluanceModal").modal('hide');
 		}
 }
@@ -108,6 +109,39 @@ function readMusee(idMusee)
 		{
 			console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
 			resetForm('#loader-login','#login-btn');
+		}
+	});
+}
+
+function addAffluence()
+{
+
+	$.ajax
+	({
+		type: "GET",
+		url : "AjoutAffluenceServlet",
+		data : {"id_user" : GetURLParameter("id_user"),
+			    "id_musee" : GetURLParameter("id_musee"),
+			    "emplacement": $('input[name=emplacement]:checked', '#form_add_affluence').val(),
+			    "text" : $("#commentaire-text").val(), 
+			    "duree" : $('input[name=duree]:checked', '#form_add_affluence').val()
+			    },
+		dataType : 'JSON',
+		success : function(data) 
+		{
+
+			var resultat = data;           
+
+
+			if (resultat.message==1)
+			{
+                 console.log("success");
+			}
+
+		},
+		error : function(XHR, testStatus, errorThrown) 
+		{
+			console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
 		}
 	});
 }

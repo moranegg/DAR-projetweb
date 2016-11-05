@@ -13,11 +13,11 @@ import com.lmo.model.User;
 public class AjoutAffluenceService
 {
 	
-	public static JSONObject addAffluence (int id_user, int id_musee, String longueur_file, String commentaire, int file, Date date)
+	public static JSONObject addAffluence (String id_user, String id_musee, String duree, String text, String emplacement)
 			throws JSONException
 	{
 		JSONObject jo = new JSONObject();
-		Affluence affluence = AffluenceDao.addAffluence(id_user, id_musee, longueur_file, commentaire, file, date);         
+		Affluence affluence = AffluenceDao.addAffluence(id_user, id_musee, duree, text, emplacement);         
 		if(affluence!=null)
 		{
 			jo.put("message", "1");

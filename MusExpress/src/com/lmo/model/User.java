@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,6 +24,7 @@ public class User implements Serializable
     private String password;
     private String codep;
 	private Set<Musee> musees = new HashSet<Musee>(0);
+    private Set<Affluence> affluences = new HashSet<Affluence>();
  
     public User() {
     } 
@@ -48,6 +50,10 @@ public class User implements Serializable
     
     public void addMusee(Musee musee) {
         this.musees.add(musee);
+    }
+    
+    public void addAffluence(Affluence affluence) {
+        this.affluences.add(affluence);
     }
  
  
@@ -107,7 +113,16 @@ public class User implements Serializable
 
 	public void setMusees(Set<Musee> musees) {
 		this.musees = musees;
-	}    
+	}  
+	
+	 @OneToMany(mappedBy = "user")
+	    public Set<Affluence> getAffluences() {
+	        return affluences;
+	    }
+	 
+	    public void setAffluences(Set<Affluence> affluences) {
+	        this.affluences = affluences;
+	    }
     
  
 }

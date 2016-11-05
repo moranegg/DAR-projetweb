@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -33,6 +34,7 @@ public class Musee implements Serializable
     private double longitude;
     private String type;
     private Set<User> users = new HashSet<User>(0);
+    private Set<Affluence> affluences = new HashSet<Affluence>();
     
 
 
@@ -81,6 +83,11 @@ public class Musee implements Serializable
     {
         this.users.add(user);
     }
+    
+    public void addAffluence(Affluence affluence) {
+        this.affluences.add(affluence);
+    }
+ 
 
 
 
@@ -201,6 +208,16 @@ public class Musee implements Serializable
 	public void setUsers(Set<User> userfav) {
 		this.users = userfav;
 	}
+	
+	 @OneToMany(mappedBy = "musee")
+	    public Set<Affluence> getAffluences() {
+	        return affluences;
+	    }
+	 
+	    public void setAffluences(Set<Affluence> affluences) {
+	        this.affluences = affluences;
+	    }
+ 
 
 	
 }

@@ -32,21 +32,21 @@ public class AjoutAffluenceServlet extends HttpServlet {
 	{
 		try
 		{
-			response.setContentType("text/plain");
+			response.setContentType("application/json");
 
 			if(!request.getParameter("id_user").equals("") && !request.getParameter("id_musee").equals("")&&
-					!request.getParameter("longueur_file").equals("") && !request.getParameter("commentaire").equals("")&&
-					!request.getParameter("file").equals("") /*&& !request.getParameter("date").equals("")*/
+					!request.getParameter("duree").equals("") && !request.getParameter("text").equals("")&&
+					!request.getParameter("emplacement").equals("") /*&& !request.getParameter("date").equals("")*/
 					)
+				
 
 			{
 				response.getWriter().print(AjoutAffluenceService.addAffluence
-						(Integer.parseInt(request.getParameter("id_user")),
-								Integer.parseInt(request.getParameter("id_musee")),
-								request.getParameter("longueur_file"),
-								request.getParameter("commentaire"),
-								Integer.parseInt(request.getParameter("file")),
-								new Date()));
+						(request.getParameter("id_user"),
+								request.getParameter("id_musee"),
+								request.getParameter("duree"),
+								request.getParameter("text"),
+								request.getParameter("emplacement")));
 
 
 			}

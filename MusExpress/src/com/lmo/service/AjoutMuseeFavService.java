@@ -3,9 +3,7 @@ package com.lmo.service;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.lmo.dao.FavorisDao;
 import com.lmo.dao.UserDao;
-import com.lmo.model.Favoris;
 import com.lmo.model.User;
 import com.lmo.utils.Tools;
 
