@@ -17,17 +17,19 @@ var home = {
 
 		onReady: function() {
 		},
-		recherche: function(event){
+		
+		recherche: function(event)
+		{
 			console.log("home.recherche");
 			var textRecherche = $("#recherche-input").val();
 			console.log("home.recherche de: "+textRecherche);
-			//var musees = sendRecherche(textRecherche);
+			var musees = sendRecherche(textRecherche);
 			
-			var musees = testRechercheMusee().musees;
-			var eltDomList = "#liste_recherche";
-			//vider la liste avant recherche
-			$(eltDomList).empty();
-			afficheMusee(musees, eltDomList)
+			//var musees = testRechercheMusee().musees;
+//			var eltDomList = "#liste_recherche";
+//			//vider la liste avant recherche
+//			$(eltDomList).empty();
+//			afficheMusee(musees, eltDomList)
 
 		},
 
@@ -99,8 +101,18 @@ function sendRecherche(textRecherche){
 		if (resultat.message=="1") 		
 			{
 				console.log("resultat.musees: "+resultat.musees);
-				//affichage de la modal avec les résultat
-				return result;
+				var musees = resultat.musees;
+				if (musees.length!=0)
+					{
+					
+						//affichage de la modal avec les résultat
+						var eltDomList = "#liste_recherche";
+						//vider la liste avant recherche
+						$(eltDomList).empty();
+						afficheMusee(musees, eltDomList)
+					}
+
+				//return result;
 			} 
 		},
 		error : function(XHR, testStatus, errorThrown) 

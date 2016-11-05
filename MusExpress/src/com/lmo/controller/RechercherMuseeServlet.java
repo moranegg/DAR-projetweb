@@ -26,6 +26,8 @@ public class RechercherMuseeServlet extends HttpServlet {
 		try
 		{
 
+	        response.setContentType("application/json");
+
 
 			if(!request.getParameter ("nom_musee").equals("") )
 
@@ -33,9 +35,9 @@ public class RechercherMuseeServlet extends HttpServlet {
 
 
 				response.getWriter().print(
-						RechercherMuseeService.getListOfMusees(request.getParameter ("nom")));
+						RechercherMuseeService.getListOfMusees(request.getParameter ("nom_musee")));
 
-				System.out.println(RechercherMuseeService.getListOfMusees(request.getParameter ("nom")).toString());
+				System.out.println(RechercherMuseeService.getListOfMusees(request.getParameter ("nom_musee")).toString());
 
 			}
 
