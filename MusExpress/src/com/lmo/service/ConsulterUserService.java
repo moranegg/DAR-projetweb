@@ -25,6 +25,7 @@ public class ConsulterUserService {
         	jo.put("prenom", user.getPrenom());
         	jo.put("codep", user.getCodep());
         	jo.put("email", user.getEmail());
+        	jo.put("password", user.getPassword());
         	jo.put("message", 1);
             return jo;
         	

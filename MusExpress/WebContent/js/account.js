@@ -7,16 +7,20 @@ $( document ).ready(function(){
 
 var account = {
 		idUser: '',
-		
+
 		readUser: function(){
 			console.log("account.readUser");
 			//appel au serveur avec id_user
 			this.idUser = GetURLParameter('id_user');
 			console.log('idUser :'+this.idUser)
-			if(this.idUser != undefined){
-				var profil = readUserServer(this.idUser);
-				showprofil (profil);
-			}else{
+			if(this.idUser != undefined)
+			{
+				//var profil = readUserServer(this.idUser);
+				//showprofil (profil);
+				readUserServer(this.idUser);
+			}
+			else
+			{
 				//problème d'id
 				alert("Le profil n'est pas reconnu");
 				//rerouter vers index
@@ -36,19 +40,20 @@ var account = {
 
 		},
 		readFavoris: function(){
-			
+
 			console.log("account.readFavoris");
 			//appel au serveur
-			//var musees = readFavoris();
-			
+			var musees = readFavoris();
+
 			//test local
-			var musees = testRechercheMusee().musees;
-			var eltDomList = "#liste_fav";
-			if(musees == undefined){
-				$("#liste_fav").append('<li class="list-group-item info" >La liste des favoris est vide</li>');
-			} else {
-				afficheMusee(musees, eltDomList);
-			}
+			//var musees = testRechercheMusee().musees;
+			
+//			var eltDomList = "#liste_fav";
+//			if(musees == undefined){
+//				$("#liste_fav").append('<li class="list-group-item info" >La liste des favoris est vide</li>');
+//			} else {
+//				afficheMusee(musees, eltDomList);
+//			}
 		}
 }
 function readUserServer(idU){
@@ -66,7 +71,9 @@ function readUserServer(idU){
 			var resultat = data;
 			if (resultat.message==1)
 			{
-				return resultat;
+				//alert ("coucou1"+resultat);
+				showprofil (resultat);
+				//return resultat;
 			}
 		},
 		error : function(XHR, testStatus, errorThrown) 
@@ -79,7 +86,6 @@ function readUserServer(idU){
 function showprofil (resultat)
 {
 
-	console.log(resultat.nom);
 	var input = $("#nom");
 	input.val(input.val() + resultat.nom);
 
@@ -91,6 +97,9 @@ function showprofil (resultat)
 
 	var input = $("#email_register");
 	input.val(input.val() + resultat.email);
+	
+	var input = $("#password_register");
+	input.val(input.val() + resultat.password);
 
 
 }
@@ -115,6 +124,8 @@ function updateProfil(nom,prenom,codep,email, password){
 			if (data.message==1)
 			{
 				alert("updated!");
+				routeur.account(data.id_user);
+
 
 			}
 
@@ -141,7 +152,16 @@ function readFavoris(){
 			if (resultat.message==1)
 			{
 				var musees = resultat.musee;
-				return musees;
+				var eltDomList = "#liste_fav";
+				if(musees.length == 0)
+				{
+					$("#liste_fav").append('<li class="list-group-item info" >La liste des favoris est vide</li>');
+				} 
+				else 
+				{
+					afficheMusee(musees, eltDomList);
+				}
+				//return musees;
 			}
 		},
 		error : function(XHR, testStatus, errorThrown) 

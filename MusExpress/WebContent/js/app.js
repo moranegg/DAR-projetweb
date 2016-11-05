@@ -21,9 +21,9 @@ var home = {
 			console.log("home.recherche");
 			var textRecherche = $("#recherche-input").val();
 			console.log("home.recherche de: "+textRecherche);
-			var musees = sendRecherche(textRecherche);
+			//var musees = sendRecherche(textRecherche);
 			
-			//var musees = testRechercheMusee().musees;
+			var musees = testRechercheMusee().musees;
 			var eltDomList = "#liste_recherche";
 			//vider la liste avant recherche
 			$(eltDomList).empty();
@@ -60,20 +60,20 @@ var routeur = {
 		home: function(id_user){
 			console.log("routeur.home");
 			this.idUser = id_user;
-			window.location=('home.html?id_user'+this.idUser);
+			window.location=('home.html?id_user='+this.idUser);
 
 
 		},
 
 		account: function(){
 			console.log("routeur.account");
-			window.location=('account.html?id_user'+this.idUser); 
+			window.location=('account.html?id_user='+GetURLParameter('id_user')); 
 
 		},
 
 		musee: function(idMusee){
 			console.log("routeur.musee");
-			window.location=('musee.html?id_user'+this.idUser+'&id_musee='+idMusee); 
+			window.location=('musee.html?id_user='+this.idUser+'&id_musee='+idMusee); 
 
 		},
 }
@@ -88,7 +88,7 @@ function sendRecherche(textRecherche){
 		},
 
 		dataType : "json",
-		success : function(data) { 
+		success : function(data) { 
 			console.log("success from RechercherMuseeServlet");
 		//var resultat = $.parseJSON(data);
 		//var resultat = JSON.parse(JSON.stringify(data));
@@ -204,21 +204,21 @@ function afficheMusee(musees, eltDomList){
  * Affichage de google map
  */
 function initMap() {
-	  var museeActuel = {lat: 48.8596, lng: 2.3369};
+	  var museeActuel = {lat: 48.8596, lng: 2.3369};
 	console.log("map");
-	  var map = new google.maps.Map(document.getElementById('map'), {
-		    center: museeActuel,
+	  var map = new google.maps.Map(document.getElementById('map'), {
+		    center: museeActuel,
 		zoom: 14,
 		panControl: false,
 		scrollwheel: false,
 		mapTypeId: google.maps.MapTypeId.ROADMAP
-		  });
+		  });
 
-	  var marker = new google.maps.Marker({
-		    position: museeActuel,
-		    map: map,
-		    title: 'Le Louvre'
-			  });
+	  var marker = new google.maps.Marker({
+		    position: museeActuel,
+		    map: map,
+		    title: 'Le Louvre'
+			  });
 
 	var contentString = '<div class="info-window">' +
 	'<h3>Info Window Content</h3>' +
@@ -265,14 +265,13 @@ function initMap() {
 	for(i=0; i<aProximite.length; i++)
 	{
 		new google.maps.Marker({
-			    position: aProximite[i].localisation,
-			    map: map,
-			    title: aProximite[i].nomMusee,
+			    position: aProximite[i].localisation,
+			    map: map,
+			    title: aProximite[i].nomMusee,
 			icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-				  });
+				  });
 	}
 
 
 
 }
-
