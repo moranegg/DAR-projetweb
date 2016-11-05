@@ -22,9 +22,9 @@ var home = {
 			console.log("home.recherche");
 			var textRecherche = $("#recherche-input").val();
 			console.log("home.recherche de: "+textRecherche);
-			//var musees = sendRecherche(textRecherche);
+			var musees = sendRecherche(textRecherche);
 			
-			var musees = testRechercheMusee().musees;
+			//var musees = testRechercheMusee().musees;
 			var eltDomList = "#liste_recherche";
 			afficheMusee(musees, eltDomList)
 
