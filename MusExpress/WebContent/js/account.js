@@ -47,12 +47,12 @@ var account = {
 
 			//test local
 			//var musees = testRechercheMusee().musees;
-			
+
 //			var eltDomList = "#liste_fav";
 //			if(musees == undefined){
-//				$("#liste_fav").append('<li class="list-group-item info" >La liste des favoris est vide</li>');
+//			$("#liste_fav").append('<li class="list-group-item info" >La liste des favoris est vide</li>');
 //			} else {
-//				afficheMusee(musees, eltDomList);
+//			afficheMusee(musees, eltDomList);
 //			}
 		}
 }
@@ -85,24 +85,36 @@ function readUserServer(idU){
 
 function showprofil (resultat)
 {
+	//la fonction fillInput prend un element DOM et met le deuxième param en  valeur
+	fillInput("#nom",resultat.nom);
 
-	var input = $("#nom");
-	input.val(input.val() + resultat.nom);
 
-	var input = $("#prenom");
-	input.val(input.val() + resultat.prenom);
+	fillInput("#prenom",resultat.prenom);
 
-	var input = $("#codep");
-	input.val(input.val() + resultat.codep);
 
-	var input = $("#email_register");
-	input.val(input.val() + resultat.email);
-	
-	var input = $("#password_register");
-	input.val(input.val() + resultat.password);
+	fillInput("#codep", resultat.codep);
 
+
+	fillInput("#email_register",resultat.email);
 
 }
+/**
+ * la fonction fillInput prend un element DOM et met le deuxième param en  valeur
+ * @param eltDomInput
+ * @param text
+ */
+function fillInput(eltDomInput, text){
+	var input = $(eltDomInput);
+	input.val(text);
+}
+/**
+ * envoi au serveur les données pour updateProfil modifiées
+ * @param nom
+ * @param prenom
+ * @param codep
+ * @param email
+ * @param password
+ */
 function updateProfil(nom,prenom,codep,email, password){
 	$.ajax({
 		type : "GET",
@@ -125,8 +137,6 @@ function updateProfil(nom,prenom,codep,email, password){
 			{
 				alert("updated!");
 				routeur.account(data.id_user);
-
-
 			}
 
 		},
