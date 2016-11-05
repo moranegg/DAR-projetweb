@@ -2,6 +2,7 @@ package com.lmo.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -9,6 +10,7 @@ import org.hibernate.Transaction;
 import org.json.JSONException;
 
 import com.lmo.hibernate.util.HibernateUtil;
+import com.lmo.model.Affluence;
 import com.lmo.model.Musee;
 import com.lmo.model.User;
 
@@ -97,4 +99,34 @@ public class MuseeDao
 	        }
 	        return list;
 	    }
-}
+	    
+	    
+//		public static Set<Affluence> listAffluence (String id)
+//				throws JSONException
+//		{
+//
+//			Session session = HibernateUtil.getSessionFactory().openSession();
+//
+//			Transaction tx = null;	
+//			try {
+//				tx = session.getTransaction();
+//				tx.begin();
+//				Musee musee = MuseeDao.getMuseeById(id);
+//				System.out.println("musee"+musee);
+//			    Set<Affluence> c = musee.getAffluences();
+//			    System.out.println("coucou"+c);
+//			    tx.commit();
+//				return c;
+//			} catch (Exception e) {
+//				if (tx != null) {
+//					tx.rollback();
+//				}
+//				e.printStackTrace();
+//			} finally {
+//				session.close();
+//			}
+//			return null;	
+//		}
+	   
+	}
+

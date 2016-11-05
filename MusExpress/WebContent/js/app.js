@@ -214,6 +214,22 @@ function afficheMusee(musees, eltDomList){
         $(".musee").click(routeur.musee(event.target.id));
 	   });
 }
+
+function afficheAffluence(affluences, eltDomList)
+{
+
+	console.log("afficheAffluence");
+
+	var liste = eltDomList;
+	$(liste).empty();
+	for(i=0; i<affluences.length || i<10; i++)
+	{
+		$(liste).append('<li class="list-group-item"><span class="label label-success "><span class="glyphicon glyphicon-flag"></span></span> <span class="commentaire">'+affluences[i].text+'</span> <span	class="text-info ext">'+affluences[i].emplacement+'</span> <span class="badge temps">'+affluences[i].date+'</span></li></li>');
+		console.log(affluences[i].id);
+
+	}
+
+}
 /**
  * Affichage de google map
  */

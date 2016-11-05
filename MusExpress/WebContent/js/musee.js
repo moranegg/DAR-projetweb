@@ -20,6 +20,7 @@ var musee = {
 			this.id = idMusee;
 			//appel à la BDD
 			var museeFromDB = readMusee(idMusee);
+			
 
 		},
 
@@ -61,6 +62,9 @@ var musee = {
 
 		},
 		getAffluance: function(){
+			console.log("musee.getAffluance");
+			getAffluences();
+
 
 		},
 		getLocalisation: function(){
@@ -146,6 +150,41 @@ function addAffluence()
 	});
 }
 
+function getAffluences(){
+	//favoris par FavorisSerrvlet
+	$.ajax({
+		type: "GET",
+		url : "AfficherAffluenceMuseeServlet",
+		data : {
+			id_musee:GetURLParameter('id_musee'), 
+		},
+		dataType : 'json',
+
+		success : function(data) {
+			//var resultat = $.parseJSON(data);
+			var resultat = data;
+			if (resultat.message==1)
+			{
+				var affluences = resultat.affluence;
+				var eltDomList = "#liste_aff";
+				if(affluences.length == 0)
+				{
+					$("#liste_aff").append('<li class="list-group-item info" >Aucune information pour le moment</li>');
+				} 
+				else 
+				{
+					afficheAffluence(affluences, eltDomList);
+				}
+				//return musees;
+			}
+		},
+		error : function(XHR, testStatus, errorThrown) 
+		{
+			console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
+		}
+	});
+}
+
 
 function testMusee(idMusee){
 	var museeExample = {
@@ -184,9 +223,10 @@ function GetURLParameter(sParam)
 $( document ).ready(function(){
 	var search = $(location).attr('search'); 
 	var idMusee = GetURLParameter('id_musee');
-
-
+	
 	var mus = musee.init(idMusee);
+	musee.getAffluance();
+
 	$("#addComment-btn").click(musee.addComment);
 
 

@@ -103,8 +103,8 @@
 		<servlet-name>AfficherFavorisServlet</servlet-name>
 		<url-pattern>/AfficherFavorisServlet</url-pattern>
 	</servlet-mapping>
-	
-		<servlet>
+
+	<servlet>
 		<description>
 		</description>
 		<display-name>AjoutAffluenceServlet</display-name>
@@ -114,6 +114,17 @@
 	<servlet-mapping>
 		<servlet-name>AjoutAffluenceServlet</servlet-name>
 		<url-pattern>/AjoutAffluenceServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description>
+			</description>
+		<display-name>AfficherAffluenceMuseeServlet</display-name>
+		<servlet-name>AfficherAffluenceMuseeServlet</servlet-name>
+		<servlet-class>com.lmo.controller.AfficherAffluenceMuseeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AfficherAffluenceMuseeServlet</servlet-name>
+		<url-pattern>/AfficherAffluenceMuseeServlet</url-pattern>
 	</servlet-mapping>
 
 

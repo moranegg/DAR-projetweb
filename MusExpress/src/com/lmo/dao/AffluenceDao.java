@@ -1,6 +1,9 @@
 package com.lmo.dao;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -51,5 +54,33 @@ public class AffluenceDao
 
 
 	}
+
+
+	public static List<Affluence> getListOfAffluences(String id){
+		List<Affluence> list = new ArrayList<Affluence>();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction tx = null; 
+
+
+		try {
+
+			tx = session.getTransaction();
+			tx.begin();
+			list = session.createQuery("from Affluence a where a.musee.id='"+id+"' order by a.date DESC")
+					.setMaxResults(10)
+					.list();                        
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+	
+
 
 }
