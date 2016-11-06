@@ -1,8 +1,15 @@
 $( document ).ready(function(){
 	displayTime();
-	var id_user = GetURLParameter('id_user');
-	routeur.init(id_user);
-	home.propositionAffluance();
+	
+	var path = window.location.pathname; 
+	if(path != "/MusExpress/" || path != "/MusExpress/index.html"){
+		var id_user = GetURLParameter('id_user');
+		routeur.init(id_user);
+		if(path == "/MusExpress/home.html"){
+			home.propositionAffluance();
+		}
+	}
+
 
 	$("#recherche-btn").click(home.recherche);
 	$("#account-btn").click(routeur.account);
@@ -84,9 +91,9 @@ var routeur = {
 
 
 function displayTime(){
-	var elt = document.getElementById("day");
+	var elt = "#day";
 	var now  = new Date();
-	elt.innerHTML = now.getDate()+"/"+(now.getMonth()+1) + "/"+now.getFullYear();
+	$(elt).append(now.getDate()+"/"+(now.getMonth()+1) + "/"+now.getFullYear());
 
 }
 
@@ -327,7 +334,7 @@ function affichePropMusee(affluences, eltDomList)
 	}
 
 }
-
+/**************************GOOGLE MAP****************************************************/
 
 /**
  * Affichage de google map
