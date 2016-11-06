@@ -1,5 +1,7 @@
 $( document ).ready(function(){
 	displayTime();
+	//show tooltip data on btn (star-favoris)
+	$("[data-toggle='tooltip']").tooltip();
 	
 	var path = window.location.pathname; 
 	if(path != "/MusExpress/" || path != "/MusExpress/index.html"){
