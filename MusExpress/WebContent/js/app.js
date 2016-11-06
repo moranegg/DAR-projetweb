@@ -10,27 +10,27 @@ $( document ).ready(function(){
 
 	var idMusee = GetURLParameter('id_musee');
 	$(".navbar-brand").click(routeur.index);
-	
-	
+
+	$(".musee").click(function(event) {
+
+		$(".musee").click(routeur.musee(event.target.id));
+	});
+
+
 });
+
 
 var home = {
 
 		onReady: function() {
 		},
-		
+
 		recherche: function(event)
 		{
 			console.log("home.recherche");
 			var textRecherche = $("#recherche-input").val();
 			console.log("home.recherche de: "+textRecherche);
 			var musees = sendRecherche(textRecherche);
-			
-			//var musees = testRechercheMusee().musees;
-//			var eltDomList = "#liste_recherche";
-//			//vider la liste avant recherche
-//			$(eltDomList).empty();
-//			afficheMusee(musees, eltDomList)
 
 		},
 
@@ -48,9 +48,6 @@ var home = {
 		}
 
 };
-
-
-/********************************************** Les redirections ********************************/
 
 var routeur = {
 		idUser: "",
@@ -145,7 +142,7 @@ function resetForm(loader, btn){
 }
 
 
-/******************************************Rechercher un musée ********************************/
+/*******************************       Rechercher un musée        *************************/
 
 function sendRecherche(textRecherche){
 	console.log("send to RechercherMuseeServlet");
@@ -159,25 +156,27 @@ function sendRecherche(textRecherche){
 		dataType : "json",
 		success : function(data) { 
 			console.log("success from RechercherMuseeServlet");
-		var resultat=data;
+			//var resultat = $.parseJSON(data);
+			//var resultat = JSON.parse(JSON.stringify(data));
+			var resultat=data;
 
 
-		console.log("resultat.message: "+resultat.message);
-		if (resultat.message=="1") 		
+			console.log("resultat.message: "+resultat.message);
+			if (resultat.message=="1") 		
 			{
 				console.log("resultat.musees: "+resultat.musees);
 				var musees = resultat.musees;
 				if (musees.length!=0)
-					{
-					
-						//affichage de la modal avec les résultat
-						var eltDomList = "#liste_recherche";
-						//vider la liste avant recherche
-						$(eltDomList).empty();
-						afficheMuseeRecherche(musees, eltDomList)
-					}
+				{
 
-				//return result;
+					//affichage de la modal avec les résultat
+					var eltDomList = "#liste_recherche";
+					//vider la liste avant recherche
+					$(eltDomList).empty();
+					afficheMuseeRecherche(musees, eltDomList);
+				}
+
+				//return musees;
 			} 
 		},
 		error : function(XHR, testStatus, errorThrown) 
@@ -189,6 +188,17 @@ function sendRecherche(textRecherche){
 }
 
 
+function testRechercheMusee(){
+	var messageSserveur = {"message":"1",
+			"musees":[
+			          {"id":4,
+			        	  "nom":"Galerie d\u2019entomologie (Muséum national d'histoire naturelle)"
+			          },
+			          {"id":150,
+			        	  "nom":"Musée des traditions, ParcGâtinais français"
+			          }]}
+	return messageSserveur;
+}
 /**
  * 
  * @param musees
@@ -201,17 +211,21 @@ function afficheMuseeRecherche(musees, eltDomList){
 	$(liste).empty();
 	for(i=0; i<musees.length; i++)
 	{
+
 		$(liste).append('<li class="list-group-item musee btn " id="'+musees[i].id+'">'+musees[i].nom+'</li>');
+	var id = musees[i].id;
+		$(liste).append('<li class="list-group-item musee btn " id="'+id+'">'+musees[i].nom+'</li>');
 		console.log(musees[i].id);
 		console.log(musees[i].nom);
 
 	}
-	
+
 	$(".musee").click(function(event) {
-		
-        $(".musee").click(routeur.musee(event.target.id));
-	   });
+
+		$(".musee").click(routeur.musee(event.target.id));
+	});
 }
+
 
 function afficheMusee(musees, eltDomList){
 	console.log("afficheMusee");
@@ -228,6 +242,9 @@ function afficheMusee(musees, eltDomList){
 
 }
 
+
+
+
 function afficheMusee2(musees, eltDomList){
 	console.log("afficheMusee");
 
@@ -243,7 +260,6 @@ function afficheMusee2(musees, eltDomList){
 
 }
 
-
 function testRechercheMusee(){
 	var messageSserveur = {"message":"1",
 			"musees":[
@@ -255,7 +271,6 @@ function testRechercheMusee(){
 			        }]}
 	return messageSserveur;
 }
-
 
 /*************************** Récupérer les propositions de musées par affluance ********************************/
 
@@ -314,25 +329,25 @@ function affichePropMusee(affluences, eltDomList)
 }
 
 
-
-/************************************   Affichage de Google Maps ********************************/
-
+/**
+ * Affichage de google map
+ */
 function initMap() {
-	  var museeActuel = {lat: 48.8596, lng: 2.3369};
+	var museeActuel = {lat: 48.8596, lng: 2.3369};
 	console.log("map");
-	  var map = new google.maps.Map(document.getElementById('map'), {
-		    center: museeActuel,
+	var map = new google.maps.Map(document.getElementById('map'), {
+		center: museeActuel,
 		zoom: 14,
 		panControl: false,
 		scrollwheel: false,
 		mapTypeId: google.maps.MapTypeId.ROADMAP
-		  });
+	});
 
-	  var marker = new google.maps.Marker({
-		    position: museeActuel,
-		    map: map,
-		    title: 'Le Louvre'
-			  });
+	var marker = new google.maps.Marker({
+		position: museeActuel,
+		map: map,
+		title: 'Le Louvre'
+	});
 
 	var contentString = '<div class="info-window">' +
 	'<h3>Info Window Content</h3>' +
@@ -358,120 +373,120 @@ function initMap() {
 	google.maps.event.addDomListener(window, 'load', initMap);
 	var aProximite = [
 {
-    nomMusee: 'Institut du Monde Arabe',
-    id: 1,
-    localisation : 
-    {
-        lat: 48.8489231,
-        lng: 2.35749301052036
-    },
+	    nomMusee: 'Institut du Monde Arabe',
+	    id: 1,
+	    localisation : 
+		    {
+		        lat: 48.8489231,
+		        lng: 2.35749301052036
+		    },
 },
 
 {
-    nomMusee: 'Musée de la Chasse et de la Nature',
-    id: 2,
-    localisation : 
-    {
-        lat: 48.8613464,
-        lng: 2.3584276
-    },
+	    nomMusee: 'Musée de la Chasse et de la Nature',
+	    id: 2,
+	    localisation : 
+		    {
+		        lat: 48.8613464,
+		        lng: 2.3584276
+		    },
 },
 
 {
-    nomMusee: 'Galerie d\'Anatomie Comparée et de Paléontologie (Muséum d\'Histoire Naturelle)',
-    id: 3,
-    localisation : 
-    {
-        lat: 48.8432434,
-        lng: 2.35954535401297
-    },
+	    nomMusee: 'Galerie d\'Anatomie Comparée et de Paléontologie (Muséum d\'Histoire Naturelle)',
+	    id: 3,
+	    localisation : 
+		    {
+		        lat: 48.8432434,
+		        lng: 2.35954535401297
+		    },
 },
 
 
 {
-    nomMusee: 'Galerie d’entomologie (Muséum national d\'histoire naturelle)',
-    id: 4,
-    localisation : 
-    {
-        lat: 48.8443464,
-        lng: 2.3562118
-    },
+	    nomMusee: 'Galerie d’entomologie (Muséum national d\'histoire naturelle)',
+	    id: 4,
+	    localisation : 
+		    {
+		        lat: 48.8443464,
+		        lng: 2.3562118
+		    },
 },
 
 {
-    nomMusee: 'Musée Hébert',
-    id: 5,
-    localisation : 
-    {
-        lat: 48.8474495,
-        lng: 2.3227049
-    },
+	    nomMusee: 'Musée Hébert',
+	    id: 5,
+	    localisation : 
+		    {
+		        lat: 48.8474495,
+		        lng: 2.3227049
+		    },
 },
 
 {
-    nomMusee: 'Musée Zadkine',
-    id: 6,
-    localisation : 
-    {
-        lat: 48.8443793,
-        lng: 2.3328737
-    },
+	    nomMusee: 'Musée Zadkine',
+	    id: 6,
+	    localisation : 
+		    {
+		        lat: 48.8443793,
+		        lng: 2.3328737
+		    },
 },
 
 {
-    nomMusee: 'Etablissement Public du Musée d\'Orsay',
-    id: 7,
-    localisation : 
-    {
-        lat: 48.8597437,
-        lng: 2.3259203
-    },
+	    nomMusee: 'Etablissement Public du Musée d\'Orsay',
+	    id: 7,
+	    localisation : 
+		    {
+		        lat: 48.8597437,
+		        lng: 2.3259203
+		    },
 },
 
 {
-    nomMusee: 'Musée National Auguste Rodin',
-    id: 8,
-    localisation : 
-    {
-        lat: 48.8513447,
-        lng: 2.3272485
-    },
+	    nomMusee: 'Musée National Auguste Rodin',
+	    id: 8,
+	    localisation : 
+		    {
+		        lat: 48.8513447,
+		        lng: 2.3272485
+		    },
 },
 
 {
-    nomMusee: 'Musée National de la Légion d\'Honneur et des Ordres de Chevalerie',
-    id: 9,
-    localisation : 
-    {
-        lat:  48.860275,
-        lng: 2.3247399
-    },
+	    nomMusee: 'Musée National de la Légion d\'Honneur et des Ordres de Chevalerie',
+	    id: 9,
+	    localisation : 
+		    {
+		        lat:  48.860275,
+		        lng: 2.3247399
+		    },
 },
 
 {
-    nomMusee: 'Musée Lénine',
-    id: 10,
-    localisation : 
-    {
-        lat:  48.8263909,
-        lng: 2.3306427
-    },
+	    nomMusee: 'Musée Lénine',
+	    id: 10,
+	    localisation : 
+		    {
+		        lat:  48.8263909,
+		        lng: 2.3306427
+		    },
 },
 
 
 
 ];
 	afficheMusee2(aProximite, "#list-meteo");
-	
+
 	for(i=0; i<aProximite.length; i++)
 	{
 		new google.maps.Marker({
-			    position: aProximite[i].localisation,
-			    map: map,
-			    title: aProximite[i].nomMusee,
+			position: aProximite[i].localisation,
+			map: map,
+			title: aProximite[i].nomMusee,
 			icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-				  });
-		
+		});
+
 	}
 
 
