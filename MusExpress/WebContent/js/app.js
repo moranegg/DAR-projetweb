@@ -16,10 +16,19 @@ $( document ).ready(function(){
 
 
 	var idMusee = GetURLParameter('id_musee');
-	$(".navbar-brand").click(routeur.index);
+	
+	
+	$(".navbar-brand").click(function(event) {
+		var idUser = GetURLParameter('id_user');
+		if(idUser != undefined){
+			routeur.home(idUser);
+		}else{
+			routeur.index;
+		}
+	});
 
 	$(".musee").click(function(event) {
-
+		console.log("clickmusee");
 		$(".musee").click(routeur.musee(event.target.id));
 	});
 
@@ -218,13 +227,7 @@ function afficheMuseeRecherche(musees, eltDomList){
 	$(liste).empty();
 	for(i=0; i<musees.length; i++)
 	{
-
 		$(liste).append('<li class="list-group-item musee btn " id="'+musees[i].id+'">'+musees[i].nom+'</li>');
-	var id = musees[i].id;
-		$(liste).append('<li class="list-group-item musee btn " id="'+id+'">'+musees[i].nom+'</li>');
-		console.log(musees[i].id);
-		console.log(musees[i].nom);
-
 	}
 
 	$(".musee").click(function(event) {
@@ -241,16 +244,12 @@ function afficheMusee(musees, eltDomList){
 	$(liste).empty();
 	for(i=0; i<musees.length; i++)
 	{
-		 $(liste).append('<li class="list-group-item">'+musees[i].nom+'</li>');
+		$(liste).append('<li class="list-group-item musee btn " id="'+musees[i].id+'">'+musees[i].nom+'</li>'); 
 
 		//console.log(musees[i].id);
 
 	}
-
 }
-
-
-
 
 function afficheMusee2(musees, eltDomList){
 	console.log("afficheMusee");
@@ -262,7 +261,6 @@ function afficheMusee2(musees, eltDomList){
 		 $(liste).append('<li class="list-group-item">'+musees[i].nomMusee+'</li>');
 
 		//console.log(musees[i].id);
-
 	}
 
 }
@@ -305,7 +303,7 @@ function getAffluances(){
 				} 
 				else 
 				{
-					affichePropMusee(affluences, eltDomList);
+					afficheMuseeRecherche(affluences, eltDomList);
 				}
 				//return musees;
 			}

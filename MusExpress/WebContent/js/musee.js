@@ -58,9 +58,7 @@ var musee = {
 			$("#longitude_musee").append(this.longitude);
 		},
 
-		addToFavorits: function(){
-
-		},
+		
 		getAffluance: function(){
 			console.log("musee.getAffluance");
 			getAffluences();
@@ -68,6 +66,7 @@ var musee = {
 
 		},
 		getLocalisation: function(){
+			
 
 		},
 		addComment: function(){
@@ -75,6 +74,20 @@ var musee = {
 			this.id;
 			addAffluence();
 			$("#affluanceModal").modal('hide');
+		},
+		addFavoris: function(){
+			console.log("add favoris");
+			addFavoris();
+			hideDom("#add-favorits-btn");
+
+
+		},
+		removeFavoris: function(){
+			console.log("remove favoris");
+			//removeFavoris();
+			//not implemented Back end
+
+			
 		}
 }
 
@@ -205,7 +218,37 @@ function afficheAffluence(affluences, eltDomList)
 	}
 
 }
+/**************************Favoris*************************************/
+function addFavoris()
+{
+	 console.log("before server");
+	$.ajax
+	({
+		type: "GET",
+		url : "AjoutMuseeFavServlet",
+		data : {"iduser" : GetURLParameter("id_user"),
+			    "idmusee" : GetURLParameter("id_musee"),  
+			    },
+		dataType : 'JSON',
+		success : function(data) 
+		{
 
+			var resultat = data;         
+
+			if (resultat.message==1)
+			{
+                 console.log("success");
+                 
+			}
+
+		},
+		error : function(XHR, testStatus, errorThrown) 
+		{
+			console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
+		}
+	});
+}
+/***************************************************************************************/
 
 function testMusee(idMusee){
 	var museeExample = {
@@ -249,6 +292,9 @@ $( document ).ready(function(){
 	musee.getAffluance();
 
 	$("#addComment-btn").click(musee.addComment);
+	$("#add-favorits-btn").click(musee.addFavoris);
+	
+	$("#remove-favorits-btn").click(musee.removeFavoris);
 
 
 

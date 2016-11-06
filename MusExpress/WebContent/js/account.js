@@ -168,7 +168,7 @@ function readFavoris(){
 				} 
 				else 
 				{
-					afficheMusee(musees, eltDomList);
+					afficheMuseeRecherche(musees, eltDomList);
 				}
 				//return musees;
 			}

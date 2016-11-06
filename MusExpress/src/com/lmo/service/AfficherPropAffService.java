@@ -30,7 +30,7 @@ public class AfficherPropAffService
 
 				affluenceJSON.put("id", a.getId_commentaire());
 				affluenceJSON.put("user", a.getUser());
-				affluenceJSON.put("musee", a.getMusee().getNom());
+				affluenceJSON.put("nom", a.getMusee().getNom());
 				affluenceJSON.put("duree", a.getDuree());
 				affluenceJSON.put("emplacement", a.getEmplacement());
 				affluenceJSON.put("text", a.getText());
