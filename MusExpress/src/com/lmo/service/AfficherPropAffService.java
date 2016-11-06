@@ -28,7 +28,7 @@ public class AfficherPropAffService
 			{
 				JSONObject affluenceJSON = new JSONObject();
 
-				affluenceJSON.put("id", a.getId_commentaire());
+				affluenceJSON.put("id", a.getMusee().getId());
 				affluenceJSON.put("user", a.getUser());
 				affluenceJSON.put("nom", a.getMusee().getNom());
 				affluenceJSON.put("duree", a.getDuree());

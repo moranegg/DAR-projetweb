@@ -9,6 +9,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -28,15 +29,8 @@ public class Affluence implements Serializable
 	private String text; 
 	private Date  date;
 	
-
-
-
-
-
-
-
 	@Id
-	@GeneratedValue
+	@GeneratedValue 
 	@Column(name = "id_commentaire")
 	public int getId_commentaire() 
 	{
@@ -48,7 +42,7 @@ public class Affluence implements Serializable
 	}
 
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "id_user")
 	public User getUser() 
 	{
@@ -60,7 +54,7 @@ public class Affluence implements Serializable
 	}
 
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "id_musee")
 	public Musee getMusee() 
 	{

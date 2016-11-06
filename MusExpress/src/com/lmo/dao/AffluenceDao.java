@@ -5,8 +5,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
 import org.json.JSONException;
 
 import com.lmo.hibernate.util.HibernateUtil;
@@ -94,7 +96,9 @@ public class AffluenceDao
 			tx = session.getTransaction();
 			tx.begin();
 			list = session.createQuery("from Affluence a where a.duree='10min' order by a.date DESC")
-					.setMaxResults(10)
+					//.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
+					//.setProjection(Projections.distinct(Projections.property("id_commentaire")))
+					//.setMaxResults(10)
 					.list();                        
 			tx.commit();
 		} catch (Exception e) {
