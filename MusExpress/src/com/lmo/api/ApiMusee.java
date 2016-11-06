@@ -49,7 +49,7 @@ public class ApiMusee
 		}
 		in.close();
 
-//		System.out.println(response.toString());
+		System.out.println(response.toString());
 
 		try 
 		{
