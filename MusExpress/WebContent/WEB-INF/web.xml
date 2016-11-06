@@ -126,6 +126,17 @@
 		<servlet-name>AfficherAffluenceMuseeServlet</servlet-name>
 		<url-pattern>/AfficherAffluenceMuseeServlet</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<description>
+			</description>
+		<display-name>AfficherPropAffServlet</display-name>
+		<servlet-name>AfficherPropAffServlet</servlet-name>
+		<servlet-class>com.lmo.controller.AfficherPropAffServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AfficherPropAffServlet</servlet-name>
+		<url-pattern>/AfficherPropAffServlet</url-pattern>
+	</servlet-mapping>
 
 
 

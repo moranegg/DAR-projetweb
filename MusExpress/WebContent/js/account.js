@@ -71,7 +71,6 @@ function readUserServer(idU){
 			var resultat = data;
 			if (resultat.message==1)
 			{
-				//alert ("coucou1"+resultat);
 				showprofil (resultat);
 				//return resultat;
 			}
@@ -170,4 +169,6 @@ function readFavoris(){
 		}
 	});
 }
+
+
 

@@ -2,6 +2,7 @@ $( document ).ready(function(){
 	displayTime();
 	var id_user = GetURLParameter('id_user');
 	routeur.init(id_user);
+	home.propositionAffluance();
 
 	$("#recherche-btn").click(home.recherche);
 	$("#account-btn").click(routeur.account);
@@ -38,6 +39,7 @@ var home = {
 		},
 
 		propositionAffluance: function(){
+			getAffluances();
 
 		},
 
@@ -46,6 +48,9 @@ var home = {
 		}
 
 };
+
+
+/********************************************** Les redirections ********************************/
 
 var routeur = {
 		idUser: "",
@@ -80,48 +85,6 @@ var routeur = {
 		},
 }
 
-function sendRecherche(textRecherche){
-	console.log("send to RechercherMuseeServlet");
-	$.ajax({
-		type : "GET",
-		url : "RechercherMuseeServlet",
-		data :{
-			"nom_musee":textRecherche,
-		},
-
-		dataType : "json",
-		success : function(data) { 
-			console.log("success from RechercherMuseeServlet");
-		//var resultat = $.parseJSON(data);
-		//var resultat = JSON.parse(JSON.stringify(data));
-		var resultat=data;
-
-
-		console.log("resultat.message: "+resultat.message);
-		if (resultat.message=="1") 		
-			{
-				console.log("resultat.musees: "+resultat.musees);
-				var musees = resultat.musees;
-				if (musees.length!=0)
-					{
-					
-						//affichage de la modal avec les résultat
-						var eltDomList = "#liste_recherche";
-						//vider la liste avant recherche
-						$(eltDomList).empty();
-						afficheMusee(musees, eltDomList)
-					}
-
-				//return result;
-			} 
-		},
-		error : function(XHR, testStatus, errorThrown) 
-		{
-			console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
-
-		}
-	});
-}
 
 function displayTime(){
 	var elt = document.getElementById("day");
@@ -181,6 +144,106 @@ function resetForm(loader, btn){
 	showDom(btn);
 }
 
+
+/******************************************Rechercher un musée ********************************/
+
+function sendRecherche(textRecherche){
+	console.log("send to RechercherMuseeServlet");
+	$.ajax({
+		type : "GET",
+		url : "RechercherMuseeServlet",
+		data :{
+			"nom_musee":textRecherche,
+		},
+
+		dataType : "json",
+		success : function(data) { 
+			console.log("success from RechercherMuseeServlet");
+		var resultat=data;
+
+
+		console.log("resultat.message: "+resultat.message);
+		if (resultat.message=="1") 		
+			{
+				console.log("resultat.musees: "+resultat.musees);
+				var musees = resultat.musees;
+				if (musees.length!=0)
+					{
+					
+						//affichage de la modal avec les résultat
+						var eltDomList = "#liste_recherche";
+						//vider la liste avant recherche
+						$(eltDomList).empty();
+						afficheMuseeRecherche(musees, eltDomList)
+					}
+
+				//return result;
+			} 
+		},
+		error : function(XHR, testStatus, errorThrown) 
+		{
+			console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
+
+		}
+	});
+}
+
+
+/**
+ * 
+ * @param musees
+ * @param eltDomList
+ */
+function afficheMuseeRecherche(musees, eltDomList){
+	console.log("afficheMuseeRecherche");
+
+	var liste = eltDomList;
+	$(liste).empty();
+	for(i=0; i<musees.length; i++)
+	{
+		$(liste).append('<li class="list-group-item musee btn " id="'+musees[i].id+'">'+musees[i].nom+'</li>');
+		console.log(musees[i].id);
+		console.log(musees[i].nom);
+
+	}
+	
+	$(".musee").click(function(event) {
+		
+        $(".musee").click(routeur.musee(event.target.id));
+	   });
+}
+
+function afficheMusee(musees, eltDomList){
+	console.log("afficheMusee");
+
+	var liste = eltDomList;
+	$(liste).empty();
+	for(i=0; i<musees.length; i++)
+	{
+		 $(liste).append('<li class="list-group-item">'+musees[i].nom+'</li>');
+
+		//console.log(musees[i].id);
+
+	}
+
+}
+
+function afficheMusee2(musees, eltDomList){
+	console.log("afficheMusee");
+
+	var liste = eltDomList;
+	$(liste).empty();
+	for(i=0; i<musees.length; i++)
+	{
+		 $(liste).append('<li class="list-group-item">'+musees[i].nomMusee+'</li>');
+
+		//console.log(musees[i].id);
+
+	}
+
+}
+
+
 function testRechercheMusee(){
 	var messageSserveur = {"message":"1",
 			"musees":[
@@ -192,47 +255,68 @@ function testRechercheMusee(){
 			        }]}
 	return messageSserveur;
 }
-/**
- * 
- * @param musees
- * @param eltDomList
- */
-function afficheMusee(musees, eltDomList){
-	console.log("afficheMusee");
 
-	var liste = eltDomList;
-	$(liste).empty();
-	for(i=0; i<musees.length || i<5; i++)
-	{
-		$(liste).append('<li class="list-group-item musee btn " id="'+musees[i].id+'">'+musees[i].nomMusee+'</li>');
-		console.log(musees[i].id);
 
-	}
-	
-	$(".musee").click(function(event) {
-		
-        $(".musee").click(routeur.musee(event.target.id));
-	   });
+/*************************** Récupérer les propositions de musées par affluance ********************************/
+
+
+function getAffluances(){
+	//favoris par FavorisSerrvlet
+	console.log("getAffluances");
+	$.ajax({
+		type: "GET",
+		date:{},
+		url : "AfficherPropAffServlet",
+		dataType : 'json',
+
+		success : function(data) {
+			//var resultat = $.parseJSON(data);
+			var resultat = data;
+			if (resultat.message==1)
+			{
+				var affluences = resultat.affluence;
+				var eltDomList = "#list-affluance";
+				if(affluences.length == 0)
+				{
+
+					$("#list-affluance").append('<li class="list-group-item" >Aucune information pour le moment</li>');
+				} 
+				else 
+				{
+					affichePropMusee(affluences, eltDomList);
+				}
+				//return musees;
+			}
+		},
+		error : function(XHR, testStatus, errorThrown) 
+		{
+			console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
+		}
+	});
 }
 
-function afficheAffluence(affluences, eltDomList)
+
+
+function affichePropMusee(affluences, eltDomList)
 {
 
-	console.log("afficheAffluence");
+	console.log("affichePropAffluence");
 
 	var liste = eltDomList;
 	$(liste).empty();
-	for(i=0; i<affluences.length || i<10; i++)
+	for(i=0; i<affluences.length && i<10; i++)
 	{
-		$(liste).append('<li class="list-group-item"><span class="label label-success "><span class="glyphicon glyphicon-flag"></span></span> <span class="commentaire">'+affluences[i].text+'</span> <span	class="text-info ext">'+affluences[i].emplacement+'</span> <span class="badge temps">'+affluences[i].date+'</span></li></li>');
-		console.log(affluences[i].id);
+		$(liste).append('<li class="list-group-item">'+affluences[i].musee+'</li>');
+		//console.log(affluences[i].id);
 
 	}
 
 }
-/**
- * Affichage de google map
- */
+
+
+
+/************************************   Affichage de Google Maps ********************************/
+
 function initMap() {
 	  var museeActuel = {lat: 48.8596, lng: 2.3369};
 	console.log("map");
@@ -377,7 +461,7 @@ function initMap() {
 
 
 ];
-	afficheMusee(aProximite, "#list-meteo");
+	afficheMusee2(aProximite, "#list-meteo");
 	
 	for(i=0; i<aProximite.length; i++)
 	{

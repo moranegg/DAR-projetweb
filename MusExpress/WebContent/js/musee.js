@@ -82,7 +82,7 @@ var musee = {
 
 
 
-//TODO: change NameServlet
+/************************************Afficher les informations du musée *************************/
 function readMusee(idMusee)
 {
 	$.ajax
@@ -93,7 +93,6 @@ function readMusee(idMusee)
 		dataType : 'JSON',
 		success : function(data) 
 		{
-			//var resultat = JSON.parse(JSON.stringify(data));
 
 			var resultat = data;
 
@@ -116,6 +115,10 @@ function readMusee(idMusee)
 		}
 	});
 }
+
+
+/************************************    Ajout d'un commentaire *************************/
+
 
 function addAffluence()
 {
@@ -150,8 +153,11 @@ function addAffluence()
 	});
 }
 
+
+/********************************** Afficher les derniers commentaires du musée *************************/
+
+
 function getAffluences(){
-	//favoris par FavorisSerrvlet
 	$.ajax({
 		type: "GET",
 		url : "AfficherAffluenceMuseeServlet",
@@ -161,7 +167,6 @@ function getAffluences(){
 		dataType : 'json',
 
 		success : function(data) {
-			//var resultat = $.parseJSON(data);
 			var resultat = data;
 			if (resultat.message==1)
 			{
@@ -183,6 +188,22 @@ function getAffluences(){
 			console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
 		}
 	});
+}
+
+function afficheAffluence(affluences, eltDomList)
+{
+
+	console.log("afficheAffluence");
+
+	var liste = eltDomList;
+	$(liste).empty();
+	for(i=0; i<affluences.length && i<10; i++)
+	{
+		$(liste).append('<li class="list-group-item"><span class="label label-success "><span class="glyphicon glyphicon-flag"></span></span> <span class="commentaire">'+affluences[i].text+'</span> <span	class="text-info ext">'+affluences[i].emplacement+'</span> <span class="badge temps">'+affluences[i].date+'</span></li></li>');
+		console.log(affluences[i].id);
+
+	}
+
 }
 
 
