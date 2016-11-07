@@ -24,7 +24,7 @@ public class RechercherMuseeService
 		{
 			response.put("message", "1");
 			for(i=0; i<museelist.size(); i++)
-			{
+			{ System.out.println("\n\n\n"+museelist.get(i).getId());
 				JSONObject museeJSON = new JSONObject();
 
 				museeJSON.put("id", museelist.get(i).getId());

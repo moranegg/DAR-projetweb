@@ -1,5 +1,7 @@
 $( document ).ready(function(){
+
 	displayTime();
+
 	//show tooltip data on btn (star-favoris)
 	$("[data-toggle='tooltip']").tooltip();
 	
@@ -237,7 +239,23 @@ function afficheMuseeRecherche(musees, eltDomList){
 	$(liste).empty();
 	for(i=0; i<musees.length; i++)
 	{
+		
+		
 		$(liste).append('<li class="list-group-item musee btn " id="'+musees[i].id+'">'+musees[i].nom+'</li>');
+		
+//		var li = document.createElement("div");
+//		li.innerHTML='<li class="list-group-item musee btn " id="'+musees[i].id+'">'+musees[i].nom+'</li>';
+//		$(liste).append(li);
+//		var supp = document.createElement("input");
+//		supp.type = "button";
+//		supp.value = "Supprimer";
+//		supp.class="btn btn-default ";
+//		supp.onclick = function() {
+//
+//			li.parentNode.removeChild(li);
+//			supp.parentNode.removeChild(supp);
+//		}
+//		$(liste).append(supp);
 	}
 
 	$(".musee").click(function(event) {
@@ -254,6 +272,7 @@ function afficheMusee(musees, eltDomList){
 	$(liste).empty();
 	for(i=0; i<musees.length; i++)
 	{
+		
 		$(liste).append('<li class="list-group-item musee btn " id="'+musees[i].id+'">'+musees[i].nom+'</li>'); 
 
 		//console.log(musees[i].id);
@@ -310,6 +329,7 @@ function getAffluances(){
 				{
 
 					$("#list-affluance").append('<li class="list-group-item" >Aucune information pour le moment</li>');
+					
 				} 
 				else 
 				{

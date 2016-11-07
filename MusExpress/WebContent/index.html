@@ -21,21 +21,29 @@
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="/MusExpress/js/lib/css/bootstrap.min.css">
+<link rel="stylesheet" href="/MusExpress/images/custom.css">
 
 </head>
 
 <body>
-	<nav class="navbar navbar-default navbar-static-top header-template"
+	<nav class="navbar navbar-default navbar-static-top header-template navbar-fixed-top"
 		role="navigation" style="margin-bottom: 0">
-		<div class="row">
-		<div class="col-md-3">
-			<a class="navbar-brand" href="#"> MusExpress</a>
-		</div>
+		<div class="row ">
+			<div class="col-md-1">
+
+				<a class="navbar-brand" href="#"> MusExpress</a>
+			</div>
+			<div class="col-md-1">
+				<img src="images/icon-mus.png" class="img-responsive" width="30"
+					height="23">
+			</div>
 		</div>
 	</nav>
 	<!-- /.navbar-header -->
 	<div class="container">
-		<div class="row">
+		<hr class="nav-margin">
+		
+		<div class="row row-padded row-centered">
 			<div class="col-md-6">
 				<div class="panel panel-default">
 					<div class="panel-heading">Connexion</div>
@@ -171,14 +179,64 @@
 
 		</div>
 
-	</div>
+		<!-- First Featurette -->
+		<div class="featurette" id="about">
+			<img class="featurette-image img-circle img-responsive pull-right"
+				src="images/louvre.jpg" width="304" height="236">
+			<h2 class="featurette-heading">
+				Recherchez vos musée favoris <span class="text-muted">Will Catch Your
+					Eye</span>
+			</h2>
+			<p class="lead">Donec ullamcorper nulla non metus auctor
+				fringilla. Vestibulum id ligula porta felis euismod semper. Praesent
+				commodo cursus magna, vel scelerisque nisl consectetur. Fusce
+				dapibus, tellus ac cursus commodo.</p>
+		</div>
 
-	<footer class="footer">
-		<p class="text-center">
-			The source code for this application is available in <a
-				href="https://github.com/moranegg/DAR-projetweb">this repository</a>
-			on GitHub.
-		</p>
-	</footer>
+		<hr class="featurette-divider">
+
+		<!-- Second Featurette -->
+		<div class="featurette" id="services">
+			<img class="featurette-image img-circle img-responsive pull-left"
+				src="images/file.jpg" width="304" height="236">
+			<h2 class="featurette-heading">
+				The Second Heading <span class="text-muted">Is Pretty Cool
+					Too.</span>
+			</h2>
+			<p class="lead">Donec ullamcorper nulla non metus auctor
+				fringilla. Vestibulum id ligula porta felis euismod semper. Praesent
+				commodo cursus magna, vel scelerisque nisl consectetur. Fusce
+				dapibus, tellus ac cursus commodo.</p>
+		</div>
+
+		<hr class="featurette-divider">
+
+		<!-- Third Featurette -->
+		<div class="featurette" id="contact">
+			<img class="featurette-image img-circle img-responsive pull-right"
+				src="images/pompidou.jpg" width="304" height="236">
+			<h2 class="featurette-heading">
+				The Third Heading <span class="text-muted">Will Seal the
+					Deal.</span>
+			</h2>
+			<p class="lead">Donec ullamcorper nulla non metus auctor
+				fringilla. Vestibulum id ligula porta felis euismod semper. Praesent
+				commodo cursus magna, vel scelerisque nisl consectetur. Fusce
+				dapibus, tellus ac cursus commodo.</p>
+		</div>
+
+		<hr class="featurette-divider">
+
+		
+
+		</div>
+
+		<footer class="footer">
+			<p class="text-center">
+				The source code for this application is available in <a
+					href="https://github.com/moranegg/DAR-projetweb">this
+					repository</a> on GitHub.
+			</p>
+		</footer>
 </body>
 </html>

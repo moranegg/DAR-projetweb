@@ -21,7 +21,7 @@ public class ApiMeteo {
 	public static JSONObject getMeteo() throws IOException, JSONException {
 		
 		// Vous remarquerez qu'ici l'id correspond à l'id de Paris
-		String url ="http://api.openweathermap.org/data/2.5/weather?id=6942553&appid=5f874cd5ab9513b09966412504731102";
+		String url ="http://api.openweathermap.org/data/2.5/weather?id=2988507&appid=5f874cd5ab9513b09966412504731102";
 		URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
@@ -44,40 +44,41 @@ public class ApiMeteo {
 
 		// DATA RECEIVING TIME
 		String dt=j.getString("dt");
-		resp.append("dt", dt);
+		resp.put("dt", dt);
 		
 		// Coordonnées de la ville de Paris
 		JSONObject coord=j.getJSONObject("coord");
 		String lon = coord.getString("lon");
 		String lat = coord.getString("lat");
 		
-		resp.append("lon", lon);
-		resp.append("lat", lat);
+		resp.put("lon", lon);
+		resp.put("lat", lat);
 		
 		// Visibilité
 		String visibility=j.getString("visibility");
 		
-		resp.append("visibility", visibility);
+		resp.put("visibility", visibility);
 		
 		//Weather
 		JSONArray weather = j.getJSONArray("weather");
-		resp.append("weather", weather);
+		resp.put("weather", weather);
 		for(int i=0;i<weather.length();i++)
 		{
 			JSONObject jo = weather.getJSONObject(i);
-			String icon = jo.getString("icon");
+			String icon = jo.getString("icon").toString();
+			System.out.println(icon);
 			String description = jo.getString("description");
 			String main = jo.getString("main");
 			//String id = jo.getString("id");
 			
-			jo.append("icon", icon);
-			jo.append("description", description);
-			jo.append("main", main);
+			jo.put("icon", "http:/openweathermap.org/img/w/"+icon+".png");
+			jo.put("description", description);
+			jo.put("main", main);
 		}
 		
 		//Le nom de la ville
 		String name=j.getString("name");
-		resp.append("name", name);
+		resp.put("name", name);
 		
 		//String cod=j.getString("cod");
 		
@@ -89,22 +90,28 @@ public class ApiMeteo {
 		String pressure = main.getString("pressure");
 		String temp_max = main.getString("temp_max");
 		
-		resp.append("temp", temp);
-		resp.append("temp_min", temp_min);
-		resp.append("humidity", humidity);
-		resp.append("pressure", pressure);
-		resp.append("temp_max", temp_max);
+		int  t= (int) (Float.parseFloat(temp)-273.15);
+		resp.put("temp", String.valueOf(t));
+		//System.out.println(String.valueOf(t));
+		
+		t= (int) (Float.parseFloat(temp_min)-273.15);
+		resp.put("temp_min", String.valueOf(t));
+		resp.put("humidity", humidity);
+		resp.put("pressure", pressure);
+		
+		t= (int) (Float.parseFloat(temp_max)-273.15);
+		resp.put("temp_max", String.valueOf(t));
 
 		// Clouds
 		JSONObject clouds=j.getJSONObject("clouds"); 
 		String all=clouds.getString("all"); //% cloudiness
 		
-		resp.append("clouds_all", all);
+		resp.put("clouds_all", all);
 		
 		//Identifiant de la ville
 		String id =j.getString("id");
 		
-		resp.append("id", id);
+		resp.put("id", id);
 		
 		// Contient des infos sur sunrise et sunset
 		JSONObject sys=j.getJSONObject("sys"); 
@@ -112,17 +119,17 @@ public class ApiMeteo {
 		String sunrise = sys.getString("sunrise");
 		String sunset = sys.getString("sunset");
 		
-		resp.append("country", country);
-		resp.append("sunrise", sunrise);
-		resp.append("sunset", sunset);
+		resp.put("country", country);
+		resp.put("sunrise", sunrise);
+		resp.put("sunset", sunset);
 		
 		//Vent
 		JSONObject wind=j.getJSONObject("wind");
 		String deg = wind.getString("deg");
 		String speed = wind.getString("speed");
 		
-		resp.append("wind_deg", deg);
-		resp.append("wind_speed", speed);
+		resp.put("wind_deg", deg);
+		resp.put("wind_speed", speed);
 		
 		return resp;
 	}
