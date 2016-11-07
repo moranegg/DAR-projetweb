@@ -100,7 +100,29 @@ public class MuseeDao
 	        return list;
 	    }
 	    
-	    
+	    public static List<Musee> getAllMusees(){
+	        List<Musee> list = new ArrayList<Musee>();
+	        Session session = HibernateUtil.getSessionFactory().openSession();
+	        Transaction tx = null; 
+
+
+	        try {
+
+	            tx = session.getTransaction();
+	            tx.begin();
+	            list = session.createQuery("from Musee")
+	            		.list();                        
+	            tx.commit();
+	        } catch (Exception e) {
+	            if (tx != null) {
+	                tx.rollback();
+	            }
+	            e.printStackTrace();
+	        } finally {
+	            session.close();
+	        }
+	        return list;
+	    }
 //		public static Set<Affluence> listAffluence (String id)
 //				throws JSONException
 //		{

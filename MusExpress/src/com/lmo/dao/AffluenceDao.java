@@ -112,7 +112,33 @@ public class AffluenceDao
 		return list;
 	}
 	
-	
+	public static List<Affluence> getAffluenceByEmplacement(String emplacement)
+	{
+		List<Affluence> list = new ArrayList<Affluence>();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction tx = null; 
+
+
+		try {
+
+			tx = session.getTransaction();
+			tx.begin();
+			list = session.createQuery("from Affluence a where a.emplacement='"+emplacement+"'")
+					//.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
+					//.setProjection(Projections.distinct(Projections.property("id_commentaire")))
+					//.setMaxResults(10)
+					.list();                        
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return list;
+	}
 
 
 }

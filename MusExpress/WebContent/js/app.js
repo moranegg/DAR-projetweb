@@ -1,6 +1,6 @@
 $( document ).ready(function(){
 
-	displayTime();
+	//displayTime();
 
 	//show tooltip data on btn (star-favoris)
 	$("[data-toggle='tooltip']").tooltip();
@@ -11,6 +11,8 @@ $( document ).ready(function(){
 		routeur.init(id_user);
 		if(path == "/MusExpress/home.html"){
 			home.propositionAffluance();
+			home.propositionMeteo();
+			home.readMeteo();
 		}
 	}
 
@@ -63,7 +65,43 @@ var home = {
 		},
 
 		readMeteo: function(){
+			
+			var div_meteo = $("#meteo");
+			//var meteo = sendMeteo(meteo_json);
+			
+			$.ajax({
+				type: "GET",
+				date:{},
+				url : "GetWeatherServlet",
+				dataType : 'json',
 
+				success : function(data) {
+					
+					if(data.message="1")
+					{
+						
+						var temp = data.temp;
+						var temp_min = data.temp_min;
+						var temp_max = data.temp_max;
+						var humidity = data.humidity;
+						var sunrise = data.sunrise;
+	//					var sunset = data.sunset;
+						var icon = data.weather[0].icon;
+			
+						$("#icon").append('<img src ="'+icon+'" width="70" height = "70"></img>');
+						$("#temp").append(temp+"° C");
+						$("#temp_min").append(temp_min+"° C");
+						$("#temp_max").append(temp_max+"° C");
+						$("#humidity").append(humidity + " %");
+						//$("#sunrise").append(new Date(parseInt(sunrise)));
+					}
+				},
+				error : function(XHR, testStatus, errorThrown) 
+				{
+					console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
+				}
+			});
+			
 		},
 
 		propositionAffluance: function(){
@@ -72,7 +110,7 @@ var home = {
 		},
 
 		propositionMeteo: function(){
-
+			getPropMeteo();
 		}
 
 };
@@ -110,7 +148,27 @@ var routeur = {
 		},
 }
 
+function sendMeteo(div_meteo)
+{
+	$.ajax({
+		type: "GET",
+		date:{},
+		url : "GetWeatherServlet",
+		dataType : 'json',
 
+		success : function(data) {
+			//printhtml("#meteo","<p>"+data.dt+"</p>");
+//			var meteo = "#meteo";
+			alert(data);
+			//console.log(data);
+//			$(meteo).append('<p>ouiza</p>');
+		},
+		error : function(XHR, testStatus, errorThrown) 
+		{
+			console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
+		}
+	});
+}
 function displayTime(){
 	var elt = "#day";
 	var now  = new Date();
@@ -523,7 +581,56 @@ function initMap() {
 		});
 
 	}
+/************************* Propositions selon la Météo**************************************/
+	function getPropMeteo(){
+		//favoris par FavorisSerrvlet
+		console.log("getPropMeteo");
+		$.ajax({
+			type: "GET",
+			date:{},
+			url : "AfficherPropMeteoServlet",
+			dataType : 'json',
 
+			success : function(data) {
+				//var resultat = $.parseJSON(data);
+				var resultat = data;
+				if (resultat.message==1)
+				{
+					var propositions = resultat.propositions;//propositions sont des musées !
+					var eltDomList = "#list-meteo";
+					if(propositions.length == 0)
+					{
 
+						$("#list-meteo").append('<li class="list-group-item" >Aucune information pour le moment</li>');
+						
+					} 
+					else 
+					{
+						afficheMuseeRecherche(affluences, eltDomList);
+					}
+					//return musees;
+				}
+			},
+			error : function(XHR, testStatus, errorThrown) 
+			{
+				console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
+			}
+		});
+	}
+	function affichePropMeteo(propositions, eltDomList)
+	{
+
+		console.log("affichePropMeteo");
+
+		var liste = eltDomList;
+		$(liste).empty();
+		for(i=0; i<propositions.length && i<10; i++)
+		{
+			$(liste).append('<li class="list-group-item">'+propositions[i].musee+'</li>');
+			//console.log(affluences[i].id);
+
+		}
+
+	}
 
 }

@@ -149,7 +149,17 @@
 		<url-pattern>/GetWeatherServlet</url-pattern>
 	</servlet-mapping>
 
-
+	<servlet>
+		<description>
+			</description>
+		<display-name>AfficherPropMeteoServlet</display-name>
+		<servlet-name>AfficherPropMeteoServlet</servlet-name>
+		<servlet-class>com.lmo.controller.AfficherPropMeteoServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AfficherPropMeteoServlet</servlet-name>
+		<url-pattern>/AfficherPropMeteoServlet</url-pattern>
+	</servlet-mapping>
 
 
 

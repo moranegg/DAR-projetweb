@@ -71,9 +71,9 @@ public class ApiMeteo {
 			String main = jo.getString("main");
 			//String id = jo.getString("id");
 			
-			jo.put("icon", "http:/openweathermap.org/img/w/"+icon+".png");
+			jo.put("icon", "http://openweathermap.org/img/w/"+icon+".png");
 			jo.put("description", description);
-			jo.put("main", main);
+			resp.put("main", main);
 		}
 		
 		//Le nom de la ville
