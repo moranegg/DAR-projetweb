@@ -30,13 +30,27 @@ var account = {
 		},
 		updateUser: function()
 		{
+			hideDom('#update-btn')
+			hideDom("#notifier-update");
+			showDom('#loader-update');
+			
 			var email = $('#email_register').val();
 			var password = $('#password_register').val();
 			var nom = $('#nom').val();
 			var prenom = $('#prenom').val();
 			var codep = $('#codep').val();
-
-			updateProfil(nom,prenom,codep,email, password);
+			
+			
+			var ok = verif(nom, prenom, codep, email, password);
+			if (ok) {
+				console.log("ok");
+				updateProfil(nom,prenom,codep,email, password);
+			}else{
+				resetForm('#loader-update','#update-btn');
+				console.log("method verif retourne faux, champs non ou " +
+				"mal remplis");
+			}
+			
 
 		},
 		readFavoris: function(){
@@ -134,14 +148,22 @@ function updateProfil(nom,prenom,codep,email, password){
 		{
 			if (data.message==1)
 			{
-				alert("updated!");
-				routeur.account(data.id_user);
+				resetForm('#loader-update','#update-btn');
+				console.log("update success: "+data.message);
+				printhtml('#notifier-update',"Votre compte à bien été modifier");
+				//routeur.account(data.id_user);
+			} else {
+				resetForm('#loader-update','#update-btn');
+				console.log("update error: "+data.message);
+				printhtml('#notifier-update',"Mot de passe incorrect, la modification n'a pas été prise en compte");
 			}
 
 		},
 		error : function(XHR, testStatus, errorThrown) 
 		{
-			alert("status: " + XHR.status + ", erreur: " + XHR.responseText);
+			resetForm('#loader-update','#update-btn');
+			console.log("update error: "+errorThrown);
+			printhtml('#notifier-update',"Erreur sur le serveur");
 		}
 	});
 }
@@ -180,5 +202,43 @@ function readFavoris(){
 	});
 }
 
+function verif(nom, prenom, codep, email, password) 
+{
+
+	if(prenom.length==0)
+	{
+
+		printhtml('#notifier-update',"Prenom manquant");
+		return false;
+	}
+
+	if(nom.length==0)
+	{
+		printhtml('#notifier-update',"Nom manquant");
+		return false;
+	}
+
+	if(codep.length<5)
+	{
+		printhtml('#notifier-update',"Code postal manquant");
+		return false;
+	}
+
+	if(email.length==0 && !isEmail(email))
+	{
+		printhtml('#notifier-update',"Email manquant");
+		return false;
+	}
+
+	if(password.length<8)
+	{
+		printhtml('#notifier-update',"Vous devez renseigner votre mot de passe afin de modifier votre compte");
+		return false;
+	}
+
+
+
+	return true;
+}
 
 

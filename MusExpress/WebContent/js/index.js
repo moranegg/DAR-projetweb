@@ -117,11 +117,15 @@ function login(email,password){
 		{
 			console.log("resultat.idUser: "+resultat.id_user)
             routeur.home(resultat.id_user);
-		} 
+		} else{
+			printhtml('#notifier-login',"Mauvais mail ou mot de passe");
+			resetForm('#loader-login','#login-btn');
+		}
 		},
 		error : function(XHR, testStatus, errorThrown) 
 		{
 			console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
+			printhtml('#notifier-login',"erreur de connexion au serveur");
 			resetForm('#loader-login','#login-btn');
 		}
 	});

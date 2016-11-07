@@ -45,10 +45,18 @@ var home = {
 
 		recherche: function(event)
 		{
+			var liste = "#liste_recherche";
+			$(liste).empty();
 			console.log("home.recherche");
 			var textRecherche = $("#recherche-input").val();
 			console.log("home.recherche de: "+textRecherche);
-			var musees = sendRecherche(textRecherche);
+			if(textRecherche == undefined || textRecherche == ''){
+				
+				$(liste).append('<li class="list-group-item ">Le champ recherche est vide</li>');
+			} else {
+				var musees = sendRecherche(textRecherche);
+			}
+			
 
 		},
 

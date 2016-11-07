@@ -118,7 +118,10 @@
 
 					<input class="btn btn-primary btn-lg" value="Valider"
 						id="update-btn" />
-					<div id='notifier-update'></div>
+					<div class="hide" role="alert" id='loader-update'>
+						<img src="images/loader.gif">
+					</div>
+					<div class="alert alert-warning hide" role="alert" id='notifier-update'></div>
 
 
 				</form>
@@ -136,11 +139,11 @@
 
 					<!-- List group à partir du résultat serveur à injecter dans les items-->
 					<ul class="list-group" id="liste_fav">
-<!-- 						<li class="list-group-item">Cras justo odio</li> -->
-<!-- 						<li class="list-group-item">Dapibus ac facilisis in</li> -->
-<!-- 						<li class="list-group-item">Morbi leo risus</li> -->
-<!-- 						<li class="list-group-item">Porta ac consectetur ac</li> -->
-<!-- 						<li class="list-group-item">Vestibulum at eros</li> -->
+						<!-- 						<li class="list-group-item">Cras justo odio</li> -->
+						<!-- 						<li class="list-group-item">Dapibus ac facilisis in</li> -->
+						<!-- 						<li class="list-group-item">Morbi leo risus</li> -->
+						<!-- 						<li class="list-group-item">Porta ac consectetur ac</li> -->
+						<!-- 						<li class="list-group-item">Vestibulum at eros</li> -->
 					</ul>
 				</div>
 
@@ -152,12 +155,12 @@
 
 		<!-- partie des favoris -->
 		<div class="row"></div>
-		
-		
-		
-				<!-- Recherche Modal -->
-		<div class="modal fade" id="rechercheModal" tabindex="-1" role="dialog"
-			aria-labelledby="rechercheModalLabel">
+
+
+
+		<!-- Recherche Modal -->
+		<div class="modal fade" id="rechercheModal" tabindex="-1"
+			role="dialog" aria-labelledby="rechercheModalLabel">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -165,11 +168,11 @@
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
-						<h4 class="modal-title" id="rechercheModalLabel">Résultat de la
-							recherche</h4>
+						<h4 class="modal-title" id="rechercheModalLabel">Résultat de
+							la recherche</h4>
 					</div>
 					<div class="modal-body">
-						
+
 						<div class="panel panel-default">
 
 							<!-- List group à partir du résultat serveur à injecter dans les items-->
@@ -180,13 +183,13 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-						
+
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- fin modal -->
-		
+
 
 	</div>
 	<!-- fin container -->
