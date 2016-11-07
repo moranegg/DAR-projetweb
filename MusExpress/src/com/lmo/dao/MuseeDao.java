@@ -100,6 +100,33 @@ public class MuseeDao
 	        return list;
 	    }
 	    
+	    public static List<Musee> getListMuseesProximite(String id)
+	    {
+	        List<Musee> list = new ArrayList<Musee>();
+	        Session session = HibernateUtil.getSessionFactory().openSession();
+	        Transaction tx = null; 
+
+
+	        try {
+	        	
+	        	Musee m = getMuseeById(id);
+	        	String departement = String.valueOf(m.getDepartement());
+	            tx = session.getTransaction();
+	            tx.begin();
+	            list = session.createQuery("from Musee m where m.departement='"+departement+"'")
+	            		.list();                        
+	            tx.commit();
+	        } catch (Exception e) {
+	            if (tx != null) {
+	                tx.rollback();
+	            }
+	            e.printStackTrace();
+	        } finally {
+	            session.close();
+	        }
+	        return list;
+	    }
+	    
 	    
 //		public static Set<Affluence> listAffluence (String id)
 //				throws JSONException
