@@ -30,7 +30,7 @@ public class AfficherMuseesProximite
 			{
 				JSONObject museeJSON = new JSONObject();
 
-				museeJSON.put("id", m.getId());
+				museeJSON.put("id_musee", m.getId());
 				museeJSON.put("nomMusee", m.getNom());
 				JSONObject localisation = new JSONObject();
 				localisation.put("lat", m.getLatitude());
