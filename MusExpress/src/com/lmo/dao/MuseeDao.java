@@ -32,7 +32,7 @@ public class MuseeDao
 			tx = session.getTransaction();
 			tx.begin();
 			Musee musee = new Musee (nom, adresse, ville, departement,codep, ferme,
-					siteweb,periode_ouverture, fermeture_annuelle, latitude,longitude,type);
+					siteweb,periode_ouverture, fermeture_annuelle, latitude, longitude,type);
 			session.save(musee);		
 			tx.commit();
 		} catch (Exception e) {
@@ -127,33 +127,7 @@ public class MuseeDao
 	        return list;
 	    }
 	    
-	    
-//		public static Set<Affluence> listAffluence (String id)
-//				throws JSONException
-//		{
-//
-//			Session session = HibernateUtil.getSessionFactory().openSession();
-//
-//			Transaction tx = null;	
-//			try {
-//				tx = session.getTransaction();
-//				tx.begin();
-//				Musee musee = MuseeDao.getMuseeById(id);
-//				System.out.println("musee"+musee);
-//			    Set<Affluence> c = musee.getAffluences();
-//			    System.out.println("coucou"+c);
-//			    tx.commit();
-//				return c;
-//			} catch (Exception e) {
-//				if (tx != null) {
-//					tx.rollback();
-//				}
-//				e.printStackTrace();
-//			} finally {
-//				session.close();
-//			}
-//			return null;	
-//		}
+
 	   
 	}
 

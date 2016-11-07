@@ -35,6 +35,12 @@ public class AfficherPropAffService
 				affluenceJSON.put("emplacement", a.getEmplacement());
 				affluenceJSON.put("text", a.getText());
 				affluenceJSON.put("date", a.getDate());
+				JSONObject localisation = new JSONObject();
+				localisation.put("lat", a.getMusee().getLatitude());
+				localisation.put("lng", a.getMusee().getLongitude());
+				affluenceJSON.put("localisation", localisation);
+				
+			
 
 				array.put(affluenceJSON);
 			}
