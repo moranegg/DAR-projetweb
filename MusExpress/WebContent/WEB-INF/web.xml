@@ -138,8 +138,8 @@
 		<url-pattern>/AfficherPropAffServlet</url-pattern>
 	</servlet-mapping>
 
- <servlet>
-   <description></description>
+	<servlet>
+		<description></description>
 		<display-name>GetWeatherServlet</display-name>
 		<servlet-name>GetWeatherServlet</servlet-name>
 		<servlet-class>com.lmo.controller.GetWeatherServlet</servlet-class>
@@ -147,6 +147,18 @@
 	<servlet-mapping>
 		<servlet-name>GetWeatherServlet</servlet-name>
 		<url-pattern>/GetWeatherServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description>
+ 	</description>
+		<display-name>AfficherMuseesProximiteServlet</display-name>
+		<servlet-name>AfficherMuseesProximiteServlet</servlet-name>
+		<servlet-class>com.lmo.controller.AfficherMuseesProximiteServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>AfficherMuseesProximiteServlet</servlet-name>
+		<url-pattern>/AfficherMuseesProximiteServlet</url-pattern>
 	</servlet-mapping>
 
 	<servlet>

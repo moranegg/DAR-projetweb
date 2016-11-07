@@ -32,7 +32,7 @@ public class MuseeDao
 			tx = session.getTransaction();
 			tx.begin();
 			Musee musee = new Musee (nom, adresse, ville, departement,codep, ferme,
-					siteweb,periode_ouverture, fermeture_annuelle, latitude,longitude,type);
+					siteweb,periode_ouverture, fermeture_annuelle, latitude, longitude,type);
 			session.save(musee);		
 			tx.commit();
 		} catch (Exception e) {
@@ -100,29 +100,7 @@ public class MuseeDao
 	        return list;
 	    }
 	    
-	    public static List<Musee> getAllMusees(){
-	        List<Musee> list = new ArrayList<Musee>();
-	        Session session = HibernateUtil.getSessionFactory().openSession();
-	        Transaction tx = null; 
 
-
-	        try {
-
-	            tx = session.getTransaction();
-	            tx.begin();
-	            list = session.createQuery("from Musee")
-	            		.list();                        
-	            tx.commit();
-	        } catch (Exception e) {
-	            if (tx != null) {
-	                tx.rollback();
-	            }
-	            e.printStackTrace();
-	        } finally {
-	            session.close();
-	        }
-	        return list;
-	    }
 //		public static Set<Affluence> listAffluence (String id)
 //				throws JSONException
 //		{
@@ -149,6 +127,58 @@ public class MuseeDao
 //			}
 //			return null;	
 //		}
+
+	    public static List<Musee> getListMuseesProximite(String id)
+	    {
+	        List<Musee> list = new ArrayList<Musee>();
+	        Session session = HibernateUtil.getSessionFactory().openSession();
+	        Transaction tx = null; 
+
+
+	        try {
+	        	
+	        	Musee m = getMuseeById(id);
+	        	String departement = String.valueOf(m.getDepartement());
+	            tx = session.getTransaction();
+	            tx.begin();
+	            list = session.createQuery("from Musee m where m.departement='"+departement+"'")
+	            		.list();                        
+	            tx.commit();
+	        } catch (Exception e) {
+	            if (tx != null) {
+	                tx.rollback();
+	            }
+	            e.printStackTrace();
+	        } finally {
+	            session.close();
+	        }
+	        return list;
+	    }
+	    
+
+	    public static List<Musee> getAllMusees(){
+	        List<Musee> list = new ArrayList<Musee>();
+	        Session session = HibernateUtil.getSessionFactory().openSession();
+	        Transaction tx = null; 
+
+
+	        try {
+
+	            tx = session.getTransaction();
+	            tx.begin();
+	            list = session.createQuery("from Musee")
+	            		.list();                        
+	            tx.commit();
+	        } catch (Exception e) {
+	            if (tx != null) {
+	                tx.rollback();
+	            }
+	            e.printStackTrace();
+	        } finally {
+	            session.close();
+	        }
+	        return list;
+	    }
 	   
 	}
 
