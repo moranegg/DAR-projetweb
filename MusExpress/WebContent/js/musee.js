@@ -188,6 +188,7 @@ function getAffluences(){
 				if(affluences.length == 0)
 				{
 					$("#liste_aff").append('<li class="list-group-item info" >Aucune information pour le moment</li>');
+					
 				} 
 				else 
 				{
@@ -207,12 +208,36 @@ function afficheAffluence(affluences, eltDomList)
 {
 
 	console.log("afficheAffluence");
-
+	hideDom("#loader-affluence");
 	var liste = eltDomList;
 	$(liste).empty();
+	//couleur affluence actuell
+	var affActuelle = affluences[0].duree;
+	if(affActuelle != undefined){
+		$("#affluance_actuelle").removeClass("label-default");
+		var drapeau = "danger";
+		if(affActuelle.startsWith("10min")){
+			drapeau = "success";
+		}else if(affActuelle.startsWith("10-30")){
+			drapeau = "primary";
+		}else if(affActuelle.startsWith("30-60")){
+			drapeau = "warning";
+		}
+		$("#affluance_actuelle").addClass("label-"+drapeau);
+	}
+	
 	for(i=0; i<affluences.length && i<10; i++)
 	{
-		$(liste).append('<li class="list-group-item"><span class="label label-success "><span class="glyphicon glyphicon-flag"></span></span> <span class="commentaire">'+affluences[i].text+'</span> <span	class="text-info ext">'+affluences[i].emplacement+'</span> <span class="badge temps">'+affluences[i].date+'</span></li></li>');
+		var duree= affluences[i].duree;
+		var drapeau = "danger";
+		if(duree.startsWith("10min")){
+			drapeau = "success";
+		}else if(duree.startsWith("10-30")){
+			drapeau = "primary";
+		}else if(duree.startsWith("30-60")){
+			drapeau = "warning";
+		}
+		$(liste).append('<li class="list-group-item"><span class="label label-'+drapeau+' "><span class="glyphicon glyphicon-flag"></span></span> <span class="commentaire">'+affluences[i].text+'</span> <span	class="text-info ext">'+affluences[i].emplacement+'</span> <span class="badge temps">'+affluences[i].date+'</span></li></li>');
 		console.log(affluences[i].id);
 
 	}
@@ -289,6 +314,7 @@ $( document ).ready(function(){
 	var idMusee = GetURLParameter('id_musee');
 	
 	var mus = musee.init(idMusee);
+	
 	musee.getAffluance();
 
 	$("#addComment-btn").click(musee.addComment);

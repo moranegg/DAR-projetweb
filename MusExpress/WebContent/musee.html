@@ -62,14 +62,19 @@
 					<!-- info -->
 					<div class="panel panel-primary">
 						<div class="panel-heading">
-
-							<h3 id="nom_musee">Nom:</h3>
-
-							<span
-								class="col-md-offset-8 btn btn-default glyphicon glyphicon-star"
-								id="add-favorits-btn"> </span> <span
+						<div class="col-md-offset-10">
+							<button type="button" class=" btn btn-default"  id="add-favorits-btn" data-toggle="tooltip" data-placement="bottom" 
+						title="Ajouter Au favoris"><span class="glyphicon glyphicon-star"> </span>
+						 </button>
+						</div>
+						
+							
+								<span
 								class="btn btn-default glyphicon glyphicon-minus hide"
 								id="remove-favorits-btn"> </span>
+							<h3 id="nom_musee">Nom:</h3>
+
+							
 
 						</div>
 						<div class="panel-body">
@@ -137,7 +142,9 @@
 						</div>
 					</div>
 					<div class="panel-body">
-
+						<div class="" role="alert" id='loader-affluence'>
+										<img src="images/loader.gif">
+									</div>
 
 
 
