@@ -4,6 +4,11 @@ var callbackMusee =false;
 $( document ).ready(function(){
 	var search = $(location).attr('search'); 
 	var idMusee = GetURLParameter('id_musee');
+	var idU = GetURLParameter('id_user');
+	
+	if(idMusee== undefined){
+		routeur.home(idU);
+	}
 	
 	var mus = musee.init(idMusee);
 	var callbackGoogleMaps;
@@ -186,13 +191,12 @@ function addAffluence()
 		dataType : 'JSON',
 		success : function(data) 
 		{
-
-			var resultat = data;           
-
-
-			if (resultat.message==1)
+			if (data.message==1)
 			{
                  console.log("success");
+                showDom("#loader-affluence");
+ 				getAffluences();
+                 
 			}
 
 		},
@@ -450,10 +454,51 @@ function initMap(mus) {
 	var styles = [{"featureType": "landscape", "stylers": [{"saturation": -100}, {"lightness": 65}, {"visibility": "on"}]}, {"featureType": "poi", "stylers": [{"saturation": -100}, {"lightness": 51}, {"visibility": "simplified"}]}, {"featureType": "road.highway", "stylers": [{"saturation": -100}, {"visibility": "simplified"}]}, {"featureType": "road.arterial", "stylers": [{"saturation": -100}, {"lightness": 30}, {"visibility": "on"}]}, {"featureType": "road.local", "stylers": [{"saturation": -100}, {"lightness": 40}, {"visibility": "on"}]}, {"featureType": "transit", "stylers": [{"saturation": -100}, {"visibility": "simplified"}]}, {"featureType": "administrative.province", "stylers": [{"visibility": "off"}]}, {"featureType": "water", "elementType": "labels", "stylers": [{"visibility": "on"}, {"lightness": -25}, {"saturation": -100}]}, {"featureType": "water", "elementType": "geometry", "stylers": [{"hue": "#ffff00"}, {"lightness": -25}, {"saturation": -97}]}];
 
 	map.set('styles', styles);
+	var testProximite = [
+{
+	    nomMusee: 'Institut du Monde Arabe',
+	    id: 1,
+	    localisation : 
+		    {
+		        lat: 48.8489231,
+		        lng: 2.35749301052036
+		    },
+},
 
+{
+	    nomMusee: 'Musée de la Chasse et de la Nature',
+	    id: 2,
+	    localisation : 
+		    {
+		        lat: 48.8613464,
+		        lng: 2.3584276
+		    },
+},
+
+{
+	    nomMusee: 'Galerie d\'Anatomie Comparée et de Paléontologie (Muséum d\'Histoire Naturelle)',
+	    id: 3,
+	    localisation : 
+		    {
+		        lat: 48.8432434,
+		        lng: 2.35954535401297
+		    },
+},
+
+
+{
+	    nomMusee: 'Galerie d’entomologie (Muséum national d\'histoire naturelle)',
+	    id: 4,
+	    localisation : 
+		    {
+		        lat: 48.8443464,
+		        lng: 2.3562118
+		    },
+}];
 
 	google.maps.event.addDomListener(window, 'load', initMap);
-	var aProximite =  museesAProximite(mus.id);
+	//var aProximite =  museesAProximite(mus.id);
+	var aProximite = testProximite;
 	if(aProximite != undefined){
 		console.log(aProximite);
 		for(i=0; i<aProximite.length; i++)

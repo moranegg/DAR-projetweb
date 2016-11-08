@@ -127,12 +127,14 @@ var routeur = {
 			this.idUser = GetURLParameter('id_user');
 		},
 
-		home: function(id_user){
+		home: function(id_user){			
 			console.log("routeur.home");
 			this.idUser = id_user;
-			window.location=('home.html?id_user='+this.idUser);
-
-
+			if(this.idUser=="" || this.idUser==undefined){
+				this.index();
+			}else{
+				window.location=('home.html?id_user='+this.idUser);
+			}
 		},
 
 		account: function(){
