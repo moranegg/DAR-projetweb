@@ -4,7 +4,7 @@ $( document ).ready(function(){
 
 	//show tooltip data on btn (star-favoris)
 	$("[data-toggle='tooltip']").tooltip();
-	
+
 	var path = window.location.pathname; 
 	if(path != "/MusExpress/" || path != "/MusExpress/index.html"){
 		var id_user = GetURLParameter('id_user');
@@ -22,8 +22,8 @@ $( document ).ready(function(){
 
 
 	var idMusee = GetURLParameter('id_musee');
-	
-	
+
+
 	$(".navbar-brand").click(function(event) {
 		var idUser = GetURLParameter('id_user');
 		if(idUser != undefined){
@@ -55,20 +55,20 @@ var home = {
 			var textRecherche = $("#recherche-input").val();
 			console.log("home.recherche de: "+textRecherche);
 			if(textRecherche == undefined || textRecherche == ''){
-				
+
 				$(liste).append('<li class="list-group-item ">Le champ recherche est vide</li>');
 			} else {
 				var musees = sendRecherche(textRecherche);
 			}
-			
+
 
 		},
 
 		readMeteo: function(){
-			
+
 			var div_meteo = $("#meteo");
 			//var meteo = sendMeteo(meteo_json);
-			
+
 			$.ajax({
 				type: "GET",
 				date:{},
@@ -76,18 +76,18 @@ var home = {
 				dataType : 'json',
 
 				success : function(data) {
-					
+
 					if(data.message="1")
 					{
-						
+
 						var temp = data.temp;
 						var temp_min = data.temp_min;
 						var temp_max = data.temp_max;
 						var humidity = data.humidity;
 						var sunrise = data.sunrise;
-	//					var sunset = data.sunset;
+						//					var sunset = data.sunset;
 						var icon = data.weather[0].icon;
-			
+
 						$("#icon").append('<img src ="'+icon+'" width="70" height = "70"></img>');
 						$("#temp").append(temp+"° C");
 						$("#temp_min").append(temp_min+"° C");
@@ -101,7 +101,7 @@ var home = {
 					console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
 				}
 			});
-			
+
 		},
 
 		propositionAffluance: function(){
@@ -296,7 +296,7 @@ function afficheMuseeRecherche(musees, eltDomList){
 	for(i=0; i<musees.length; i++)
 	{
 		$(liste).append('<li class="list-group-item musee btn " id="'+musees[i].id+'">'+musees[i].nom+'</li>');
-		
+
 //		var li = document.createElement("div");
 //		li.innerHTML='<li class="list-group-item musee btn " id="'+musees[i].id+'">'+musees[i].nom+'</li>';
 //		$(liste).append(li);
@@ -305,9 +305,9 @@ function afficheMuseeRecherche(musees, eltDomList){
 //		supp.value = "Supprimer";
 //		supp.class="btn btn-default ";
 //		supp.onclick = function() {
-//
-//			li.parentNode.removeChild(li);
-//			supp.parentNode.removeChild(supp);
+
+//		li.parentNode.removeChild(li);
+//		supp.parentNode.removeChild(supp);
 //		}
 //		$(liste).append(supp);
 	}
@@ -326,7 +326,7 @@ function afficheMusee(musees, eltDomList){
 	$(liste).empty();
 	for(i=0; i<musees.length; i++)
 	{
-		
+
 		$(liste).append('<li class="list-group-item musee btn " id="'+musees[i].id+'">'+musees[i].nom+'</li>'); 
 
 		//console.log(musees[i].id);
@@ -341,7 +341,7 @@ function afficheMusee2(musees, eltDomList){
 	$(liste).empty();
 	for(i=0; i<musees.length; i++)
 	{
-		 $(liste).append('<li class="list-group-item">'+musees[i].nomMusee+'</li>');
+		$(liste).append('<li class="list-group-item">'+musees[i].nomMusee+'</li>');
 
 		//console.log(musees[i].id);
 	}
@@ -351,12 +351,12 @@ function afficheMusee2(musees, eltDomList){
 function testRechercheMusee(){
 	var messageSserveur = {"message":"1",
 			"musees":[
-			         {"id":4,
-			        	 "nom":"Galerie d\u2019entomologie (Muséum national d'histoire naturelle)"
-			         },
-			         {"id":150,
-			        	 "nom":"Musée des traditions, ParcGâtinais français"
-			        }]}
+			          {"id":4,
+			        	  "nom":"Galerie d\u2019entomologie (Muséum national d'histoire naturelle)"
+			          },
+			          {"id":150,
+			        	  "nom":"Musée des traditions, ParcGâtinais français"
+			          }]}
 	return messageSserveur;
 }
 
@@ -378,17 +378,33 @@ function getAffluances(){
 			if (resultat.message==1)
 			{
 				//To do change to musees
-				var affluences = resultat.affluence;
+				var musees = resultat.musees;
 				var eltDomList = "#list-affluance";
-				if(affluences.length == 0)
+				if(musees.length == 0)
 				{
 
 					$("#list-affluance").append('<li class="list-group-item" >Aucune information pour le moment</li>');
-					
+
 				} 
 				else 
 				{
-					afficheMuseeRecherche(affluences, eltDomList);
+					var affluances = [];
+					affluances.push(musees[0]);
+					//effacer les doublons
+					for(var i = 1; i< musees.length;i++){
+						var exists = false;
+						for(var j = 0; j< affluances.length;j++){
+							if(musees[i].id==affluances[j].id){
+								exists = true;
+								break;
+							}
+						}
+						if(exists== false){
+							affluances.push(musees[i]);
+						} 
+
+					}
+					afficheMuseeRecherche(affluances, eltDomList);
 				}
 				//return musees;
 			}
@@ -468,5 +484,5 @@ function affichePropMeteo(propositions, eltDomList)
 }
 /**************GoogleMaps functions ************************************/
 function GoogleMapsHome(){
-	
+
 }
