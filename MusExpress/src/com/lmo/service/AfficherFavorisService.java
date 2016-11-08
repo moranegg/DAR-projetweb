@@ -50,7 +50,7 @@ public class AfficherFavorisService {
 				array.put(museeJSON);
 			}
 			
-			response.put("musee",array);
+			response.put("musees",array);
 			return response;
 
 			
@@ -64,7 +64,7 @@ public class AfficherFavorisService {
 		else
 		{
 			response.put("message","problème!");
-			response.put("musee","");
+			response.put("musees","");
 			return response;
 
 		}

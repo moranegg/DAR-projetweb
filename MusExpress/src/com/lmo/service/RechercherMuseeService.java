@@ -60,7 +60,7 @@ public class RechercherMuseeService
 		else
 		{
 			response.put("message","problème!");
-			response.put("musee","");
+			response.put("musees","");
 			return response;
 
 		}

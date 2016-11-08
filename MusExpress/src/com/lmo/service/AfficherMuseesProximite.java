@@ -39,7 +39,7 @@ public class AfficherMuseesProximite
 				array.put(museeJSON);
 			}
 			
-			response.put("musee",array);
+			response.put("musees",array);
 			return response;
 
 			
@@ -49,7 +49,7 @@ public class AfficherMuseesProximite
 		else
 		{
 			response.put("message","problème!");
-			response.put("musee","");
+			response.put("musees","");
 			return response;
 
 		}
