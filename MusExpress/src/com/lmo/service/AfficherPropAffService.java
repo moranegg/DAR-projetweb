@@ -45,7 +45,7 @@ public class AfficherPropAffService
 				array.put(affluenceJSON);
 			}
 			
-			response.put("affluence",array);
+			response.put("musees",array);
 			return response;
 
 			
@@ -54,7 +54,7 @@ public class AfficherPropAffService
 		else
 		{
 			response.put("message","problème!");
-			response.put("affluence","");
+			response.put("musees","");
 			return response;
 
 		}

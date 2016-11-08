@@ -377,6 +377,7 @@ function getAffluances(){
 			var resultat = data;
 			if (resultat.message==1)
 			{
+				//To do change to musees
 				var affluences = resultat.affluence;
 				var eltDomList = "#list-affluance";
 				if(affluences.length == 0)
