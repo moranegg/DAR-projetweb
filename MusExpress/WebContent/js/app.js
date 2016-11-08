@@ -4,7 +4,7 @@ $( document ).ready(function(){
 
 	//show tooltip data on btn (star-favoris)
 	$("[data-toggle='tooltip']").tooltip();
-	
+
 	var path = window.location.pathname; 
 	if(path != "/MusExpress/" || path != "/MusExpress/index.html"){
 		var id_user = GetURLParameter('id_user');
@@ -22,8 +22,8 @@ $( document ).ready(function(){
 
 
 	var idMusee = GetURLParameter('id_musee');
-	
-	
+
+
 	$(".navbar-brand").click(function(event) {
 		var idUser = GetURLParameter('id_user');
 		if(idUser != undefined){
@@ -55,20 +55,20 @@ var home = {
 			var textRecherche = $("#recherche-input").val();
 			console.log("home.recherche de: "+textRecherche);
 			if(textRecherche == undefined || textRecherche == ''){
-				
+
 				$(liste).append('<li class="list-group-item ">Le champ recherche est vide</li>');
 			} else {
 				var musees = sendRecherche(textRecherche);
 			}
-			
+
 
 		},
 
 		readMeteo: function(){
-			
+
 			var div_meteo = $("#meteo");
 			//var meteo = sendMeteo(meteo_json);
-			
+
 			$.ajax({
 				type: "GET",
 				date:{},
@@ -76,18 +76,18 @@ var home = {
 				dataType : 'json',
 
 				success : function(data) {
-					
+
 					if(data.message="1")
 					{
-						
+
 						var temp = data.temp;
 						var temp_min = data.temp_min;
 						var temp_max = data.temp_max;
 						var humidity = data.humidity;
 						var sunrise = data.sunrise;
-	//					var sunset = data.sunset;
+						//					var sunset = data.sunset;
 						var icon = data.weather[0].icon;
-			
+
 						$("#icon").append('<img src ="'+icon+'" width="70" height = "70"></img>');
 						$("#temp").append(temp+"° C");
 						$("#temp_min").append(temp_min+"° C");
@@ -101,7 +101,7 @@ var home = {
 					console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
 				}
 			});
-			
+
 		},
 
 		propositionAffluance: function(){
@@ -119,7 +119,6 @@ var routeur = {
 		idUser: "",
 
 		index: function(){
-			console.log("routeur.index");
 			window.location=('index.html'); 
 		},
 
@@ -127,22 +126,21 @@ var routeur = {
 			this.idUser = GetURLParameter('id_user');
 		},
 
-		home: function(id_user){
-			console.log("routeur.home");
+		home: function(id_user){			
 			this.idUser = id_user;
-			window.location=('home.html?id_user='+this.idUser);
-
-
+			if(this.idUser=="" || this.idUser==undefined){
+				this.index();
+			}else{
+				window.location=('home.html?id_user='+this.idUser);
+			}
 		},
 
 		account: function(){
-			console.log("routeur.account");
 			window.location=('account.html?id_user='+GetURLParameter('id_user')); 
 
 		},
 
 		musee: function(idMusee){
-			console.log("routeur.musee");
 			window.location=('musee.html?id_user='+this.idUser+'&id_musee='+idMusee); 
 
 		},
@@ -291,16 +289,14 @@ function testRechercheMusee(){
  * @param eltDomList
  */
 function afficheMuseeRecherche(musees, eltDomList){
-	console.log("afficheMuseeRecherche");
+	console.log("afficheMusee" + eltDomList);
 
 	var liste = eltDomList;
 	$(liste).empty();
 	for(i=0; i<musees.length; i++)
 	{
-		
-		
 		$(liste).append('<li class="list-group-item musee btn " id="'+musees[i].id+'">'+musees[i].nom+'</li>');
-		
+
 //		var li = document.createElement("div");
 //		li.innerHTML='<li class="list-group-item musee btn " id="'+musees[i].id+'">'+musees[i].nom+'</li>';
 //		$(liste).append(li);
@@ -309,9 +305,9 @@ function afficheMuseeRecherche(musees, eltDomList){
 //		supp.value = "Supprimer";
 //		supp.class="btn btn-default ";
 //		supp.onclick = function() {
-//
-//			li.parentNode.removeChild(li);
-//			supp.parentNode.removeChild(supp);
+
+//		li.parentNode.removeChild(li);
+//		supp.parentNode.removeChild(supp);
 //		}
 //		$(liste).append(supp);
 	}
@@ -330,7 +326,7 @@ function afficheMusee(musees, eltDomList){
 	$(liste).empty();
 	for(i=0; i<musees.length; i++)
 	{
-		
+
 		$(liste).append('<li class="list-group-item musee btn " id="'+musees[i].id+'">'+musees[i].nom+'</li>'); 
 
 		//console.log(musees[i].id);
@@ -345,7 +341,7 @@ function afficheMusee2(musees, eltDomList){
 	$(liste).empty();
 	for(i=0; i<musees.length; i++)
 	{
-		 $(liste).append('<li class="list-group-item">'+musees[i].nomMusee+'</li>');
+		$(liste).append('<li class="list-group-item">'+musees[i].nomMusee+'</li>');
 
 		//console.log(musees[i].id);
 	}
@@ -355,12 +351,12 @@ function afficheMusee2(musees, eltDomList){
 function testRechercheMusee(){
 	var messageSserveur = {"message":"1",
 			"musees":[
-			         {"id":4,
-			        	 "nom":"Galerie d\u2019entomologie (Muséum national d'histoire naturelle)"
-			         },
-			         {"id":150,
-			        	 "nom":"Musée des traditions, ParcGâtinais français"
-			        }]}
+			          {"id":4,
+			        	  "nom":"Galerie d\u2019entomologie (Muséum national d'histoire naturelle)"
+			          },
+			          {"id":150,
+			        	  "nom":"Musée des traditions, ParcGâtinais français"
+			          }]}
 	return messageSserveur;
 }
 
@@ -381,17 +377,34 @@ function getAffluances(){
 			var resultat = data;
 			if (resultat.message==1)
 			{
-				var affluences = resultat.affluence;
+				//To do change to musees
+				var musees = resultat.musees;
 				var eltDomList = "#list-affluance";
-				if(affluences.length == 0)
+				if(musees.length == 0)
 				{
 
 					$("#list-affluance").append('<li class="list-group-item" >Aucune information pour le moment</li>');
-					
+
 				} 
 				else 
 				{
-					afficheMuseeRecherche(affluences, eltDomList);
+					var affluances = [];
+					affluances.push(musees[0]);
+					//effacer les doublons
+					for(var i = 1; i< musees.length;i++){
+						var exists = false;
+						for(var j = 0; j< affluances.length;j++){
+							if(musees[i].id==affluances[j].id){
+								exists = true;
+								break;
+							}
+						}
+						if(exists== false){
+							affluances.push(musees[i]);
+						} 
+
+					}
+					afficheMuseeRecherche(affluances, eltDomList);
 				}
 				//return musees;
 			}
@@ -420,217 +433,56 @@ function affichePropMusee(affluences, eltDomList)
 	}
 
 }
-/**************************GOOGLE MAP****************************************************/
 
-/**
- * Affichage de google map
- */
-function initMap() {
-	var museeActuel = {lat: 48.8596, lng: 2.3369};
-	console.log("map");
-	var map = new google.maps.Map(document.getElementById('map'), {
-		center: museeActuel,
-		zoom: 14,
-		panControl: false,
-		scrollwheel: false,
-		mapTypeId: google.maps.MapTypeId.ROADMAP
-	});
-
-	var marker = new google.maps.Marker({
-		position: museeActuel,
-		map: map,
-		title: 'Le Louvre'
-	});
-
-	var contentString = '<div class="info-window">' +
-	'<h3>Info Window Content</h3>' +
-	'<div class="info-content">' +
-	'<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>' +
-	'</div>' +
-	'</div>';
-
-	var infowindow = new google.maps.InfoWindow({
-		content: contentString,
-		maxWidth: 400
-	});
-
-	marker.addListener('click', function () {
-		infowindow.open(map, marker);
-	});
-
-	var styles = [{"featureType": "landscape", "stylers": [{"saturation": -100}, {"lightness": 65}, {"visibility": "on"}]}, {"featureType": "poi", "stylers": [{"saturation": -100}, {"lightness": 51}, {"visibility": "simplified"}]}, {"featureType": "road.highway", "stylers": [{"saturation": -100}, {"visibility": "simplified"}]}, {"featureType": "road.arterial", "stylers": [{"saturation": -100}, {"lightness": 30}, {"visibility": "on"}]}, {"featureType": "road.local", "stylers": [{"saturation": -100}, {"lightness": 40}, {"visibility": "on"}]}, {"featureType": "transit", "stylers": [{"saturation": -100}, {"visibility": "simplified"}]}, {"featureType": "administrative.province", "stylers": [{"visibility": "off"}]}, {"featureType": "water", "elementType": "labels", "stylers": [{"visibility": "on"}, {"lightness": -25}, {"saturation": -100}]}, {"featureType": "water", "elementType": "geometry", "stylers": [{"hue": "#ffff00"}, {"lightness": -25}, {"saturation": -97}]}];
-
-	map.set('styles', styles);
-
-
-	google.maps.event.addDomListener(window, 'load', initMap);
-	var aProximite = [
-{
-	    nomMusee: 'Institut du Monde Arabe',
-	    id: 1,
-	    localisation : 
-		    {
-		        lat: 48.8489231,
-		        lng: 2.35749301052036
-		    },
-},
-
-{
-	    nomMusee: 'Musée de la Chasse et de la Nature',
-	    id: 2,
-	    localisation : 
-		    {
-		        lat: 48.8613464,
-		        lng: 2.3584276
-		    },
-},
-
-{
-	    nomMusee: 'Galerie d\'Anatomie Comparée et de Paléontologie (Muséum d\'Histoire Naturelle)',
-	    id: 3,
-	    localisation : 
-		    {
-		        lat: 48.8432434,
-		        lng: 2.35954535401297
-		    },
-},
-
-
-{
-	    nomMusee: 'Galerie d’entomologie (Muséum national d\'histoire naturelle)',
-	    id: 4,
-	    localisation : 
-		    {
-		        lat: 48.8443464,
-		        lng: 2.3562118
-		    },
-},
-
-{
-	    nomMusee: 'Musée Hébert',
-	    id: 5,
-	    localisation : 
-		    {
-		        lat: 48.8474495,
-		        lng: 2.3227049
-		    },
-},
-
-{
-	    nomMusee: 'Musée Zadkine',
-	    id: 6,
-	    localisation : 
-		    {
-		        lat: 48.8443793,
-		        lng: 2.3328737
-		    },
-},
-
-{
-	    nomMusee: 'Etablissement Public du Musée d\'Orsay',
-	    id: 7,
-	    localisation : 
-		    {
-		        lat: 48.8597437,
-		        lng: 2.3259203
-		    },
-},
-
-{
-	    nomMusee: 'Musée National Auguste Rodin',
-	    id: 8,
-	    localisation : 
-		    {
-		        lat: 48.8513447,
-		        lng: 2.3272485
-		    },
-},
-
-{
-	    nomMusee: 'Musée National de la Légion d\'Honneur et des Ordres de Chevalerie',
-	    id: 9,
-	    localisation : 
-		    {
-		        lat:  48.860275,
-		        lng: 2.3247399
-		    },
-},
-
-{
-	    nomMusee: 'Musée Lénine',
-	    id: 10,
-	    localisation : 
-		    {
-		        lat:  48.8263909,
-		        lng: 2.3306427
-		    },
-},
-
-
-
-];
-	afficheMusee2(aProximite, "#list-meteo");
-
-	for(i=0; i<aProximite.length; i++)
-	{
-		new google.maps.Marker({
-			position: aProximite[i].localisation,
-			map: map,
-			title: aProximite[i].nomMusee,
-			icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-		});
-
-	}
 /************************* Propositions selon la Météo**************************************/
-	function getPropMeteo(){
-		//favoris par FavorisSerrvlet
-		console.log("getPropMeteo");
-		$.ajax({
-			type: "GET",
-			date:{},
-			url : "AfficherPropMeteoServlet",
-			dataType : 'json',
+function getPropMeteo(){
+	//favoris par FavorisSerrvlet
+	console.log("getPropMeteo");
+	$.ajax({
+		type: "GET",
+		date:{},
+		url : "AfficherPropMeteoServlet",
+		dataType : 'json',
 
-			success : function(data) {
-				//var resultat = $.parseJSON(data);
-				var resultat = data;
-				if (resultat.message==1)
-				{
-					var propositions = resultat.propositions;//propositions sont des musées !
-					var eltDomList = "#list-meteo";
-					if(propositions.length == 0)
-					{
+		success : function(data) {
 
-						$("#list-meteo").append('<li class="list-group-item" >Aucune information pour le moment</li>');
-						
-					} 
-					else 
-					{
-						afficheMuseeRecherche(affluences, eltDomList);
-					}
-					//return musees;
-				}
-			},
-			error : function(XHR, testStatus, errorThrown) 
+			if (data.message==1)
 			{
-				console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
+				var musees = data.propositions;//propositions sont des musées !
+				var eltDomList = "#list-meteo";
+				if(musees.length == 0)
+				{
+					$("#list-meteo").append('<li class="list-group-item" >Aucune information pour le moment</li>');
+				} 
+				else 
+				{			
+					afficheMuseeRecherche(musees, eltDomList);
+				}
 			}
-		});
-	}
-	function affichePropMeteo(propositions, eltDomList)
-	{
-
-		console.log("affichePropMeteo");
-
-		var liste = eltDomList;
-		$(liste).empty();
-		for(i=0; i<propositions.length && i<10; i++)
+		},
+		error : function(XHR, testStatus, errorThrown) 
 		{
-			$(liste).append('<li class="list-group-item">'+propositions[i].musee+'</li>');
-			//console.log(affluences[i].id);
-
+			$("#list-meteo").append('<li class="list-group-item" >Aucune information pour le moment</li>');
+			console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
 		}
+	});
+}
+function affichePropMeteo(propositions, eltDomList)
+{
+
+	console.log("affichePropMeteo");
+
+	var liste = eltDomList;
+	$(liste).empty();
+	for(i=0; i<propositions.length && i<10; i++)
+	{
+		$(liste).append('<li class="list-group-item">'+propositions[i].musee+'</li>');
+		//console.log(affluences[i].id);
 
 	}
+
+}
+/**************GoogleMaps functions ************************************/
+function GoogleMapsHome(){
 
 }

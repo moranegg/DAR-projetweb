@@ -182,7 +182,7 @@ function readFavoris(){
 			var resultat = data;
 			if (resultat.message==1)
 			{
-				var musees = resultat.musee;
+				var musees = resultat.musees;
 				var eltDomList = "#liste_fav";
 				if(musees.length == 0)
 				{
