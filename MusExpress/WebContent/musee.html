@@ -60,7 +60,9 @@
 	</nav>
 
 	<div class="container">
-	<hr class="nav-margin">
+		<div class="page-header">
+			<h3 id="nom_musee"></h3>
+		</div>
 		<div class="row">
 			<div class="col-md-4">
 
@@ -72,19 +74,13 @@
 							<button type="button" class=" btn btn-default hide"  id="add-favorits-btn" data-toggle="tooltip" data-placement="bottom" 
 						title="Ajouter Au favoris"><span class="glyphicon glyphicon-star"> </span>
 						 </button>
-						</div>
-						
-							
-								<span
+						 <span
 								class="btn btn-default glyphicon glyphicon-minus hide"
 								id="remove-favorits-btn"> </span>
-							<h3 id="nom_musee">Nom:</h3>
-
-							
-
+						</div>
+						<h4>Informations pratiques:</h4>
 						</div>
 						<div class="panel-body">
-							<div id="id_musee">Id:</div>
 							<div id="adresse_musee">Adresse:</div>
 							<div id="ville_musee">Ville:</div>
 							<div id="departement_musee">Departement:</div>
@@ -121,12 +117,13 @@
 					<div class="panel-heading">
 						<div class="row">
 							<div class="col-md-9">
-								<h3>
+								<h3>Commentaires sur la file d'attente</h3>
+								<h4>
 									Affluance actuelle: <span id="affluance_actuelle"
 										class="label label-default"> <span
 										class="glyphicon glyphicon-flag"></span>
 									</span>
-								</h3>
+								</h4>
 							</div>
 							<div class="col-md-3">
 								<!-- Button trigger modal -->
