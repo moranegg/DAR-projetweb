@@ -100,6 +100,34 @@ public class MuseeDao
 	        return list;
 	    }
 	    
+
+//		public static Set<Affluence> listAffluence (String id)
+//				throws JSONException
+//		{
+//
+//			Session session = HibernateUtil.getSessionFactory().openSession();
+//
+//			Transaction tx = null;	
+//			try {
+//				tx = session.getTransaction();
+//				tx.begin();
+//				Musee musee = MuseeDao.getMuseeById(id);
+//				System.out.println("musee"+musee);
+//			    Set<Affluence> c = musee.getAffluences();
+//			    System.out.println("coucou"+c);
+//			    tx.commit();
+//				return c;
+//			} catch (Exception e) {
+//				if (tx != null) {
+//					tx.rollback();
+//				}
+//				e.printStackTrace();
+//			} finally {
+//				session.close();
+//			}
+//			return null;	
+//		}
+
 	    public static List<Musee> getListMuseesProximite(String id)
 	    {
 	        List<Musee> list = new ArrayList<Musee>();
@@ -128,6 +156,29 @@ public class MuseeDao
 	    }
 	    
 
+	    public static List<Musee> getAllMusees(){
+	        List<Musee> list = new ArrayList<Musee>();
+	        Session session = HibernateUtil.getSessionFactory().openSession();
+	        Transaction tx = null; 
+
+
+	        try {
+
+	            tx = session.getTransaction();
+	            tx.begin();
+	            list = session.createQuery("from Musee")
+	            		.list();                        
+	            tx.commit();
+	        } catch (Exception e) {
+	            if (tx != null) {
+	                tx.rollback();
+	            }
+	            e.printStackTrace();
+	        } finally {
+	            session.close();
+	        }
+	        return list;
+	    }
 	   
 	}
 
