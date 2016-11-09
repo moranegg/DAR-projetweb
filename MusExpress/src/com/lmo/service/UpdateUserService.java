@@ -9,28 +9,53 @@ import com.lmo.utils.Tools;
 
 public class UpdateUserService {
 	public static JSONObject updateUser(String id, String nom, String prenom, String codep, String email, String password)
-    	    throws JSONException
-    {
-        
+			throws JSONException
+	{
+
 		User user = UserDao.getUserById(id);
-		
-        if(user!=null)
-        {
-        	//la modif 
-        	UserDao.updateUser(user, nom, prenom, codep, email, password);
-        	
-        	//on retourne l'identifiant de l'utilisateur
-        	//return Tools.serviceMessage(""+id);
-            //return true;
-        	JSONObject jo = new JSONObject().put("id_user",id);
-        	jo.put("message", 1);
-            return jo;
-        }
-        else
-        {
-            return Tools.serviceMessage("Problème !");
-            //return false;
-        }
-    	   
-    }
+		User user2 = UserDao.getUserByUserEmail(email);
+
+		if(user!=null)
+		{
+			if (user2!=null)
+			{
+				if (user.getId()!=user2.getId()) 
+				{
+					JSONObject jo = new JSONObject();
+					jo.put("message", "Email existant");
+					return jo;
+				}
+				
+				else 
+
+
+				{
+					System.out.println("coucou");
+					UserDao.updateUser(user, nom, prenom, codep, email, password);
+					JSONObject jo = new JSONObject().put("id_user",id);
+					jo.put("message", 1);
+					return jo;
+				}
+			}
+			
+			else 
+
+
+			{
+				System.out.println("coucou");
+				UserDao.updateUser(user, nom, prenom, codep, email, password);
+				JSONObject jo = new JSONObject().put("id_user",id);
+				jo.put("message", 1);
+				return jo;
+			}
+
+			
+		}
+		else
+		{
+			return Tools.serviceMessage("Problï¿½me !");
+			//return false;
+		}
+
+	}
 }

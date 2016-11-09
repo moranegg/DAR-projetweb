@@ -27,7 +27,8 @@ public class UpdateUserServlet extends HttpServlet
 		response.setContentType("text/plain");
 // il me faut l'identifiant de l'utilisateur
 		
-		if(   	map.containsKey("id")     && !request.getParameter ("id").equals("") )
+		if(   	map.containsKey("id")     && !request.getParameter ("id").equals("") 
+				)
 		
 		{
 			JSONObject jo = UpdateUserService.updateUser(request.getParameter ("id"),request.getParameter ("nom"), request.getParameter ("prenom"),
