@@ -156,8 +156,8 @@ public class MuseeDao
 	    }
 	    
 
-	    public static List<Musee> getAllMusees(){
-	        List<Musee> list = new ArrayList<Musee>();
+	    public static ArrayList<Musee> getAllMusees(){
+	        ArrayList<Musee> list = new ArrayList<Musee>();
 	        Session session = HibernateUtil.getSessionFactory().openSession();
 	        Transaction tx = null; 
 
@@ -166,8 +166,7 @@ public class MuseeDao
 
 	            tx = session.getTransaction();
 	            tx.begin();
-	            list = session.createQuery("from Musee")
-	            		.list();                        
+	            list = (ArrayList<Musee>) session.createQuery("from Musee").list();                        
 	            tx.commit();
 	        } catch (Exception e) {
 	            if (tx != null) {
