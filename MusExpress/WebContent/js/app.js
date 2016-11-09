@@ -4,7 +4,7 @@ var callbackPropMeteo =false;
 
 $( document ).ready(function(){
 
-	//displayTime();
+	displayTime();
 
 	//show tooltip data on btn (star-favoris)
 	$("[data-toggle='tooltip']").tooltip();
@@ -460,6 +460,7 @@ function getPropMeteo(){
 			{
 				var musees = data.propositions;//propositions sont des musées !
 				var eltDomList = "#list-meteo";
+				hideDom("#loader-propMeteo");
 				if(musees.length == 0)
 				{
 					$("#list-meteo").append('<li class="list-group-item" >Aucune information pour le moment</li>');
@@ -474,6 +475,7 @@ function getPropMeteo(){
 		},
 		error : function(XHR, testStatus, errorThrown) 
 		{
+			hideDom("#loader-propMeteo");
 			$("#list-meteo").append('<li class="list-group-item" >Aucune information pour le moment</li>');
 			console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
 		},

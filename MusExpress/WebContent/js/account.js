@@ -1,5 +1,5 @@
 $( document ).ready(function(){
-	displayTime();
+	
 	account.readUser();
 	account.readFavoris();
 	$("#update-btn").click(account.updateUser);		
