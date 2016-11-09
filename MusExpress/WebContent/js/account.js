@@ -109,6 +109,9 @@ function showprofil (resultat)
 
 
 	fillInput("#email_register",resultat.email);
+	
+	fillInput("#password_register",resultat.password);
+
 
 }
 /**
@@ -150,9 +153,18 @@ function updateProfil(nom,prenom,codep,email, password){
 			{
 				resetForm('#loader-update','#update-btn');
 				console.log("update success: "+data.message);
-				printhtml('#notifier-update',"Votre compte à bien été modifier");
+				printhtml('#notifier-update',"Votre compte à bien été modifié");
 				//routeur.account(data.id_user);
-			} else {
+			} 
+			else if (data.message=="Email existant")
+			{
+				resetForm('#loader-update','#update-btn');
+				console.log("update error: "+data.message);
+				printhtml('#notifier-update',data.message);
+				//routeur.account(data.id_user);
+			}
+			
+			else {
 				resetForm('#loader-update','#update-btn');
 				console.log("update error: "+data.message);
 				printhtml('#notifier-update',"Mot de passe incorrect, la modification n'a pas été prise en compte");
