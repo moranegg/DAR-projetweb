@@ -11,7 +11,7 @@ $( document ).ready(function(){
 	}
 
 	var mus = musee.init(idMusee);
-	var callbackGoogleMaps;
+
 
 
 	musee.getAffluance();
@@ -425,6 +425,7 @@ function initMap(mus) {
 		position: museeActuel,
 		map: map,
 		title: mus.nom,
+		icon: 'images/red-icon.png',
 	});
 
 //	var contentString = '<div class="info-window">' +
@@ -504,8 +505,7 @@ function initMap(mus) {
 				position: aProximite[i].localisation,
 				map: map,
 				title: aProximite[i].nomMusee,
-				icon: //'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-					'images/museum-icon-32.png',
+				icon: 'images/blue-icon.png',
 				
 			});
 			

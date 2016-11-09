@@ -178,11 +178,9 @@ function readFavoris(){
 		dataType : 'json',
 
 		success : function(data) {
-			//var resultat = $.parseJSON(data);
-			var resultat = data;
-			if (resultat.message==1)
+			if (data.message==1)
 			{
-				var musees = resultat.musees;
+				var musees = data.musees;
 				var eltDomList = "#liste_fav";
 				if(musees.length == 0)
 				{

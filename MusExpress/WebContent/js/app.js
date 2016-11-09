@@ -1,3 +1,7 @@
+var callbackGoogleMapsHome= false;
+var callbackPropAff =false;
+var callbackPropMeteo =false;
+
 $( document ).ready(function(){
 
 	//displayTime();
@@ -43,6 +47,8 @@ $( document ).ready(function(){
 
 
 var home = {
+		museesPropAff: null,
+		museesPropMeteo: null,
 
 		onReady: function() {
 		},
@@ -382,9 +388,7 @@ function getAffluances(){
 				var eltDomList = "#list-affluance";
 				if(musees.length == 0)
 				{
-
 					$("#list-affluance").append('<li class="list-group-item" >Aucune information pour le moment</li>');
-
 				} 
 				else 
 				{
@@ -405,6 +409,12 @@ function getAffluances(){
 
 					}
 					afficheMuseeRecherche(affluances, eltDomList);
+					home.museesPropAff =affluances;
+					callbackPropAff = true;
+					console.log("googlemapshome:"+ callbackGoogleMapsHome);
+					if(callbackPropMeteo == true && callbackGoogleMapsHome==true){
+						initMap();
+					}
 				}
 				//return musees;
 			}
@@ -457,6 +467,8 @@ function getPropMeteo(){
 				else 
 				{			
 					afficheMuseeRecherche(musees, eltDomList);
+					home.museesPropAff =musees;
+					
 				}
 			}
 		},
@@ -464,6 +476,13 @@ function getPropMeteo(){
 		{
 			$("#list-meteo").append('<li class="list-group-item" >Aucune information pour le moment</li>');
 			console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
+		},
+		complete: function(){
+			callbackPropMeteo = true;
+			console.log("googlemapshome:"+ callbackGoogleMapsHome);
+			if(callbackPropAff == true && callbackGoogleMapsHome==true){
+				initMap();
+			}
 		}
 	});
 }
@@ -484,5 +503,58 @@ function affichePropMeteo(propositions, eltDomList)
 }
 /**************GoogleMaps functions ************************************/
 function GoogleMapsHome(){
+	callbackGoogleMapsHome = true;
+}
 
+function initMap(){
+	console.log("init map");
+	console.log(home.museesPropAff);
+	console.log(home.museesPropMeteo);
+	
+	
+	var m = home.museesPropAff[0].localisation;
+	console.log("map");
+	var map = new google.maps.Map(document.getElementById('map'), {
+		center: m,
+		zoom: 14,
+		panControl: false,
+		scrollwheel: false,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	});
+
+	var styles = [{"featureType": "landscape", "stylers": [{"saturation": -100}, {"lightness": 65}, {"visibility": "on"}]}, {"featureType": "poi", "stylers": [{"saturation": -100}, {"lightness": 51}, {"visibility": "simplified"}]}, {"featureType": "road.highway", "stylers": [{"saturation": -100}, {"visibility": "simplified"}]}, {"featureType": "road.arterial", "stylers": [{"saturation": -100}, {"lightness": 30}, {"visibility": "on"}]}, {"featureType": "road.local", "stylers": [{"saturation": -100}, {"lightness": 40}, {"visibility": "on"}]}, {"featureType": "transit", "stylers": [{"saturation": -100}, {"visibility": "simplified"}]}, {"featureType": "administrative.province", "stylers": [{"visibility": "off"}]}, {"featureType": "water", "elementType": "labels", "stylers": [{"visibility": "on"}, {"lightness": -25}, {"saturation": -100}]}, {"featureType": "water", "elementType": "geometry", "stylers": [{"hue": "#ffff00"}, {"lightness": -25}, {"saturation": -97}]}];
+
+	map.set('styles', styles);
+
+
+	google.maps.event.addDomListener(window, 'load', initMap);
+	//console.log(home.museesPropAff);
+	//console.log(home.museesPropMeteo);
+	if(home.museesPropAff != null){
+
+		for(i=0; i<home.museesPropAff.length; i++)
+		{
+			var prox = new google.maps.Marker({
+				position: home.museesPropAff[i].localisation,
+				map: map,
+				title: home.museesPropAff[i].nom,
+				icon:'images/red-icon.png',
+				
+			});
+		}
+	}
+	if(home.museesPropMeteo != null){
+
+		for(i=0; i<home.museesPropMeteo.length; i++)
+		{
+			var prox = new google.maps.Marker({
+				position: home.museesPropMeteo[i].localisation,
+				map: map,
+				title: home.museesPropMeteo[i].nom,
+				icon: 'images/blue-icon.png',
+				
+			});
+		}
+	}
+	
 }
