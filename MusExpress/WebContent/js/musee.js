@@ -2,12 +2,22 @@ var callbackGoogleMaps= false;
 var callbackMusee =false;
 var callbackProx = false;
 
+function myTimer() {
+    console.log(' each 3 minute...');
+    getAffluences();
+}
+
+var myVar = setInterval(function(){ myTimer() }, 30000);
+
 $( document ).ready(function(){
 	var search = $(location).attr('search'); 
 	var idMusee = GetURLParameter('id_musee');
 	var idU = GetURLParameter('id_user');
 
 	if(idMusee== undefined){
+		if(idU== undefined){
+			routeur.index();
+		}
 		routeur.home(idU);
 	}
 
@@ -16,15 +26,10 @@ $( document ).ready(function(){
 
 	museesAProximite(idMusee);
 	musee.getAffluance();
-	//var listeProx = museesAProximite(idMusee);
-	//initMap(mus.nom, mus.latitude,mus.longitude,listeProx);
 
 	$("#addComment-btn").click(musee.addComment);
 	$("#add-favorits-btn").click(musee.addFavoris);
-
 	$("#remove-favorits-btn").click(musee.removeFavoris);
-
-
 
 
 });
@@ -76,12 +81,13 @@ var musee = {
 			//console.log("musee.init.après :"+this);
 			this.showMusee();
 			callbackMusee = true;
-			console.log("googlemaps:"+ callbackGoogleMaps);
+			console.log("setMusee.googlemaps:"+ callbackGoogleMaps);
+			console.log("setMusee.prox:"+ callbackProx);
 			if(callbackProx == true && callbackGoogleMaps==true){
 				initMap(this);
 			}
 			//si le musee est deja en favoris-> ne pas afficher btn-fav
-			isFavoris(this.id);
+			//isFavoris(this.id);
 
 		},
 
@@ -109,19 +115,34 @@ var musee = {
 
 		},
 		setAprox: function(aProximite){
+			console.log("setAprox.googlemaps:"+ callbackGoogleMaps);
+			console.log("setAprox.prox:"+ callbackProx);
+			console.log("setAprox.musee:"+ callbackMusee);
 			this.approx = aProximite;
 			callbackProx =true;
 			console.log("googlemaps:"+ callbackGoogleMaps);
 			if(callbackMusee == true && callbackGoogleMaps==true){
 				initMap(this);
 			}
-
 		},
 		addComment: function(){
 			console.log("add comment");
-			this.id;
-			addAffluence();
-			$("#affluanceModal").modal('hide');
+			$("#affluance-notifier").addClass('hide');
+			var im =this.id;
+			var iu =GetURLParameter("id_user");			
+			var emplacement= $('input[name=emplacement]:checked', '#form_add_affluence').val();
+			var text= $("#commentaire-text").val();
+			var duree= $('input[name=duree]:checked', '#form_add_affluence').val();
+			if(im != undefined && iu != undefined &&emplacement!=undefined &&text!=undefined 
+					&& duree!=undefined){
+				addAffluence();
+				$("#affluanceModal").modal('hide');
+				hideDom("affluance-notifier");
+			}else{
+				$("#affluance-notifier").removeClass('hide');
+			}
+			
+			
 		},
 		addFavoris: function(){
 			console.log("add favoris");
@@ -165,6 +186,7 @@ function readMusee(idMusee)
 		error : function(XHR, testStatus, errorThrown) 
 		{
 			console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
+			routeur.home(routeur.idUser);
 		}
 	});
 }
@@ -266,7 +288,7 @@ function afficheAffluence(affluences, eltDomList)
 		$("#affluance_actuelle").addClass("label-"+drapeau);
 	}
 
-	for(i=0; i<affluences.length && i<10; i++)
+	for(i=0; i<affluences.length && i<7; i++)
 	{
 		var duree= affluences[i].duree;
 		var drapeau = "danger";
@@ -401,12 +423,75 @@ function museesAProximite(idMusee)
 		{
 			if (data.message==1)
 			{
-				setAprox(data.musees);
+				musee.setAprox(data.musees);
 				console.log("success");                
 			}
 		},
 		error : function(XHR, testStatus, errorThrown) 
 		{
+			var test =[
+			{
+				nomMusee: 'Galerie d’entomologie (Muséum national d\'histoire naturelle)',
+				id: 4,
+				localisation : 
+				{
+					lat: 48.8443464,
+					lng: 2.3562118
+				},
+
+			},
+			{
+				nomMusee: 'Musée Hébert',
+				id: 5,
+				localisation : 
+
+				{
+					lat: 48.8474495,
+					lng: 2.3227049
+				},
+
+			},
+			{
+				nomMusee: 'Musée Zadkine',
+
+				id: 6,
+
+				localisation : 
+				{
+					lat: 48.8443793,
+					lng: 2.3328737
+				},
+			},
+			{
+
+				nomMusee: 'Musée National Auguste Rodin',
+				id: 8,
+				localisation : 
+				{
+					lat: 48.8513447,
+					lng: 2.3272485
+				},
+			},
+			{
+				nomMusee: 'Musée National de la Légion d\'Honneur et des Ordres de Chevalerie',
+				id: 9,
+				localisation : 
+				{
+					lat:  48.860275,
+					lng: 2.3247399
+				},
+			},
+			{
+				nomMusee: 'Musée Lénine',
+				id: 10,
+				localisation : 
+				{
+					lat:  48.8263909,
+					lng: 2.3306427
+				},
+			},
+			];
+			musee.setAprox(test);
 			console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
 		}
 	});
@@ -449,30 +534,30 @@ function initMap(mus) {
 				map: map,
 				title: aProximite[i].nomMusee,
 				icon: 'images/blue-icon.png',
-				
+
 			});
-			
+
 //			var contentString = '<div class="info-window">' +
 //			'<h4>'+aProximite[i].nomMusee+'</h4>' +
 //			'<div class="info-content">' +
 //			'<div class="btn btn-primary musee" id="'+aProximite[i].id+'">Voir musée</div>'+
 //			'</div>' +
 //			'</div>';
-//
+
 //			var infowindow = new google.maps.InfoWindow({
 //			content: contentString,
 //			maxWidth: 400
 //			});
-//
-//
+
+
 //			prox.addListener('click', function () {
-//				infowindow.open(map, prox);
+//			infowindow.open(map, prox);
 //			});			
 		}
-		
-		
+
+
 	}
-	
+
 
 
 }
