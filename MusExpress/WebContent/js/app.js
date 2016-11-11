@@ -15,8 +15,8 @@ $( document ).ready(function(){
 		routeur.init(id_user);
 		if(path == "/MusExpress/home.html"){
 			home.propositionAffluance();
+			//home.propositionMeteo();
 			home.readMeteo();
-			home.propositionMeteo();
 		}
 	}
 
@@ -100,6 +100,8 @@ var home = {
 						$("#temp_max").append(temp_max+"° C");
 						$("#humidity").append(humidity + " %");
 						//$("#sunrise").append(new Date(parseInt(sunrise)));
+						
+						getPropMeteo();
 					}
 				},
 				error : function(XHR, testStatus, errorThrown) 
@@ -115,9 +117,9 @@ var home = {
 
 		},
 
-		propositionMeteo: function(){
-			getPropMeteo();
-		}
+//		propositionMeteo: function(){
+//			getPropMeteo();
+//		}
 
 };
 

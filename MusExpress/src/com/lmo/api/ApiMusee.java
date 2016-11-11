@@ -119,7 +119,7 @@ public class ApiMusee
 							periode_ouverture, 							
 							fermeture_annuelle, 
 							latitude, 
-							longitude,"musée");
+							longitude,"musee");
 					
 
 					
