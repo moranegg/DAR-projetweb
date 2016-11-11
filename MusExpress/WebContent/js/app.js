@@ -163,7 +163,7 @@ function sendMeteo(div_meteo)
 		success : function(data) {
 			//printhtml("#meteo","<p>"+data.dt+"</p>");
 //			var meteo = "#meteo";
-			alert(data);
+			//alert(data);
 			//console.log(data);
 //			$(meteo).append('<p>ouiza</p>');
 		},
@@ -394,7 +394,7 @@ function getAffluances(){
 				{
 					var affluances = [];
 					affluances.push(musees[0]);
-					alert(musees[0]);
+					//alert(musees[0]);
 					//effacer les doublons
 					for(var i = 1; i< musees.length;i++){
 						var exists = false;
