@@ -15,8 +15,8 @@ $( document ).ready(function(){
 		routeur.init(id_user);
 		if(path == "/MusExpress/home.html"){
 			home.propositionAffluance();
-			home.propositionMeteo();
 			home.readMeteo();
+			home.propositionMeteo();
 		}
 	}
 
