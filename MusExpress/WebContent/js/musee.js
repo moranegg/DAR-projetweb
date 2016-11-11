@@ -100,7 +100,7 @@ var musee = {
 			$("#codep_musee").append(this.codep);
 
 			$("#ferme_musee").append(this.ferme);
-			$("#siteweb_musee").append("<href>"+this.siteweb +"<\href>");
+			$("#siteweb_musee").append("<a href=\"http://"+this.siteweb+"\">"+this.siteweb+"<\a>");
 			$("#periode_ouvertue_musee").append(this.periode_ouvertue);
 			$("#fermeture_annuelle_musee").append(this.fermeture_annuelle);
 			$("#latitude_musee").append(this.latitude);
