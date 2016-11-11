@@ -394,6 +394,7 @@ function getAffluances(){
 				{
 					var affluances = [];
 					affluances.push(musees[0]);
+					alert(musees[0]);
 					//effacer les doublons
 					for(var i = 1; i< musees.length;i++){
 						var exists = false;
@@ -467,8 +468,8 @@ function getPropMeteo(){
 				} 
 				else 
 				{			
-					afficheMuseeRecherche(musees, eltDomList);
-					home.museesPropAff =musees;
+					affichePropMeteo(musees, eltDomList);
+					home.museesPropMeteo =musees;
 					
 				}
 			}
@@ -491,15 +492,12 @@ function getPropMeteo(){
 function affichePropMeteo(propositions, eltDomList)
 {
 
-	console.log("affichePropMeteo");
-
 	var liste = eltDomList;
 	$(liste).empty();
 	for(i=0; i<propositions.length && i<10; i++)
 	{
 		$(liste).append('<li class="list-group-item">'+propositions[i].musee+'</li>');
-		//console.log(affluences[i].id);
-
+		
 	}
 
 }
@@ -515,6 +513,7 @@ function initMap(){
 	
 	
 	var m = home.museesPropAff[0].localisation;
+	
 	console.log("map");
 	var map = new google.maps.Map(document.getElementById('map'), {
 		center: m,

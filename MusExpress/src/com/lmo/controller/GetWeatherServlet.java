@@ -38,7 +38,7 @@ public GetWeatherServlet()
 			JSONObject jo = ApiMeteo.getMeteo();
 			jo.put("message", "1");
 			response.getWriter().print(jo);
-			//System.out.println(jo);
+			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
