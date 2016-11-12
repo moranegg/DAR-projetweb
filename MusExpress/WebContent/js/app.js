@@ -470,7 +470,8 @@ function getPropMeteo(){
 				} 
 				else 
 				{			
-					affichePropMeteo(musees, eltDomList);
+					//affichePropMeteo(musees, eltDomList);
+					afficheMuseeRecherche(musees,eltDomList);
 					home.museesPropMeteo =musees;
 					
 				}

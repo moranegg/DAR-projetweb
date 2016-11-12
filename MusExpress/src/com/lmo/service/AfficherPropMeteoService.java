@@ -90,11 +90,7 @@ public class AfficherPropMeteoService {
 
 		}
 
-
-
 		// Récupération des musées selon les files d'attentes
-
-
 
 		List<Affluence> aff_int = AffluenceDao.getAffluenceByEmplacement("interieur");
 
@@ -134,10 +130,10 @@ public class AfficherPropMeteoService {
 
 					
 
-					jm.put("musee",m.getNom());
+					jm.put("nom",m.getNom());
 
 					
-
+					jm.put("id",m.getId());
 					jm.put("localisation", localisation);
 
 					propositions.add(jm);
@@ -180,9 +176,9 @@ public class AfficherPropMeteoService {
 
 					
 
-					jm.put("musee",m.getNom());
+					jm.put("nom",m.getNom());
 
-					
+					jm.put("id",m.getId());
 
 					jm.put("localisation", localisation);
 
@@ -214,9 +210,9 @@ public class AfficherPropMeteoService {
 
 						localisation.put("lat", m.getLatitude());
 
-						
+						jm.put("id",m.getId());
 
-						jm.put("musee",m.getNom());
+						jm.put("nom",m.getNom());
 
 						
 
