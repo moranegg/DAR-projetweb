@@ -11,6 +11,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Projections;
 import org.json.JSONException;
 
+import com.lmo.api.ApiMusee;
 import com.lmo.hibernate.util.HibernateUtil;
 import com.lmo.model.Affluence;
 import com.lmo.model.Musee;
@@ -40,7 +41,7 @@ public class AffluenceDao
 			affluence.setEmplacement(emplacement);
 			java.util.Date dt = new java.util.Date();
 			affluence.setDate(dt);
-			session.save(affluence);		
+   			session.save(affluence);		
 			tx.commit();
 			return affluence;
 		} catch (Exception e) {
@@ -139,6 +140,14 @@ public class AffluenceDao
 		}
 		return list;
 	}
+	
+
+
+
+        
+
+
+
 
 
 }

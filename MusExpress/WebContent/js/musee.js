@@ -416,7 +416,7 @@ function museesAProximite(idMusee)
 		type: "GET",
 		url : "AfficherMuseesProximiteServlet",
 		data : {
-			"idmusee" : idMusee,  
+			"id_musee" : idMusee,  
 		},
 		dataType : 'JSON',
 		success : function(data) 

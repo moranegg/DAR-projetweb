@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.lmo.hibernate.util.HibernateUtil;
+import com.lmo.model.Affluence;
 import com.lmo.model.Musee;
 import com.lmo.model.User;
 
@@ -231,6 +232,9 @@ public class UserDao
 			return null;	
 		}
 	   
-	}
+
+
+}
+
 
 

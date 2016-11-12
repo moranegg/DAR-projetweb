@@ -119,59 +119,6 @@ public class Affluence implements Serializable
 
 
 
-//	public Affluence(int id_commentaire, User user, Musee musee, String duree, String commentaire, String emplacement,
-//			Date date) {
-//		super();
-//		this.id_commentaire = id_commentaire;
-//		this.user = user;
-//		this.musee = musee;
-//		this.duree = duree;
-//		this.commentaire = commentaire;
-//		this.emplacement = emplacement;
-//		this.date = date;
-//	}
-//
-//
-//
-//	public Affluence(User user, Musee musee, String duree, String commentaire, String emplacement, Date date) {
-//		super();
-//		this.user = user;
-//		this.musee = musee;
-//		this.duree = duree;
-//		this.commentaire = commentaire;
-//		this.emplacement = emplacement;
-//		this.date = date;
-//	}
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-
-
 
 
 }

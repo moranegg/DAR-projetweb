@@ -31,7 +31,6 @@ public class User implements Serializable
      
     public User(String nom, String prenom, String email, String password,  String codep) 
     {
-    	//this.id=id;
     	this.nom=nom;
     	this.prenom=prenom;
         this.email = email;
@@ -106,7 +105,6 @@ public class User implements Serializable
         this.password = password;
     }
 
-    //@ManyToMany(mappedBy = "users")
 	public Set<Musee> getMusees() {
 		return musees;
 	}

@@ -141,8 +141,8 @@ public class MuseeDao
 	        	String departement = String.valueOf(m.getDepartement());
 	            tx = session.getTransaction();
 	            tx.begin();
-	            list = session.createQuery("from Musee m where m.departement='"+departement+"'")
-	            		.list();                        
+	            list = session.createQuery("from Musee m where m.id!='"+id+"' and m.departement='"+departement+"'")
+	            		.list();                          
 	            tx.commit();
 	        } catch (Exception e) {
 	            if (tx != null) {

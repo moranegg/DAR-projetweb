@@ -195,12 +195,7 @@ public class Musee implements Serializable
 		this.type = type;
 	}
 
-   /* @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "favoris",
-            joinColumns = @JoinColumn(name = "musee_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )*/
+
 	public Set<User> getUsers() {
 		return users;
 	}
