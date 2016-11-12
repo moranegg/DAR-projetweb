@@ -3,7 +3,7 @@ var callbackPropAff =false;
 var callbackPropMeteo =false;
 
 $( document ).ready(function(){
-
+	//function shows time in navbar
 	displayTime();
 
 	//show tooltip data on btn (star-favoris)
@@ -15,7 +15,7 @@ $( document ).ready(function(){
 		routeur.init(id_user);
 		if(path == "/MusExpress/home.html"){
 			home.propositionAffluance();
-			//home.propositionMeteo();
+			getPropMeteo();
 			home.readMeteo();
 		}
 	}
@@ -45,21 +45,24 @@ $( document ).ready(function(){
 
 });
 
-
+/**
+ * Object home
+ */
 var home = {
 		museesPropAff: null,
 		museesPropMeteo: null,
 
 		onReady: function() {
 		},
-
+		
+		//
 		recherche: function(event)
 		{
 			var liste = "#liste_recherche";
 			$(liste).empty();
-			console.log("home.recherche");
+			//console.log("home.recherche");
 			var textRecherche = $("#recherche-input").val();
-			console.log("home.recherche de: "+textRecherche);
+			//console.log("home.recherche de: "+textRecherche);
 			if(textRecherche == undefined || textRecherche == ''){
 
 				$(liste).append('<li class="list-group-item ">Le champ recherche est vide</li>');
@@ -74,41 +77,9 @@ var home = {
 
 			var div_meteo = $("#meteo");
 			//var meteo = sendMeteo(meteo_json);
+			sendMeteo();
 
-			$.ajax({
-				type: "GET",
-				date:{},
-				url : "GetWeatherServlet",
-				dataType : 'json',
 
-				success : function(data) {
-
-					if(data.message="1")
-					{
-
-						var temp = data.temp;
-						var temp_min = data.temp_min;
-						var temp_max = data.temp_max;
-						var humidity = data.humidity;
-						var sunrise = data.sunrise;
-						//					var sunset = data.sunset;
-						var icon = data.weather[0].icon;
-
-						$("#icon").append('<img src ="'+icon+'" width="70" height = "70"></img>');
-						$("#temp").append(temp+"° C");
-						$("#temp_min").append(temp_min+"° C");
-						$("#temp_max").append(temp_max+"° C");
-						$("#humidity").append(humidity + " %");
-						//$("#sunrise").append(new Date(parseInt(sunrise)));
-						
-						getPropMeteo();
-					}
-				},
-				error : function(XHR, testStatus, errorThrown) 
-				{
-					console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
-				}
-			});
 
 		},
 
@@ -117,9 +88,9 @@ var home = {
 
 		},
 
-//		propositionMeteo: function(){
-//			getPropMeteo();
-//		}
+		propositionMeteo: function(){
+			getPropMeteo();
+		}
 
 };
 
@@ -153,35 +124,58 @@ var routeur = {
 
 		},
 }
+/**
+ * Sends request to GetWeatherServlet for Meteo of the day
+ */
+function sendMeteo(){
+	$.ajax({
+		type: "GET",
+		date:{},
+		url : "GetWeatherServlet",
+		dataType : 'json',
 
-//function sendMeteo(div_meteo)
-//{
-//	$.ajax({
-//		type: "GET",
-//		date:{},
-//		url : "GetWeatherServlet",
-//		dataType : 'json',
-//
-//		success : function(data) {
-//			//printhtml("#meteo","<p>"+data.dt+"</p>");
-////			var meteo = "#meteo";
-//			//alert(data);
-//			//console.log(data);
-////			$(meteo).append('<p>ouiza</p>');
-//		},
-//		error : function(XHR, testStatus, errorThrown) 
-//		{
-//			console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
-//		}
-//	});
-//}
+		success : function(data) {
+			var div_meteo = $("#meteo");
+			if(data.message="1")
+			{
+				var temp = data.temp;
+				var temp_min = data.temp_min;
+				var temp_max = data.temp_max;
+				var humidity = data.humidity;
+				var sunrise = data.sunrise;
+				//var sunset = data.sunset;
+				var icon = data.weather[0].icon;
+
+				$("#icon").append('<img src ="'+icon+'" width="70" height = "70"></img>');
+				$("#temp").append(temp+"° C");
+				$("#temp_min").append(temp_min+"° C");
+				$("#temp_max").append(temp_max+"° C");
+				$("#humidity").append(humidity + " %");
+				//$("#sunrise").append(new Date(parseInt(sunrise)));
+
+				
+			}
+		},
+		error : function(XHR, testStatus, errorThrown) 
+		{
+			//console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
+		}
+	});
+}
+/**
+ * Displays today date and time in dom elemnt "day"
+ */
 function displayTime(){
 	var elt = "#day";
 	var now  = new Date();
 	$(elt).append(now.getDate()+"/"+(now.getMonth()+1) + "/"+now.getFullYear()+"  "+(now.getHours()+1)+":"+(now.getMinutes()+1)+":"+(now.getSeconds()+1));
 
 }
-
+/**
+ * Get Parameter in actuel Url
+ * @param sParam
+ * @returns
+ */
 function GetURLParameter(sParam)
 {
 	var sPageURL = window.location.search.substring(1);
@@ -195,25 +189,33 @@ function GetURLParameter(sParam)
 		}
 	}
 }
-
+/**
+ * prints a message inside dom elemnt
+ * @param dom
+ * @param msg
+ */
 function printhtml(dom,msg)
 {
 	$(dom).html(msg);
 	$(dom).removeClass('hide');
 }
 
-
+/***hide dom elemnt**/
 function hideDom(dom)
 {
 	$(dom).addClass('hide');
 }
-
+/*** shows dom element**/
 function showDom(dom)
 {
 	$(dom).removeClass('hide');
 }
 
-
+/**
+ * checks if text was entered in form
+ * @param text
+ * @returns {Boolean}
+ */
 function checkIsText(text){
 	if(text.length==0)
 	{
@@ -222,12 +224,22 @@ function checkIsText(text){
 		return true;
 	}
 }
+/**
+ * regex checks email is correct
+ * @param email
+ * @returns
+ */
 function isEmail(email){
 
 	var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	return re.test(email);
 
 }
+/**
+ * hides loader from view and shows form again
+ * @param loader
+ * @param btn
+ */
 function resetForm(loader, btn){
 	hideDom(loader);
 	showDom(btn);
@@ -235,9 +247,12 @@ function resetForm(loader, btn){
 
 
 /*******************************       Rechercher un musée        *************************/
-
+/**
+ * 
+ * Message sent to server with text in search => textRecherche
+ */
 function sendRecherche(textRecherche){
-	console.log("send to RechercherMuseeServlet");
+	//console.log("send to RechercherMuseeServlet");
 	$.ajax({
 		type : "GET",
 		url : "RechercherMuseeServlet",
@@ -279,7 +294,10 @@ function sendRecherche(textRecherche){
 	});
 }
 
-
+/**
+ * 
+ * @returns liste of museums to test display methods
+ */
 function testRechercheMusee(){
 	var messageSserveur = {"message":"1",
 			"musees":[
@@ -305,19 +323,6 @@ function afficheMuseeRecherche(musees, eltDomList){
 	{
 		$(liste).append('<li class="list-group-item musee btn " id="'+musees[i].id+'">'+musees[i].nom+'</li>');
 
-//		var li = document.createElement("div");
-//		li.innerHTML='<li class="list-group-item musee btn " id="'+musees[i].id+'">'+musees[i].nom+'</li>';
-//		$(liste).append(li);
-//		var supp = document.createElement("input");
-//		supp.type = "button";
-//		supp.value = "Supprimer";
-//		supp.class="btn btn-default ";
-//		supp.onclick = function() {
-
-//		li.parentNode.removeChild(li);
-//		supp.parentNode.removeChild(supp);
-//		}
-//		$(liste).append(supp);
 	}
 
 	$(".musee").click(function(event) {
@@ -326,7 +331,11 @@ function afficheMuseeRecherche(musees, eltDomList){
 	});
 }
 
-
+/**
+ * 
+ * @param musees
+ * @param eltDomList
+ */
 function afficheMusee(musees, eltDomList){
 	console.log("afficheMusee");
 
@@ -342,31 +351,6 @@ function afficheMusee(musees, eltDomList){
 	}
 }
 
-function afficheMusee2(musees, eltDomList){
-	console.log("afficheMusee");
-
-	var liste = eltDomList;
-	$(liste).empty();
-	for(i=0; i<musees.length; i++)
-	{
-		$(liste).append('<li class="list-group-item">'+musees[i].nomMusee+'</li>');
-
-		//console.log(musees[i].id);
-	}
-
-}
-
-function testRechercheMusee(){
-	var messageSserveur = {"message":"1",
-			"musees":[
-			          {"id":4,
-			        	  "nom":"Galerie d\u2019entomologie (Muséum national d'histoire naturelle)"
-			          },
-			          {"id":150,
-			        	  "nom":"Musée des traditions, ParcGâtinais français"
-			          }]}
-	return messageSserveur;
-}
 
 /*************************** Récupérer les propositions de musées par affluance ********************************/
 
@@ -511,8 +495,8 @@ function GoogleMapsHome(){
 
 function initMap(){
 	console.log("init map");
-	console.log(home.museesPropAff);
-	console.log(home.museesPropMeteo);
+	//console.log(home.museesPropAff);
+	//console.log(home.museesPropMeteo);
 	
 	
 	var m = home.museesPropAff[0].localisation;

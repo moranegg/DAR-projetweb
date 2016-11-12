@@ -29,7 +29,11 @@ import com.lmo.model.Affluence;
 import com.lmo.model.Musee;
 
 
-
+/**
+ * 
+ * Service that gets propositions by meteo of the day
+ *
+ */
 public class AfficherPropMeteoService {
 
 
@@ -41,201 +45,102 @@ public class AfficherPropMeteoService {
 	{
 
 		JSONObject result = new JSONObject();
-
 		result.put("message", "1");
-
-		JSONObject jo = ApiMeteo.getMeteo();//il vaut meiux faire un seul appel ??? A revoir!!
-
-		//JSONArray weather = jo.getJSONArray("weather");
-		
-		//Récupération de la description de la météo
-
-		String climat = jo.getString("main");
-
-		//System.out.println("\n\n\n"+climat);
-
-
-
-		ArrayList propositions = new ArrayList<>();
-
-		// Récupération des musées et des parcs
-
-		ArrayList<Musee> lieux = MuseeDao.getAllMusees();
-
-		ArrayList<Musee> musees = new ArrayList<Musee>();
-
-		ArrayList<Musee> parcs = new ArrayList<Musee>();
-
-		for(int i=0;i<lieux.size();i++)
-
-		{
-
-			if(lieux.get(i).getType().equals("musée"))
-
-			{
-
-				musees.add(lieux.get(i));
-
-			}
-
-
-
-			if(lieux.get(i).getType().equals("parc"))
-
-			{
-
-				parcs.add(lieux.get(i));
-
-			}
-
-		}
-
-		// Récupération des musées selon les files d'attentes
-
-		List<Affluence> aff_int = AffluenceDao.getAffluenceByEmplacement("interieur");
-
-		List<Affluence> aff_ext = AffluenceDao.getAffluenceByEmplacement("exterieur");
-
-		
+		JSONObject meteoDuMoment = ApiMeteo.getMeteo();
 
 		JSONArray ja = new JSONArray();
 
+		//initialisation de la liste vide
+		ArrayList propositions = new ArrayList<>();
+		ArrayList<Musee> toReturn = new ArrayList<Musee>();
+
+		// Récupération des musées et des parcs
+		ArrayList<Musee> lieux = MuseeDao.getAllMusees();
+		ArrayList<Musee> musees = new ArrayList<Musee>();
+		ArrayList<Musee> parcs = new ArrayList<Musee>();
 
 
-		if(climat.equals("Mist") || climat.equals("Rain") || climat.equals("Snow"))
-
-		{ int i=0;
-
-		for(Musee m : musees)
-
-		{// pour chaque musée vérifier si la queue est interieure ou ext
-
-			// et ce à partir de la table affluence
-
-			for(Affluence a : aff_int)
-
+		//Récupération de la description de la météo
+		String climat = meteoDuMoment.getString("main");
+		String[] climatOptions = {"Clear","Sunny","Clouds","Mist","Rain","Snow","Drizzle",""};
+		//test de la meteo du moment
+		//String climat = climatOptions[6];
+		//System.out.println(climat);
+		
+		if(climat.equals("Clear") ||  climat.equals("Sunny") ){//si il fait beau=> parc
+			//System.out.println(climat);
+			for(int i=0;i<lieux.size()&& propositions.size()<5;i++ )
 			{
-
-				if(m.getId()==a.getMusee().getId() && i<5)
-
+				//m c'est un parc
+				Musee m= lieux.get(i);
+				if(lieux.get(i).getType().equals("parc"))
 				{
+					//pour ne pas ajouter deux fois le meme musee
+					if(!toReturn.contains(m)){
+						JSONObject jm = toJsonObject(m);
+						toReturn.add(m);
+						propositions.add(jm);
+					}
 
-					JSONObject jm = new JSONObject();
+				}
+			}
 
-					JSONObject localisation = new JSONObject();
 
-					localisation.put("lng", m.getLongitude());
+		}else if( climat.equals("Clouds")|| climat.equals("Drizzle")){ //si nuageux  =>  musee + file d'attente ext	
+			List<Affluence> aff_ext = AffluenceDao.getAffluenceByEmplacement("exterieur");
+			for(int j=0; j<aff_ext.size()&& propositions.size()<5; j++){
+				Musee m=aff_ext.get(j).getMusee();
+				if(m.getType().equals("musee"))
+				{
+					//pour ne pas ajouter deux fois le meme musee
+					if(!toReturn.contains(m)){
+						JSONObject jm = toJsonObject(m);
+						toReturn.add(m);
+						propositions.add(jm);
+					}
+				}	
+			}
 
-					localisation.put("lat", m.getLatitude());
-
-					
-
-					jm.put("nom",m.getNom());
-
-					
-					jm.put("id",m.getId());
-					jm.put("localisation", localisation);
-
-					propositions.add(jm);
-
-					i++;
+		}else if(climat.equals("Mist") || climat.equals("Rain") || climat.equals("Snow")){//si il pleut => musee + file d'attente in
+			//System.out.println(climat);
+			// Récupération des musées selon les files d'attentes
+			List<Affluence> aff_int = AffluenceDao.getAffluenceByEmplacement("interieur");
+			for(int j=0; j<aff_int.size()&& propositions.size()<5; j++){
+	
+				Musee m=aff_int.get(j).getMusee();
+				if(m.getType().equals("musee"))
+				{
+					//pour ne pas ajouter deux fois le meme musee
+					if(!toReturn.contains(m)){
+						JSONObject jm = toJsonObject(m);
+						toReturn.add(m);
+						propositions.add(jm);
+					}
 
 				}	
-
 			}
-
 		}
-
-		//retourner 10 musées
-
-		}
-
-
-
-		if(climat.equals("Clear") || climat.equals("Clouds"))
-
-		{
-
-			int i=0;
-
-			for(Musee m : parcs)
-
+		//si aucun musee a ete ajoute-> ajouter les 5 premiers musees
+		if(propositions.isEmpty()){
+			for(int i=0; propositions.size()<5;i++)
 			{
-
-				if(i<5)
-
-				{
-
-					JSONObject jm = new JSONObject();
-
-					JSONObject localisation = new JSONObject();
-
-					localisation.put("lng", m.getLongitude());
-
-					localisation.put("lat", m.getLatitude());
-
-					
-
-					jm.put("nom",m.getNom());
-
-					jm.put("id",m.getId());
-
-					jm.put("localisation", localisation);
-
+				int x=0;
+				x=(int)( Math.random()*100);
+				//System.out.println(x);
+				
+				Musee m= lieux.get(x);
+				//pour ne pas ajouter deux fois le meme musee
+				if(!toReturn.contains(m)){
+					JSONObject jm = toJsonObject(m);
+					toReturn.add(m);
 					propositions.add(jm);
-
-					i++;
-
 				}
 
-			}
-
-			for(Musee m : musees)
-
-			{
-
-				for(Affluence a : aff_ext)
-
-				{
-
-					if(m.getId()==a.getMusee().getId() && i<5)
-
-					{
-
-						JSONObject jm = new JSONObject();
-
-						JSONObject localisation = new JSONObject();
-
-						localisation.put("lng", m.getLongitude());
-
-						localisation.put("lat", m.getLatitude());
-
-						jm.put("id",m.getId());
-
-						jm.put("nom",m.getNom());
-
-						
-
-						jm.put("localisation", localisation);
-
-						propositions.add(jm);
-
-						i++;
-
-					}	
-
-				}
-
-			}
-
-			//retourner 10 parcs et/ou musées
-
+			}	
 		}
-
-
-
+		//System.out.println(climat);
 		result.put("propositions", propositions);
-
+		
 		return result;
 
 	}
@@ -248,6 +153,23 @@ public class AfficherPropMeteoService {
 
 		System.out.println(listPropMeteo());
 
+	}
+	
+	public static JSONObject toJsonObject(Musee m){
+		JSONObject jm = new JSONObject();
+		JSONObject localisation = new JSONObject();
+		try {
+			localisation.put("lng", m.getLongitude());
+			localisation.put("lat", m.getLatitude());
+			jm.put("nom",m.getNom());
+			jm.put("id",m.getId());
+			jm.put("localisation", localisation);
+		} catch (JSONException e) {
+
+		}
+		
+		
+		return jm;
 	}
 
 }
