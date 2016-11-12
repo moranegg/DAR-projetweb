@@ -37,7 +37,11 @@ import com.lmo.model.Musee;
 public class AfficherPropMeteoService {
 
 
-
+	/**
+	 * Retourne un objet JSON qui contient le message 1 de réussite et la liste des propositions
+	 * @return
+	 * @throws JSONException
+	 */
 	public static JSONObject listPropMeteo()
 
 			throws JSONException, IOException
