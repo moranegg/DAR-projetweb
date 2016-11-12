@@ -44,14 +44,10 @@ public class AfficherPropMeteoService {
 
 		result.put("message", "1");
 
-
-
 		JSONObject jo = ApiMeteo.getMeteo();//il vaut meiux faire un seul appel ??? A revoir!!
 
 		//JSONArray weather = jo.getJSONArray("weather");
-
-
-
+		
 		//Récupération de la description de la météo
 
 		String climat = jo.getString("main");
@@ -124,7 +120,7 @@ public class AfficherPropMeteoService {
 
 			{
 
-				if(m.getId()==a.getMusee().getId() && i<10)
+				if(m.getId()==a.getMusee().getId() && i<5)
 
 				{
 
@@ -170,7 +166,7 @@ public class AfficherPropMeteoService {
 
 			{
 
-				if(i<10)
+				if(i<5)
 
 				{
 
@@ -206,7 +202,7 @@ public class AfficherPropMeteoService {
 
 				{
 
-					if(m.getId()==a.getMusee().getId() && i<10)
+					if(m.getId()==a.getMusee().getId() && i<5)
 
 					{
 

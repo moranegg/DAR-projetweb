@@ -154,27 +154,27 @@ var routeur = {
 		},
 }
 
-function sendMeteo(div_meteo)
-{
-	$.ajax({
-		type: "GET",
-		date:{},
-		url : "GetWeatherServlet",
-		dataType : 'json',
-
-		success : function(data) {
-			//printhtml("#meteo","<p>"+data.dt+"</p>");
-//			var meteo = "#meteo";
-			//alert(data);
-			//console.log(data);
-//			$(meteo).append('<p>ouiza</p>');
-		},
-		error : function(XHR, testStatus, errorThrown) 
-		{
-			console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
-		}
-	});
-}
+//function sendMeteo(div_meteo)
+//{
+//	$.ajax({
+//		type: "GET",
+//		date:{},
+//		url : "GetWeatherServlet",
+//		dataType : 'json',
+//
+//		success : function(data) {
+//			//printhtml("#meteo","<p>"+data.dt+"</p>");
+////			var meteo = "#meteo";
+//			//alert(data);
+//			//console.log(data);
+////			$(meteo).append('<p>ouiza</p>');
+//		},
+//		error : function(XHR, testStatus, errorThrown) 
+//		{
+//			console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
+//		}
+//	});
+//}
 function displayTime(){
 	var elt = "#day";
 	var now  = new Date();
@@ -496,7 +496,7 @@ function affichePropMeteo(propositions, eltDomList)
 
 	var liste = eltDomList;
 	$(liste).empty();
-	for(i=0; i<propositions.length && i<10; i++)
+	for(i=0; i<propositions.length && i<5; i++)
 	{
 		$(liste).append('<li class="list-group-item">'+propositions[i].musee+'</li>');
 		
