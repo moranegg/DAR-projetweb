@@ -7,17 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.lmo.service.AfficherPropAffService;
 import com.lmo.service.AfficherPropMeteoService;
-
+/**
+ * Servlet permettant de retourner la liste de propositions par météo (en json)
+ * en appelant la méthode listPropMeteo de la classe AfficherPropMeteoService
+ */
 public class AfficherPropMeteoServlet extends HttpServlet {
 private static final long serialVersionUID = 1L;
     
-
     public AfficherPropMeteoServlet() {
         super();
     }
-
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
@@ -31,8 +31,6 @@ private static final long serialVersionUID = 1L;
 
 				response.getWriter().print(
 						AfficherPropMeteoService.listPropMeteo());
-			
-
 		}
 		catch (Exception e) 
 		{

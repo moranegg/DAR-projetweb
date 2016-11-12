@@ -10,11 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
-import com.lmo.service.InscriptionService;
 import com.lmo.service.UpdateUserService;
 
+/**
+ * Servlet permettant d'appeler la méthode updateUser de la classe UpdateUserService
+ * dans le but de modifier les informations d'un utilisateur dans la bdd
+ */
 public class UpdateUserServlet extends HttpServlet 
 {
+	private static final long serialVersionUID = 1L;
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);}
 

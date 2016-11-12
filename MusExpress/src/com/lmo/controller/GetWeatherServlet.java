@@ -12,12 +12,12 @@ import org.json.JSONObject;
 
 import com.lmo.jobs.ApiMeteo;
 
-
-
+/**
+ * Servlet permettant de recevoir les données json de l'api OpenWeatherMap en appelant
+ * la méthode getMeteo de la classe ApiMeteo
+ */
 public class GetWeatherServlet extends HttpServlet {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 
 public GetWeatherServlet()

@@ -7,16 +7,18 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.lmo.model.User;
 import com.lmo.service.ConsulterUserService;
-import com.lmo.service.UpdateUserService;
 import com.lmo.utils.Tools;
-
+/**
+ * Servlet permettant de consulter un utilisateur dont l'identifiant est id_user en appelant
+ * la méthode getUser de la classe ConsulterUserService
+ */
 public class ConsulterUserServlet extends HttpServlet {
+	
+	private static final long serialVersionUID = 1L;
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}

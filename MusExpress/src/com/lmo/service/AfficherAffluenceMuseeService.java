@@ -9,6 +9,10 @@ import org.json.JSONObject;
 import com.lmo.dao.AffluenceDao;
 import com.lmo.model.Affluence;
 
+/**
+ * 
+ *
+ */
 public class AfficherAffluenceMuseeService 
 {
 
