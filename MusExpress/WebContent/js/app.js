@@ -520,7 +520,7 @@ function initMap(){
 	console.log("map");
 	var map = new google.maps.Map(document.getElementById('map'), {
 		center: m,
-		zoom: 14,
+		zoom: 9,
 		panControl: false,
 		scrollwheel: false,
 		mapTypeId: google.maps.MapTypeId.ROADMAP
