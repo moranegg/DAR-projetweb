@@ -1,4 +1,4 @@
-package com.lmo.api;
+package com.lmo.jobs;
 
 import java.io.BufferedReader;
 import java.io.IOException;

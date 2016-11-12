@@ -17,9 +17,19 @@ import com.lmo.model.Affluence;
 import com.lmo.model.Musee;
 import com.lmo.model.User;
 
+/**
+ * 
+ * @author lina
+ *
+ */
 public class UserDao 
 {
 	
+	  /**
+	   *  Cette méthode permer de récupérer les nformations d'un utilisateur à partir de son mail
+	   * @param email
+	   * @return User
+	   */
 	   public static User getUserByUserEmail(String email) 
 	    {
 	        Session session = HibernateUtil.getSessionFactory().openSession();
@@ -48,6 +58,11 @@ public class UserDao
 	        return user;
 	    }
 	   
+	   /**
+	    * Cette méthode permet de récupérer les informations d'un utilisateur à partir de son id
+	    * @param id
+	    * @return User
+	    */
 	   public static User getUserById(String id) 
 	    {
 	        Session session = HibernateUtil.getSessionFactory().openSession();
@@ -76,7 +91,17 @@ public class UserDao
 	        return user;
 	    }
 	   
-	    public static User createUser(String nom ,String prenom ,String codep, String email,String password)
+	   /**
+	    * Cette méthode permet d'insérer un nouvel utilisateur en base de données 
+	    * 
+	    * @param nom
+	    * @param prenom
+	    * @param codep
+	    * @param email
+	    * @param password
+	    * @return User
+	    */
+	   public static User createUser(String nom ,String prenom ,String codep, String email,String password)
 	    	    {
         	        User user = null;
 
@@ -105,6 +130,16 @@ public class UserDao
 	    	    	
 	    	    }
 	     
+	    /**
+	     * Cette méthode permet de mettre à jour les informations d'un utilisateur
+	     * 
+	     * @param olduser : les ancienneces informations de l'utilisateur
+	     * @param nom : nouveau nom saisi par l'utilisateur
+	     * @param prenom : nouveau prénom saisi par l'utilisateur
+	     * @param codep : nouveau codep saisi par l'utilisateur
+	     * @param email : nouvel email saisi par l'utilisateur
+	     * @param password : nouveau mdp saisi par l'utilisateur
+	     */
 	    public static void updateUser(User olduser,
 	    		String nom, String prenom, String codep, String email, String password)
 	    {
@@ -130,26 +165,15 @@ public class UserDao
 	    	
 	    }
  
-	    public List<User> getListOfUsers(){
-	        List<User> list = new ArrayList<User>();
-	        Session session = HibernateUtil.getSessionFactory().openSession();
-	        Transaction tx = null;       
-	        try {
-	            tx = session.getTransaction();
-	            tx.begin();
-	            list = session.createQuery("from User").list();                       
-	            tx.commit();
-	        } catch (Exception e) {
-	            if (tx != null) {
-	                tx.rollback();
-	            }
-	            e.printStackTrace();
-	        } finally {
-	            session.close();
-	        }
-	        return list;
-	    }
-	    public static int getUserId(String email) 
+
+	    
+	   /**
+	    * Cette méthode retourne l'id d'un utilisateur à partir de son email
+	    * @param email
+	    * @return l'id d'un utilisateur
+	    */
+	     public static int getUserId(String email) 
+	    
 	    {
 	        Session session = HibernateUtil.getSessionFactory().openSession();
 	        Transaction tx = null;
@@ -177,7 +201,16 @@ public class UserDao
 	        return id;
 	    }
 	    
-		public static User addFavoris (int iduser, int idmusee)
+		
+	    /**
+	     * Cette méthode permet d'ajouter un musée aux favoris d'un utilisateur
+	     * 
+	     * @param iduser
+	     * @param idmusee
+	     * @return User
+	     * @throws JSONException
+	     */
+	    public static User addFavoris (int iduser, int idmusee)
 				throws JSONException
 		{
 
@@ -207,6 +240,12 @@ public class UserDao
 			return null;	
 		}
 		
+		/**
+		 * Cette méthode retourne les musées favoris d'un utilisateur
+		 * @param iduser
+		 * @return Set<Musee>
+		 * @throws JSONException
+		 */
 		public static Set<Musee> listFavoris (String iduser)
 				throws JSONException
 		{
