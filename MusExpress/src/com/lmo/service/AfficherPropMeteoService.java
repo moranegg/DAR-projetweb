@@ -159,6 +159,11 @@ public class AfficherPropMeteoService {
 
 	}
 	
+	/**
+	 * Retourne un objet JSON à partir d'un musee
+	 * @param m
+	 * @return
+	 */
 	public static JSONObject toJsonObject(Musee m){
 		JSONObject jm = new JSONObject();
 		JSONObject localisation = new JSONObject();
