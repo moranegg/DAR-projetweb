@@ -7,9 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.lmo.service.AfficherFavorisService;
-import com.lmo.service.ConsulterMuseeService;
-
-
+/**
+ * Servlet permettant de retourner la liste des musées favoris (en json) pour un utilisateur dont l'identifiant est id_user
+ * en appelant la méthode listFavoris de la classe AfficherFavorisService
+ */
 public class AfficherFavorisServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -18,23 +19,17 @@ public class AfficherFavorisServlet extends HttpServlet {
         super();
     }
 
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
-
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try
 		{
 	        response.setContentType("application/json");
-
-
 			if(!request.getParameter ("id_user").equals("") )
 
 			{  
-
-				
 				response.getWriter().print(
 						AfficherFavorisService.listFavoris(request.getParameter ("id_user")));
 				System.out.println(AfficherFavorisService.listFavoris(request.getParameter ("id")).toString());

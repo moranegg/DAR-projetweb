@@ -12,8 +12,17 @@ import org.json.JSONObject;
 
 import com.lmo.service.InscriptionService;
 
+/**
+ * Servlet permettant d'appeler la méthode createUser de la classe InscriptionService
+ * dans le but d'ajouter un utilisateur à la bdd
+ */
 public class InscriptionServlet extends HttpServlet 
 {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);}

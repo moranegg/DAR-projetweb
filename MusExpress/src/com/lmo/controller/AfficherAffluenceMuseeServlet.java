@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.lmo.service.AfficherAffluenceMuseeService;
 
-
+/**
+ * Servlet permettant de retourner la liste des affluences (en json) pour un musée dont l'identifiant est id_musée
+ * en appelant la méthode listAffluence de la classe AfficherAffluenceMuseeService
+ */
 public class AfficherAffluenceMuseeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -23,7 +26,6 @@ public class AfficherAffluenceMuseeServlet extends HttpServlet {
 		doPost(request, response);
         }
 
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try
 		{
@@ -33,11 +35,9 @@ public class AfficherAffluenceMuseeServlet extends HttpServlet {
 			if(!request.getParameter ("id_musee").equals("") )
 
 			{  
-
-				
 				response.getWriter().print(
 						AfficherAffluenceMuseeService.listAffluence(request.getParameter ("id_musee")));
-				System.out.println(AfficherAffluenceMuseeService.listAffluence(request.getParameter ("id_musee")).toString());
+				//System.out.println(AfficherAffluenceMuseeService.listAffluence(request.getParameter ("id_musee")).toString());
 			}
 
 			else throw new Exception("Wrong Url! Missing parameters\n Il manque des parametres a l'URL!");

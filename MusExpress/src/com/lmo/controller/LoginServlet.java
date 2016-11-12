@@ -1,24 +1,22 @@
 package com.lmo.controller;
 
 import java.io.IOException;
-import java.util.Map;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.json.JSONObject;
 
-import com.lmo.dao.UserDao;
 import com.lmo.model.User;
 import com.lmo.service.LoginService;
 
 
 
-
+/**
+ * Servlet permettant d'appeler la méthode auhentificateUser de la classe LoginService
+ * dans le but d'authentifier un utilisateur
+ */
 public class LoginServlet extends HttpServlet 
 {
 
