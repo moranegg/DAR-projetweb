@@ -244,10 +244,12 @@ function getAffluences(){
 			var resultat = data;
 			if (resultat.message==1)
 			{
+				
 				var affluences = resultat.affluence;
 				var eltDomList = "#liste_aff";
 				if(affluences.length == 0)
 				{
+					$("#liste_aff").empty();
 					hideDom("#loader-affluence");
 					$("#liste_aff").append('<li class="list-group-item info" >Aucune information pour le moment</li>');
 
