@@ -360,7 +360,7 @@ function getAffluances(){
 	console.log("getAffluances");
 	$.ajax({
 		type: "GET",
-		date:{},
+		data:{},
 		url : "AfficherPropAffServlet",
 		dataType : 'json',
 

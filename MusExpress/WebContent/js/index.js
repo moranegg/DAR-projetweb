@@ -106,16 +106,16 @@ function login(email,password){
 
 		dataType : "json",
 		success : function(data) { 
-			console.log("success from LoginServlet");
+			//console.log("success from LoginServlet");
 		//var resultat = $.parseJSON(data);
 		//var resultat = JSON.parse(JSON.stringify(data));
 		var resultat=data;
 
 		var user = resultat.user;
-		console.log("resultat.message: "+resultat.message);
+		//console.log("resultat.message: "+resultat.message);
 		if (resultat.message=="1") 		
 		{
-			console.log("resultat.idUser: "+resultat.id_user)
+			//console.log("resultat.idUser: "+resultat.id_user)
             routeur.home(resultat.id_user);
 		} else{
 			printhtml('#notifier-login',"Mauvais mail ou mot de passe");
@@ -124,7 +124,7 @@ function login(email,password){
 		},
 		error : function(XHR, testStatus, errorThrown) 
 		{
-			console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
+			//console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
 			printhtml('#notifier-login',"erreur de connexion au serveur");
 			resetForm('#loader-login','#login-btn');
 		}
