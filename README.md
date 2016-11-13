@@ -1,4 +1,4 @@
-# Projet Web MusExpress
+## Projet Web MusExpress
 
 Dans le cadre de l’UE Développement d’Applications Réticulaires (DAR), 
 nous avons réalisé l’application Web « MusExpress » permettant aux utilisateurs
@@ -29,8 +29,8 @@ Go to http://81.57.18.95:8080/MusExpress/
 
 
 
-Recap des principales commandes:
--premiÃ¨re fois: git clone 
+##Recap des principales commandes:
+-première fois: git clone 
 - recuperer la derniere version du depot: git pull
 - ajouter un fichier (encore jamais versionnÃƒÂ©): git add 
 - mettre a jour les fichiers: git commit -a -m "comment" git push
