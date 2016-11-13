@@ -93,7 +93,9 @@ var home = {
 		}
 
 };
-
+/**
+ * Router object: validates navigation 
+ */
 var routeur = {
 		idUser: "",
 

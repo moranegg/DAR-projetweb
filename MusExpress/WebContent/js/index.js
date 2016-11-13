@@ -3,7 +3,9 @@ $( document ).ready(function(){
 	$("#login-btn").click(index.login);
 	$("#register-btn").click(index.createAccount);
 });
-
+/**
+ * object Index for actions on index
+ */
 var index = {
 
 		onReady: function() {
@@ -51,7 +53,15 @@ var index = {
 		}
 };
 
-
+/**
+ * Verifications du formulaire inscription
+ * @param nom
+ * @param prenom
+ * @param codep
+ * @param email
+ * @param password
+ * @returns {Boolean}
+ */
 function verif(nom, prenom, codep, email, password) 
 {
 
@@ -94,6 +104,11 @@ function verif(nom, prenom, codep, email, password)
 
 	return true;
 }
+/**
+ * sends ajax to LoginServlet
+ * @param email
+ * @param password
+ */
 function login(email,password){
 	console.log("send to LoginServlet");
 	$.ajax({
@@ -130,7 +145,14 @@ function login(email,password){
 		}
 	});
 }
-
+/**
+ * sends ajax to server-InscriptionServlet
+ * @param prenom
+ * @param nom
+ * @param codep
+ * @param email
+ * @param password
+ */
 function enregistre(prenom, nom, codep, email, password) 
 {
 	console.log("send to InscriptionServlet");

@@ -4,7 +4,9 @@ $( document ).ready(function(){
 	account.readFavoris();
 	$("#update-btn").click(account.updateUser);		
 });
-
+/**
+ * object account for actions in account page
+ */
 var account = {
 		idUser: '',
 
@@ -59,17 +61,13 @@ var account = {
 			//appel au serveur
 			var musees = readFavoris();
 
-			//test local
-			//var musees = testRechercheMusee().musees;
 
-//			var eltDomList = "#liste_fav";
-//			if(musees == undefined){
-//			$("#liste_fav").append('<li class="list-group-item info" >La liste des favoris est vide</li>');
-//			} else {
-//			afficheMusee(musees, eltDomList);
-//			}
 		}
 }
+/**
+ * sends ajax to ConsulterUserServlet
+ * @param idU
+ */
 function readUserServer(idU){
 	//readUser avec UserServlet/AccountServlet dans l'approche REST
 	//ou ReadUserServlet dans l'approche SOAP
@@ -95,7 +93,10 @@ function readUserServer(idU){
 		}
 	});
 }
-
+/**
+ * display profile on page
+ * @param resultat
+ */
 function showprofil (resultat)
 {
 	//la fonction fillInput prend un element DOM et met le deuxième param en  valeur
@@ -179,6 +180,9 @@ function updateProfil(nom,prenom,codep,email, password){
 		}
 	});
 }
+/**
+ * sends ajax to AfficherFavorisServlet
+ */
 function readFavoris(){
 	//favoris par FavorisSerrvlet
 	$.ajax({
@@ -211,7 +215,15 @@ function readFavoris(){
 		}
 	});
 }
-
+/**
+ * verification of update form
+ * @param nom
+ * @param prenom
+ * @param codep
+ * @param email
+ * @param password
+ * @returns {Boolean}
+ */
 function verif(nom, prenom, codep, email, password) 
 {
 

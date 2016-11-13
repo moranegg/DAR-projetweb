@@ -55,7 +55,7 @@ public class AfficherPropMeteoService {
 		ArrayList<Musee> toReturn = new ArrayList<Musee>();
 
 		// Récupération des musées et des parcs
-		ArrayList<Musee> lieux = MuseeDao.getAllMusees();
+		ArrayList<Musee> lieux = new ArrayList<Musee>();
 		ArrayList<Musee> musees = new ArrayList<Musee>();
 		ArrayList<Musee> parcs = new ArrayList<Musee>();
 
@@ -68,6 +68,7 @@ public class AfficherPropMeteoService {
 		//System.out.println(climat);
 		
 		if(climat.equals("Clear") ||  climat.equals("Sunny") ){//si il fait beau=> parc
+			lieux = MuseeDao.getAllMusees();
 			//System.out.println(climat);
 			for(int i=0;i<lieux.size()&& propositions.size()<5;i++ )
 			{
@@ -122,6 +123,7 @@ public class AfficherPropMeteoService {
 		}
 		//si aucun musee a ete ajoute-> ajouter les 5 premiers musees
 		if(propositions.isEmpty()){
+			MuseeDao.getAllMusees();
 			for(int i=0; propositions.size()<5;i++)
 			{
 				int x=0;
