@@ -11,15 +11,28 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Projections;
 import org.json.JSONException;
 
-import com.lmo.api.ApiMusee;
 import com.lmo.hibernate.util.HibernateUtil;
+import com.lmo.jobs.ApiMusee;
 import com.lmo.model.Affluence;
 import com.lmo.model.Musee;
 import com.lmo.model.User;
-
+/**
+ * 
+ * @author lina
+ *
+ */
 public class AffluenceDao 
 {
-
+/**
+ * Cette méthode permet d'ajouter une nouvelle affluence rédigée par un utilisateur dans la base de donnée 
+ * @param id_user : id de l'utilisateur
+ * @param id_musee : id du musée concerné
+ * @param duree : durée d'attente dans la file
+ * @param text : commentaire de l'utilisateur
+ * @param emplacement : file extérieure ou intérieure
+ * @return
+ * @throws JSONException
+ */
 	public static Affluence addAffluence (String id_user, String id_musee, String duree, String text, String emplacement)
 			throws JSONException
 	{
@@ -59,6 +72,11 @@ public class AffluenceDao
 	}
 
 
+	/**
+	 * Cette méthode permet de récupérer les affluences qui concernent un musée identifié par le paramètre en entrée 
+	 * @param id du musée 
+	 * @return List<Affluence>
+	 */
 	public static List<Affluence> getListOfAffluences(String id){
 		List<Affluence> list = new ArrayList<Affluence>();
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -84,7 +102,11 @@ public class AffluenceDao
 		return list;
 	}
 	
-	
+	/**
+	 * Cette méthode permet de récupérer les musées dot la dernière affluence enregistrée a une file d'attente de moins de 10mn
+	 * dans le but de recommander aux utilisateurs des musées à visiter sans qu'il n'y ai trop d'attente
+	 * @return List<Affluence>
+	 */
 	public static List<Affluence> getListOfAffluenceProposition()
 	{
 		List<Affluence> list = new ArrayList<Affluence>();
@@ -97,9 +119,6 @@ public class AffluenceDao
 			tx = session.getTransaction();
 			tx.begin();
 			list = session.createQuery("from Affluence a where a.duree='10min' order by a.date DESC")
-					//.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
-					//.setProjection(Projections.distinct(Projections.property("id_commentaire")))
-					//.setMaxResults(10)
 					.list();                        
 			tx.commit();
 		} catch (Exception e) {
@@ -112,7 +131,13 @@ public class AffluenceDao
 		}
 		return list;
 	}
-	
+	/***
+	 * 	Cette méthode permer de récupérer les affluences selon le critère d'emplacement de la file d'attente (intérieur ou extérieur)
+	 * Ces données seront manipulés pour la recommandation de musées en prenant compte de la météo
+
+	 * @param emplacement
+	 * @return List<Affluence>
+	 */
 	public static List<Affluence> getAffluenceByEmplacement(String emplacement)
 	{
 		List<Affluence> list = new ArrayList<Affluence>();
@@ -125,9 +150,6 @@ public class AffluenceDao
 			tx = session.getTransaction();
 			tx.begin();
 			list = session.createQuery("from Affluence a where a.emplacement='"+emplacement+"'")
-					//.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
-					//.setProjection(Projections.distinct(Projections.property("id_commentaire")))
-					//.setMaxResults(10)
 					.list();                        
 			tx.commit();
 		} catch (Exception e) {
@@ -141,31 +163,8 @@ public class AffluenceDao
 		return list;
 	}
 	
-	public static List<Affluence> getAffluenceByMusee(String musee)
-	{
-		List<Affluence> list = new ArrayList<Affluence>();
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		Transaction tx = null; 
-		try {
 
-			tx = session.getTransaction();
-			tx.begin();
-			list = session.createQuery("from Affluence a where a.id_musee='"+musee+"'")
-					//.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
-					//.setProjection(Projections.distinct(Projections.property("id_commentaire")))
-					//.setMaxResults(10)
-					.list();                        
-			tx.commit();
-		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
-			}
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-		return list;
-	}
+
 
 
 

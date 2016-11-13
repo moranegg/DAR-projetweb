@@ -1,18 +1,16 @@
 package com.lmo.controller;
 
 import java.io.IOException;
-import java.util.Date;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.lmo.service.AjoutAffluenceService;
-import com.lmo.service.AjoutMuseeFavService;
 
 /**
- * Servlet implementation class AjoutMuseefavServlet
+ * Servlet permettant d'envoyer une affluence à la méthode addAffluence de la classe AjoutAffluenceService
+ * dans le but de l'ajouter en bdd
  */
 public class AjoutAffluenceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -21,12 +19,10 @@ public class AjoutAffluenceServlet extends HttpServlet {
 		super();
 	}
 
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		doPost(request, response);
 	}
-
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
@@ -38,8 +34,6 @@ public class AjoutAffluenceServlet extends HttpServlet {
 					!request.getParameter("duree").equals("") && !request.getParameter("text").equals("")&&
 					!request.getParameter("emplacement").equals("") /*&& !request.getParameter("date").equals("")*/
 					)
-				
-
 			{
 				response.getWriter().print(AjoutAffluenceService.addAffluence
 						(request.getParameter("id_user"),
@@ -47,8 +41,6 @@ public class AjoutAffluenceServlet extends HttpServlet {
 								request.getParameter("duree"),
 								request.getParameter("text"),
 								request.getParameter("emplacement")));
-
-
 			}
 
 			else throw new Exception("Wrong Url! Missing parameters\n Il manque des parametres a l'URL!");

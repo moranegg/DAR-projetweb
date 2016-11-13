@@ -41,7 +41,6 @@ public class Musee implements Serializable
 	public Musee() 
 	{
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Musee(int id, String nom, String adresse, String ville, int departement, int codep, String ferme,

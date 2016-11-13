@@ -13,12 +13,32 @@ import com.lmo.hibernate.util.HibernateUtil;
 import com.lmo.model.Affluence;
 import com.lmo.model.Musee;
 import com.lmo.model.User;
-
+/**
+ * 
+ * @author lina
+ *
+ */
 public class MuseeDao 
 
 {
 
 
+	/**Cette méthode permet d'ajouter un musée en base de données 
+	 * 
+	 * @param nom
+	 * @param adresse
+	 * @param ville
+	 * @param departement
+	 * @param codep
+	 * @param ferme
+	 * @param siteweb
+	 * @param periode_ouverture
+	 * @param fermeture_annuelle
+	 * @param latitude
+	 * @param longitude
+	 * @param type
+	 * @throws JSONException
+	 */
 	public static void addMusee	(String nom, String adresse, String ville, int departement, int codep, String ferme,
 			String siteweb, String periode_ouverture, String fermeture_annuelle, double latitude, double longitude, String type)
 					throws JSONException
@@ -47,6 +67,11 @@ public class MuseeDao
 	}
 	
 	
+	/**
+	 * Cette méthode permet de récupérer les informations d'un musée à partir de son id
+	 * @param id
+	 * @return Musee
+	 */
 	   public static Musee getMuseeById(String id) 
 	    {
 	        Session session = HibernateUtil.getSessionFactory().openSession();
@@ -75,6 +100,11 @@ public class MuseeDao
 	        return musee;
 	    }
 	   
+	   /**
+	    * Cette méthode permet de récupérer les musées dont le nom contient le string passé en paramètre
+	    * @param nom
+	    * @return List<Musee>
+	    */
 	    public static List<Musee> getListOfMusees(String nom){
 	        List<Musee> list = new ArrayList<Musee>();
 	        Session session = HibernateUtil.getSessionFactory().openSession();
@@ -101,33 +131,12 @@ public class MuseeDao
 	    }
 	    
 
-//		public static Set<Affluence> listAffluence (String id)
-//				throws JSONException
-//		{
-//
-//			Session session = HibernateUtil.getSessionFactory().openSession();
-//
-//			Transaction tx = null;	
-//			try {
-//				tx = session.getTransaction();
-//				tx.begin();
-//				Musee musee = MuseeDao.getMuseeById(id);
-//				System.out.println("musee"+musee);
-//			    Set<Affluence> c = musee.getAffluences();
-//			    System.out.println("coucou"+c);
-//			    tx.commit();
-//				return c;
-//			} catch (Exception e) {
-//				if (tx != null) {
-//					tx.rollback();
-//				}
-//				e.printStackTrace();
-//			} finally {
-//				session.close();
-//			}
-//			return null;	
-//		}
-
+		/**Cette méthode permet de récupérer la liste des musées se trouvant à proximité du musée dont l'id 
+		 * est passé en paramètre. Les musées à proximité sont les musées se trouvant dans le même département.
+		 * 
+		 * @param id
+		 * @return List<Musee> 
+		 */
 	    public static List<Musee> getListMuseesProximite(String id)
 	    {
 	        List<Musee> list = new ArrayList<Musee>();
@@ -156,6 +165,11 @@ public class MuseeDao
 	    }
 	    
 
+	    /**
+	     * Cette méthode récupère tous les musées stockés en base de données. 
+	     * Elle est utilisée dans la recommandation de visites.
+	     * @return ArrayList<Musee>
+	     */
 	    public static ArrayList<Musee> getAllMusees(){
 	        ArrayList<Musee> list = new ArrayList<Musee>();
 	        Session session = HibernateUtil.getSessionFactory().openSession();

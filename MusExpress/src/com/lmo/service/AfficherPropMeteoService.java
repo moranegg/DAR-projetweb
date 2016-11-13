@@ -16,14 +16,10 @@ import org.json.JSONException;
 
 import org.json.JSONObject;
 
-
-
-import com.lmo.api.ApiMeteo;
-
 import com.lmo.dao.AffluenceDao;
 
 import com.lmo.dao.MuseeDao;
-
+import com.lmo.jobs.ApiMeteo;
 import com.lmo.model.Affluence;
 
 import com.lmo.model.Musee;
@@ -38,7 +34,7 @@ public class AfficherPropMeteoService {
 
 
 	/**
-	 * Retourne un objet JSON qui contient le message 1 de réussite et la liste des propositions
+	 * Retourne un objet JSON qui contient le message 1 de rï¿½ussite et la liste des propositions
 	 * @return
 	 * @throws JSONException
 	 */
@@ -160,7 +156,7 @@ public class AfficherPropMeteoService {
 	}
 	
 	/**
-	 * Retourne un objet JSON à partir d'un musee
+	 * Retourne un objet JSON ï¿½ partir d'un musee
 	 * @param m
 	 * @return
 	 */

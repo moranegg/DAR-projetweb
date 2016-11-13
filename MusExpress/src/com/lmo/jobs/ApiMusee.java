@@ -1,4 +1,4 @@
-package com.lmo.api;
+package com.lmo.jobs;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -154,7 +154,6 @@ public class ApiMusee
 		}
 		in.close();
 
-//		System.out.println(response.toString());
 
 		try 
 		{
