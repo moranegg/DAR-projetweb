@@ -1,22 +1,19 @@
 # Projet Web MusExpress
 
-Dans le cadre de l’UE Développement d’Applications Réticulaires (DAR), 
-nous avons réalisé l’application Web « MusExpress » permettant aux utilisateurs
-franciliens de connaître le temps d'attente actuel des musées. La force de cette 
-application réside dans le fait que les utilisateurs fournissent eux-mêmes les affluences durant leur propre visite. 
+Dans le cadre de lâ€™UE DÃ©veloppement dâ€™Applications RÃ©ticulaires (DAR), 
+nous avons rÃ©alisÃ© lâ€™application Web Â« MusExpress Â» permettant aux utilisateurs
+franciliens de connaÃ®tre le temps d'attente actuel des musÃ©es. La force de cette 
+application rÃ©side dans le fait que les utilisateurs fournissent eux-mÃªmes les affluences durant leur propre visite. 
 Il s'agit donc d'une solution communautaire interactive permettant aux utilisateurs de gagner du temps au quotidien.
 
 Par ailleurs, l'application offre aux utilisateurs des suggestions de visites
-de musées qui s'accordent avec la météo actuelle, leur permettant d'éviter des files d'attente interminables 
-sous des conditions météorologiques défavorables (soleil de plomb, pluie torrentielle...).
+de musÃ©es qui s'accordent avec la mÃ©tÃ©o actuelle, leur permettant d'Ã©viter des files d'attente interminables 
+sous des conditions mÃ©tÃ©orologiques dÃ©favorables (soleil de plomb, pluie torrentielle...).
 
 
-L'objectif du projet est de développer une application web en utilisant des API 
-en Île-de-France sous une architecture client-serveur en se servant d'appels simultanés avec un traitement côté serveur.
+L'objectif du projet est de dÃ©velopper une application web en utilisant des API 
+en Ãle-de-France sous une architecture client-serveur en se servant d'appels simultanÃ©s avec un traitement cÃ´tÃ© serveur.
 
-## Installation
-
-TODO: Describe the installation process
 
 ## Usage
 
@@ -26,18 +23,16 @@ Go to http://81.57.18.95:8080/MusExpress/
 
 ## Credits
 
-    Ouiza Bouyahiaoui
-    Morane Gruenpeter
-    Lina Yahi
+Â Â Â  Ouiza Bouyahiaoui
+Â Â Â  Morane Gruenpeter
+Â Â Â  Lina Yahi
 
-## License
 
-TODO: Write license
 
 Recap des principales commandes:
--premiÃ¨re fois: git clone 
+-premiÃƒÂ¨re fois: git clone 
 - recuperer la derniere version du depot: git pull
-- ajouter un fichier (encore jamais versionnÃƒÂ©): git add 
+- ajouter un fichier (encore jamais versionnÃƒÆ’Ã‚Â©): git add 
 - mettre a jour les fichiers: git commit -a -m "comment" git push
 -N'oubliez pas d'update votre git pour que l'on ai votre nom ! (voir git --config)
 
