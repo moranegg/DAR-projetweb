@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>QUnit basic example</title>
+<link rel="stylesheet"
+	href="https://code.jquery.com/qunit/qunit-2.0.1.css">
+</head>
+<body>
+	<div id="qunit"></div>
+	<div id="qunit-fixture"></div>
+	<script type="text/javascript"
+		src="/MusExpress/js/lib/jquery-3.1.1.min.js"></script>
+	<script src="https://code.jquery.com/qunit/qunit-2.0.1.js"></script>
+	<script
+		src=https://raw.githubusercontent.com/JamesMGreene/qunit-assert-compare/master/qunit-assert-compare.js"></script>
+
+	<script>
+		/***************************************************************************************/
+		QUnit
+				.test(
+						"AfficherPropMeteoServlet",
+						function(assert) {
+							var done = assert.async();
+							var musees = null;
+
+							$
+									.ajax({
+										type : "GET",
+										data : {},
+										url : "AfficherPropMeteoServlet",
+										dataType : 'json',
+
+										success : function(data) {
+
+											if (data.message == 1) {
+												musees = data.propositions;//propositions sont des musées !
+											}
+										},
+										complete : function() {
+											assert.equal(musees.length, 5,"la liste des propositions météo contient 5 élément");
+											done();
+										}
+
+									});
+						});
+		/***************************************************************************************/
+		QUnit.test("AfficherPropAffServlet",function(assert) {
+							var done = assert.async();
+							var musees = null;
+							var message ='';
+
+							$
+									.ajax({
+										type : "GET",
+										data : {},
+										url : "AfficherPropAffServlet",
+										dataType : 'json',
+
+										success : function(data) {
+											message="success "+data.message;
+											if (data.message == 1) {
+												musees = data.musees;//propositions sont des musées !
+											}
+										},
+										error : function(XHR, testStatus, errorThrown) {
+											message = "status: " + XHR.status + ", erreur: "
+													+ XHR.responseText;
+
+										},
+										complete : function() {
+											assert.ok(musees, message);
+											done();
+										}
+
+									});
+						});
+		/************************************************************************************/
+		QUnit.test("InscriptionServlet", function(assert) {
+			var done = assert.async();
+			var email = "moranehaha@gmail.com";
+			var password = "123456789";
+			var prenom = "momo";
+			var nom = "momo";
+			var codep = "75005";
+			var message = '';
+			var user = null;
+
+			$.ajax({
+				type : "GET",
+				url : "InscriptionServlet",
+				data : {
+					"prenom" : prenom,
+					"nom" : nom,
+					"codep" : codep,
+					"email" : email,
+					"password" : password,
+				},
+
+				dataType : "json",
+				success : function(data) {
+					var resultat = data;
+					user = resultat.id_user;
+					message = "return sucess, user is " + user + "message :"+data.message;
+
+				},
+				error : function(XHR, testStatus, errorThrown) {
+					message = "status: " + XHR.status + ", erreur: "
+							+ XHR.responseText;
+
+				},
+				complete : function() {
+					assert.ok(user, message);
+					done();
+				}
+			});
+		});
+		/**********************************************************************************/
+		QUnit.test("LoginServlet", function(assert) {
+			var done = assert.async();
+			var email = "morane@gmail.com";
+			var password = "123456789";
+			var message = '';
+			var user = null;
+
+			$.ajax({
+				type : "GET",
+				url : "LoginServlet",
+				data : {
+					"email" : email,
+					"password" : password,
+				},
+
+				dataType : "json",
+				success : function(data) {
+					user = data.id_user;
+					message = "return sucess, user is " + user;
+
+				},
+				error : function(XHR, testStatus, errorThrown) {
+					message = "status: " + XHR.status + ", erreur: "
+							+ XHR.responseText;
+
+				},
+				complete : function() {
+					assert.equal(user, '12', message);
+					done();
+				}
+			});
+		});
+		/****************************************************************************/
+		QUnit.test("RechercherMuseeServlet", function(assert) {
+			var done = assert.async();
+			var musees = null;
+			var message = '';
+			
+			$.ajax({
+				type : "GET",
+				url : "RechercherMuseeServlet",
+				data : {
+					"nom_musee" : "Louvre",
+				},
+
+				dataType : "json",
+				success : function(data) {
+					console.log("success from RechercherMuseeServlet");
+					//var resultat = $.parseJSON(data);
+					//var resultat = JSON.parse(JSON.stringify(data));
+					var resultat = data;
+					if (resultat.message == "1") {
+
+						musees = resultat.musees;
+						message = "return sucess, musees are "
+								+ musees.toString();
+					}
+				},
+				error : function(XHR, testStatus, errorThrown) {
+					message = "status: " + XHR.status + ", erreur: "
+							+ XHR.responseText;
+
+				},
+				complete : function() {
+					assert.ok(musees, message);
+					done();
+				}
+			});
+		});
+		/****************************************************************************/
+		QUnit.test("GetWeatherServlet", function(assert) {
+			var done = assert.async();
+			var meteo = null;
+			var message = '';
+
+			$.ajax({
+				type : "GET",
+				date : {},
+				url : "GetWeatherServlet",
+				dataType : 'json',
+
+				success : function(data) {
+					if (data.message = "1") {
+						var temp = data.temp;
+						var temp_min = data.temp_min;
+						var temp_max = data.temp_max;
+						var humidity = data.humidity;
+						var sunrise = data.sunrise;
+						message = "temp: " + temp + "temp_min: " + temp_min
+								+ "temp_max :" + temp_max;
+						meteo = true;
+					}
+				},
+				error : function(XHR, testStatus, errorThrown) {
+					message = "status: " + XHR.status + ", erreur: "
+							+ XHR.responseText;
+
+				},
+				complete : function() {
+					assert.ok(meteo, message);
+					done();
+				}
+
+			});
+		});
+		/**************************************************************************/
+		
+		QUnit.test("ConsulterUserServlet", function(assert) {
+			var done = assert.async();
+			var user = null;
+			
+			$.ajax({
+				type: "GET",
+				url : "ConsulterUserServlet",
+				dataType : 'json',
+				data : {
+					id_user : "12"
+				},
+				success : function(data) {
+					message = "success: nom= "+data.nom+"id=" +data.id_user;
+					var resultat = data;
+					if (resultat.message==1)
+					{
+						user=data.nom;
+					}
+				},
+				error : function(XHR, testStatus, errorThrown) {
+					message = "status: " + XHR.status + ", erreur: "
+							+ XHR.responseText;
+
+				},
+				complete : function() {
+					assert.ok(user, message);
+					done();
+				}
+			});
+
+		});
+		/************************************************************************/
+		QUnit.test("UpdateUserServlet", function(assert) {
+			var done = assert.async();
+			var success = false;
+			
+			$.ajax({
+				type : "GET",
+				url : "UpdateUserServlet",
+				data : {
+					"id": "12",
+					"prenom" : "test",
+					"nom" : "test",
+					"codep" : "12345", 
+					"email": "morane@gmail.com",
+					"password": "123456789",
+
+				},
+
+
+				dataType : "json",
+				success : function(data)
+				{
+					success= true;
+					if (data.message==1)
+					{
+						message = "update success: "+data.message;
+
+					} 
+					else if(data.message=="Email existant")
+					{
+						
+
+						message = "update error: "+data.message;
+						
+					}
+
+				},
+				error : function(XHR, testStatus, errorThrown) {
+					message = "status: " + XHR.status + ", erreur: "
+							+ XHR.responseText;
+
+				},
+				complete : function() {
+					assert.ok(success, message);
+					done();
+				}
+			});
+
+		});
+		/************************************************************************/
+		QUnit.test("AfficherFavorisServlet", function(assert) {
+			var done = assert.async();
+			var musees = null;
+			var message='';
+			
+			$.ajax({
+				type: "GET",
+				url : "AfficherFavorisServlet",
+				data : {
+					id_user:"12", 
+				},
+				dataType : 'json',
+
+				success : function(data) {
+					if (data.message==1)
+					{
+						musees = data.musees;
+						
+					}
+				},
+				error : function(XHR, testStatus, errorThrown) {
+					message = "status: " + XHR.status + ", erreur: "
+							+ XHR.responseText;
+
+				},
+				complete : function() {
+					assert.ok(musees, message);
+					done();
+				}
+			});
+
+		});
+		/************************************************************************/
+		QUnit.test("ConsulterMuseeServlet", function(assert) {
+			var done = assert.async();
+			var musee = null;
+			var idMusee = "5";
+			var message="";
+			
+			$.ajax
+			({
+				type: "GET",
+				url : "ConsulterMuseeServlet",
+				data : {id : idMusee},
+				dataType : 'JSON',
+				success : function(data) 
+				{
+					message = "success"+data.musee.nom;
+					var museeFromDB = data.musee;
+					if (data.message==1)
+					{
+						musee = museeFromDB;
+						
+					}	
+
+				},
+				error : function(XHR, testStatus, errorThrown) {
+					message = "status: " + XHR.status + ", erreur: "
+							+ XHR.responseText;
+
+				},
+				complete : function() {
+					assert.ok(musee, message);
+					done();
+				}
+			});
+
+		});
+		/************************************************************************/
+		QUnit.test("AjoutAffluanceServlet", function(assert) {
+			var done = assert.async();
+			var affluance = false;
+			
+			$.ajax
+			({
+				type: "GET",
+				url : "AjoutAffluenceServlet",
+				data : {"id_user" : "1",
+					"id_musee" : "84",
+					"emplacement": "int",
+					"text" : "super journée!!", 
+					"duree" :"10min"
+				},
+				dataType : 'JSON',
+				success : function(data) 
+				{
+					if (data.message==1)
+					{
+						message = "update success: "+data.message;
+						affluance = true;
+					}
+
+				},
+				error : function(XHR, testStatus, errorThrown) {
+					message = "status: " + XHR.status + ", erreur: "
+							+ XHR.responseText;
+
+				},
+				complete : function() {
+					assert.ok(affluance, message);
+					done();
+				}
+			});
+		
+
+		});
+		/************************************************************************/
+		QUnit.test("AfficherAffluanceServlet", function(assert) {
+			var done = assert.async();
+			var affluances = null;
+			
+			$.ajax({
+				type: "GET",
+				url : "AfficherAffluenceMuseeServlet",
+				data : {
+					id_musee:"6", 
+				},
+				dataType : 'json',
+
+				success : function(data) {
+					var resultat = data;
+					if (resultat.message==1)
+					{
+						affluances = resultat.affluence[0];
+						message = "update success: "+data.message;
+						
+					}
+				},
+				error : function(XHR, testStatus, errorThrown) {
+					message = "status: " + XHR.status + ", erreur: "
+							+ XHR.responseText;
+
+				},
+				complete : function() {
+					assert.ok(affluances, message);
+					done();
+				}
+			});
+
+		});
+		/************************************************************************/
+		QUnit.test("AfficherMuseesProximiteServlet", function(assert) {
+			var done = assert.async();
+			var musees = null;
+			var idMusee= "4";
+			var message ="";
+			
+			$.ajax
+			({
+				type: "GET",
+				url : "AfficherMuseesProximiteServlet",
+				data : {
+					"id_musee" : idMusee,  
+				},
+				dataType : 'JSON',
+				success : function(data) 
+				{
+					if (data.message==1)
+					{
+						musees= data.musees;
+						message = "success";                
+					}
+				},
+				error : function(XHR, testStatus, errorThrown) {
+					message = "status: " + XHR.status + ", erreur: "
+							+ XHR.responseText;
+
+				},
+				complete : function() {
+					assert.ok(musees, message);
+					done();
+				}
+			});
+
+		});
+	</script>
+</body>
+</html>

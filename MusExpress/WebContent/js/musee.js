@@ -337,6 +337,10 @@ function addFavoris()
 		}
 	});
 }
+/**
+ * Checks if musee is in favoris
+ * @param idMusee
+ */
 function isFavoris(idMusee){
 	//favoris par FavorisSerrvlet
 	$.ajax({
@@ -355,6 +359,7 @@ function isFavoris(idMusee){
 				for(i =0; i<musees.length;i++ ){
 					if(musees[i].id == idMusee){
 						isfavoris = true;
+						hideDom("#add-favorits-btn");
 						return true;
 					}
 				}
@@ -391,24 +396,11 @@ function testMusee(idMusee){
 
 }
 
-function GetURLParameter(sParam)
-{
-	var sPageURL = window.location.search.substring(1);
-	var sURLVariables = sPageURL.split('&');
-	for (var i = 0; i < sURLVariables.length; i++) 
-	{
-		var sParameterName = sURLVariables[i].split('=');
-		if (sParameterName[0] == sParam) 
-		{
-			return sParameterName[1];
-		}
-	}
-}
 
 
 /**************************GOOGLE MAP****************************************************/
 /**
- * Envoyer à la servlet
+ * sends ajax to AfficherMuseesProximiteServlet
  */
 function museesAProximite(idMusee)
 {

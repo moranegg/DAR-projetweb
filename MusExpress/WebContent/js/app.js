@@ -93,7 +93,9 @@ var home = {
 		}
 
 };
-
+/**
+ * Router object: validates navigation 
+ */
 var routeur = {
 		idUser: "",
 
@@ -360,7 +362,7 @@ function getAffluances(){
 	console.log("getAffluances");
 	$.ajax({
 		type: "GET",
-		date:{},
+		data:{},
 		url : "AfficherPropAffServlet",
 		dataType : 'json',
 
