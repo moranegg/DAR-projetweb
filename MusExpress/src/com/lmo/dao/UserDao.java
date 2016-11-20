@@ -1,6 +1,7 @@
 package com.lmo.dao;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -13,6 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.lmo.hibernate.util.HibernateUtil;
+import com.lmo.jobs.ApiMusee;
 import com.lmo.model.Affluence;
 import com.lmo.model.Musee;
 import com.lmo.model.User;
@@ -215,14 +217,28 @@ public class UserDao
 		{
 
 			Session session = HibernateUtil.getSessionFactory().openSession();
+			User user = UserDao.getUserById(String.valueOf(iduser));
+			Musee musee = MuseeDao.getMuseeById(String.valueOf(idmusee));
+			Set<Musee> c = user.getMusees();
 
+       		boolean trouve= false; 
+		     
+            for (Musee m :c)
+            {
+            	if (trouve!=true)
+            	{
+            		if (m.getId()==musee.getId()) trouve=true;
+            	}
+            }
+			
+		    if (trouve==false) 
+		    {
+		    	
 			Transaction tx = null;	
 			try {
 				tx = session.getTransaction();
 				tx.begin();
-				User user = UserDao.getUserById(String.valueOf(iduser));
-				Musee musee = MuseeDao.getMuseeById(String.valueOf(idmusee));
-			    Set<Musee> c = user.getMusees();
+
 			    c.add(musee);
 			    user.setMusees(c);	
 			    session.saveOrUpdate(user);	
@@ -234,9 +250,14 @@ public class UserDao
 					tx.rollback();
 				}
 				e.printStackTrace();
-			} finally {
+			} 
+			finally {
 				session.close();
 			}
+		    }
+
+			
+
 			return null;	
 		}
 		
@@ -269,6 +290,36 @@ public class UserDao
 				session.close();
 			}
 			return null;	
+		}
+		
+		
+		public static void main(String[] args) throws Exception 
+		{
+			System.out.println("Avant:");
+
+           User user = getUserById("5");
+           Set<Musee> musee = user.getMusees();
+           for (Musee m : musee)
+           {
+        	   System.out.println(m.getId());
+           }
+           
+           addFavoris (5, 87);
+           //addFavoris (5, 83);
+           //addFavoris (5, 82);
+           
+           System.out.println("Après:");
+           
+           for (Musee m : user.getMusees())
+           {
+        	   System.out.println(m.getId());
+           }
+
+           
+           
+
+
+
 		}
 	   
 
