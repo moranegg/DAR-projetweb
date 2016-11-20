@@ -118,8 +118,9 @@ public class AffluenceDao
 
 			tx = session.getTransaction();
 			tx.begin();
-			list = session.createQuery("from Affluence a where a.duree='10min' order by a.date DESC")
-					.list();                        
+			//list = session.createQuery("from Affluence a where a.duree='10min' order by a.date DESC")
+			list = session.createQuery("from Affluence a where a.duree='10min' and a.date >= all ( select a2.date from Affluence a2 where  a2.musee=a.musee)")
+				.list();                        
 			tx.commit();
 		} catch (Exception e) {
 			if (tx != null) {
@@ -163,15 +164,6 @@ public class AffluenceDao
 		return list;
 	}
 	
-
-
-
-
-
-        
-
-
-
-
+	
 
 }
