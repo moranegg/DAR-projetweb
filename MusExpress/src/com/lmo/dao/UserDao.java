@@ -291,36 +291,7 @@ public class UserDao
 			}
 			return null;	
 		}
-		
-		
-		public static void main(String[] args) throws Exception 
-		{
-			System.out.println("Avant:");
 
-           User user = getUserById("5");
-           Set<Musee> musee = user.getMusees();
-           for (Musee m : musee)
-           {
-        	   System.out.println(m.getId());
-           }
-           
-           addFavoris (5, 87);
-           //addFavoris (5, 83);
-           //addFavoris (5, 82);
-           
-           System.out.println("Après:");
-           
-           for (Musee m : user.getMusees())
-           {
-        	   System.out.println(m.getId());
-           }
-
-           
-           
-
-
-
-		}
 	   
 
 
