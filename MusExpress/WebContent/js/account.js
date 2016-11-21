@@ -208,10 +208,12 @@ function readFavoris(){
 				}
 				//return musees;
 			}
+			hideDom("#loader-favoris");
 		},
 		error : function(XHR, testStatus, errorThrown) 
 		{
 			console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
+			hideDom("#loader-favoris");
 		}
 	});
 }

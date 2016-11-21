@@ -52,6 +52,7 @@ var musee = {
 		latitude: "", 
 		longitude: "",
 		approx: null,
+		isFavoris: null,
 
 
 		init: function(idMusee)
@@ -81,13 +82,17 @@ var musee = {
 			//console.log("musee.init.après :"+this);
 			this.showMusee();
 			callbackMusee = true;
-			console.log("setMusee.googlemaps:"+ callbackGoogleMaps);
-			console.log("setMusee.prox:"+ callbackProx);
+			//console.log("setMusee.googlemaps:"+ callbackGoogleMaps);
+			//console.log("setMusee.prox:"+ callbackProx);
 			if(callbackProx == true && callbackGoogleMaps==true){
 				initMap(this);
 			}
 			//si le musee est deja en favoris-> ne pas afficher btn-fav
-			//isFavoris(this.id);
+			if(this.isfavoris == null){
+				this.isfavoris = isFavoris(this.id);
+				console.log("this.isfavoris: "+ this.isfavoris);
+			}
+			
 
 		},
 
@@ -144,10 +149,10 @@ var musee = {
 			
 			
 		},
-		addFavoris: function(){
+		addFavoris: function(idMusee,idU){
 			console.log("add favoris");
 			addFavoris();
-			hideDom("#add-favorits-btn");
+			
 
 
 		},
@@ -310,30 +315,36 @@ function afficheAffluence(affluences, eltDomList)
 /**************************Favoris*************************************/
 function addFavoris()
 {
-	console.log("before server");
+	var idMusee = GetURLParameter('id_musee');
+	var idU = GetURLParameter('id_user');
+	hideDom("#add-favorits-btn");
+	
+	//console.log("add favoris ajax"+ idU+" "+idMusee);
 	$.ajax
 	({
 		type: "GET",
 		url : "AjoutMuseeFavServlet",
-		data : {"iduser" : GetURLParameter("id_user"),
-			"idmusee" : GetURLParameter("id_musee"),  
+		data : {"iduser" : idU,
+			"idmusee" :idMusee,  
 		},
 		dataType : 'JSON',
 		success : function(data) 
 		{
-
+			console.log("add favoris success");
 			var resultat = data;         
-
+			hideDom("#add-favorits-btn");
+			hideDom("#add-favorits-btn");
 			if (resultat.message==1)
 			{
-				console.log("success");
-
+				//console.log("add favoris success");
+				
 			}
 
 		},
 		error : function(XHR, testStatus, errorThrown) 
 		{
-			console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
+			//console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
+			showDom("#add-favorits-btn");
 		}
 	});
 }
@@ -342,6 +353,7 @@ function addFavoris()
  * @param idMusee
  */
 function isFavoris(idMusee){
+	var isFavoris = false;
 	//favoris par FavorisSerrvlet
 	$.ajax({
 		type: "GET",
@@ -355,7 +367,6 @@ function isFavoris(idMusee){
 			if (data.message==1)
 			{
 				var musees = data.musees;
-				var isFavoris = false;
 				for(i =0; i<musees.length;i++ ){
 					if(musees[i].id == idMusee){
 						isfavoris = true;
@@ -363,14 +374,14 @@ function isFavoris(idMusee){
 						return true;
 					}
 				}
-				if(isFavoris==false){
-					showDom("#add-favorits-btn");
-				};	
+				
 			}
+			return isFavoris;
 		},
 		error : function(XHR, testStatus, errorThrown) 
 		{
 			console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
+			return isFavoris;
 		}
 	});
 }

@@ -170,7 +170,7 @@ function sendMeteo(){
 function displayTime(){
 	var elt = "#day";
 	var now  = new Date();
-	$(elt).append(now.getDate()+"/"+(now.getMonth()+1) + "/"+now.getFullYear()+"  "+(now.getHours()+1)+":"+(now.getMinutes()+1)+":"+(now.getSeconds()+1));
+	$(elt).append(now.getDate()+"/"+(now.getMonth()+1) + "/"+now.getFullYear()+"  "+(now.getHours())+":"+(now.getMinutes()+1)+":"+(now.getSeconds()+1));
 
 }
 /**
