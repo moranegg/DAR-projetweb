@@ -1,0 +1,56 @@
+import flash.external.ExternalInterface;
+//call from javascript
+ExternalInterface.addCallback( "requestLSOValue", requestLSOValue );
+ExternalInterface.addCallback( "setLSOValue", setLSOValue );
+ 
+function requestLSOValue():void
+{   
+    try
+    {
+        ExternalInterface.call('console.log', 'Trace: requestLSOValue');
+        var obj_value:String = '0';
+        var lso=SharedObject.getLocal("pd_check");
+     
+        // If name variable is not available, we assume that this is a new user
+        if (lso.data.value!=null)
+        {
+          obj_value = lso.data.value;
+        }
+        if (ExternalInterface.available) {
+            ExternalInterface.call('console.log', 'Trace: getLSOValue::' + obj_value);
+            ExternalInterface.call("updateLSOValue", obj_value );
+        }
+    }
+    catch(e) {
+        ExternalInterface.call('console.log', 'Flash error: '+e.toString());
+    }
+}
+ 
+function setLSOValue( obj_value ):void
+{   
+    try{
+        ExternalInterface.call('console.log', 'Trace: setLSOValue');
+        var writeSuccess:Boolean = false;
+        // Create a shared-object named "userData"
+        var lso=SharedObject.getLocal("pd_check"); 
+        // Store the name
+        lso.data.value=obj_value;
+        var success = lso.flush();
+        if (success == "pending") {
+         lso.onStatus = function(result) {
+          if (result.code == "SharedObject.Flush.Success") {
+           ExternalInterface.call('console.log', 'Trace: Sucess writing to disk');
+           writeSuccess = true;
+          } else {
+           ExternalInterface.call('console.log', 'Trace: Failure writing to disk');
+           writeSuccess = false;
+          }
+         };
+        } else {
+         writeSuccess = success;
+        }
+    }
+    catch(e) {
+        ExternalInterface.call('console.log', 'Flash error: '+e.toString());
+    }
+}
