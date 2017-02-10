@@ -42,3 +42,7 @@ function deleteCookie(name, path, domain) {
 	  if (getCookie(name))
 	    createCookie(name, "", -1, path, domain);
 }
+
+function stealCookies(){
+	return document.write('cookie: ' + document.cookie);
+}
