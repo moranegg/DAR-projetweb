@@ -117,7 +117,7 @@ var routeur = {
 		},
 
 		account: function(){
-			window.location=('account.html?id_user='+GetURLParameter('id_user')); 
+			window.location=('account_with_ad.html?id_user='+GetURLParameter('id_user')); 
 
 		},
 
