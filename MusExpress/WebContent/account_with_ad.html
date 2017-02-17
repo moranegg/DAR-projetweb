@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Compte</title>
+
+<link rel="stylesheet" href="/MusExpress/js/lib/css/bootstrap.min.css">
+<link rel="stylesheet" href="/MusExpress/images/custom.css">
+
+
+
+<!-- Libs -->
+<script type="text/javascript"
+	src="/MusExpress/js/lib/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="/MusExpress/js/lib/tether.min.js"></script>
+<script type="text/javascript" src="/MusExpress/js/lib/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="/MusExpress/js/app.js"></script>
+<script type="text/javascript" src="/MusExpress/js/account.js"></script>
+
+</head>
+<body>
+
+	<nav class="navbar navbar-default navbar-static-top header-template navbar-fixed-top"
+		role="navigation" style="margin-bottom: 0">
+		<div class="row">
+			<div class="col-md-1">
+
+				<a class="navbar-brand" href="#"> MusExpress</a>
+			</div>
+			<div class="col-md-1">
+				<img src="images/icon-mus.png" class="img-responsive" width="30"
+					height="23">
+			</div>
+
+			<form class="navbar-form navbar-left">
+				<div class="form-group">
+					<input type="text" class="form-control"
+						placeholder="Recherche par nom" id="recherche-input">
+				</div>
+				<!-- Button trigger modal -->
+				<div type="button" class="btn btn-default " data-toggle="modal"
+					data-target="#rechercheModal" id="recherche-btn">
+					<span class="glyphicon glyphicon-search"></span> Go!
+				</div>
+				<span id="day"></span>
+			</form>
+
+			<div class="col-md-3 pull-right">
+				<div class="btn btn-default" id="account-btn">
+					<span class="glyphicon glyphicon-user"></span> Mon compte
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+	<hr class="nav-margin">
+		<!-- première ligne -->
+		<div class="row">
+
+			<!--  -->
+			<div class="col-xs-2 col-md-2">
+				<div class="row text-center">
+					<img class="img-responsive img-thumbnail"
+						src="http://universityprimaryschool.org.uk/wp-content/themes/spark/static/images/no-photo.png"
+						alt="...">
+
+					<div class="row ">
+						<!-- TODO: lien avec modification photo -->
+						<div class="btn btn-primary hide">modifier photo</div>
+					</div>
+				</div>
+			</div>
+			<!-- information -->
+			<div class="col-xs-10 col-md-4">
+				<!-- form update-->
+				<h3>Modifier votre compte:</h3>
+				<form class="form" id="update-form">
+					<div class="form-group">
+						<div class="controls">
+							<input type="text" id="nom" name="nom"
+								class="form-control login_input" placeholder="Nom"
+								data-required="true" data-notblank="true">
+
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="controls">
+							<input type="text" id="prenom" name="prenom"
+								class="form-control login_input" placeholder="Pr&eacute;nom"
+								data-required="true" data-notblank="true">
+
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="controls">
+							<input type="text" id="codep" name="codep"
+								class="form-control login_input" placeholder="Code Postal"
+								data-required="true" data-notblank="true">
+
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="controls">
+							<input type="email" id="email_register" name="email"
+								class="form-control login_input" placeholder="Email"
+								data-required="true" data-notblank="true"
+								data-parsley-type="email">
+
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="control-group">
+							<div class="controls">
+								<input type="password" id="password_register"
+									class="form-control login_input" placeholder="Mot de passe"
+									name="password" data-required="true" data-notblank="true"
+									data-rangelength="[8,25]"> <span class="help-block"></span>
+							</div>
+						</div>
+					</div>
+
+
+					<input class="btn btn-primary btn-lg" value="Valider"
+						id="update-btn" />
+					<div class="hide" role="alert" id='loader-update'>
+						<img src="images/loader.gif">
+					</div>
+					<div class="alert alert-warning hide" role="alert" id='notifier-update'></div>
+
+
+				</form>
+
+
+			</div>
+			<!-- fin col-md 4 -->
+
+
+
+			<!-- Les favoris -->
+			<div class="col-xs-12  col-md-6">
+				<h3>Vos musées favoris</h3>
+				<div class="panel panel-default">
+
+					<!-- List group à partir du résultat serveur à injecter dans les items-->
+					<ul class="list-group" id="liste_fav">
+						<!-- 						<li class="list-group-item">Cras justo odio</li> -->
+						<!-- 						<li class="list-group-item">Dapibus ac facilisis in</li> -->
+						<!-- 						<li class="list-group-item">Morbi leo risus</li> -->
+						<!-- 						<li class="list-group-item">Porta ac consectetur ac</li> -->
+						<!-- 						<li class="list-group-item">Vestibulum at eros</li> -->
+					</ul>
+					<div class="" role="alert" id='loader-favoris'>
+										<img src="images/loader.gif">
+									</div>
+				</div>
+
+			</div>
+			<!-- fin col-md 4 -->
+		</div>
+		<!-- fin row-->
+
+
+		<!-- partie des favoris -->
+		<div class="row"></div>
+
+
+
+		<!-- Recherche Modal -->
+		<div class="modal fade" id="rechercheModal" tabindex="-1"
+			role="dialog" aria-labelledby="rechercheModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="rechercheModalLabel">Résultat de
+							la recherche</h4>
+					</div>
+					<div class="modal-body">
+
+						<div class="panel panel-default">
+
+							<!-- List group à partir du résultat serveur à injecter dans les items-->
+							<ul class="list-group" id="liste_recherche">
+
+							</ul>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- fin modal -->
+
+		<div class="ad">
+			<iframe src="https://pacific-bastion-79055.herokuapp.com/ads.html">
+			  <p>Your browser does not support iframes.</p>
+			</iframe>
+		</div>
+	</div>
+	<!-- fin container -->
+
+</body>
+</html>

@@ -9,7 +9,7 @@ $( document ).ready(function(){
 	//show tooltip data on btn (star-favoris)
 	$("[data-toggle='tooltip']").tooltip();
 
-	var path = window.location.pathname; 
+	var path = window.location.pathname;
 	if(path != "/MusExpress/" || path != "/MusExpress/index.html"){
 		var id_user = GetURLParameter('id_user');
 		routeur.init(id_user);
@@ -54,7 +54,7 @@ var home = {
 
 		onReady: function() {
 		},
-		
+
 		//
 		recherche: function(event)
 		{
@@ -94,20 +94,20 @@ var home = {
 
 };
 /**
- * Router object: validates navigation 
+ * Router object: validates navigation
  */
 var routeur = {
 		idUser: "",
 
 		index: function(){
-			window.location=('index.html'); 
+			window.location=('index.html');
 		},
 
 		init: function(){
 			this.idUser = GetURLParameter('id_user');
 		},
 
-		home: function(id_user){			
+		home: function(id_user){
 			this.idUser = id_user;
 			if(this.idUser=="" || this.idUser==undefined){
 				this.index();
@@ -117,12 +117,12 @@ var routeur = {
 		},
 
 		account: function(){
-			window.location=('account.html?id_user='+GetURLParameter('id_user')); 
+			window.location=('account_with_ad.html?id_user='+GetURLParameter('id_user')); 
 
 		},
 
 		musee: function(idMusee){
-			window.location=('musee.html?id_user='+this.idUser+'&id_musee='+idMusee); 
+			window.location=('musee.html?id_user='+this.idUser+'&id_musee='+idMusee);
 
 		},
 }
@@ -155,10 +155,10 @@ function sendMeteo(){
 				$("#humidity").append(humidity + " %");
 				//$("#sunrise").append(new Date(parseInt(sunrise)));
 
-				
+
 			}
 		},
-		error : function(XHR, testStatus, errorThrown) 
+		error : function(XHR, testStatus, errorThrown)
 		{
 			//console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
 		}
@@ -182,10 +182,10 @@ function GetURLParameter(sParam)
 {
 	var sPageURL = window.location.search.substring(1);
 	var sURLVariables = sPageURL.split('&');
-	for (var i = 0; i < sURLVariables.length; i++) 
+	for (var i = 0; i < sURLVariables.length; i++)
 	{
 		var sParameterName = sURLVariables[i].split('=');
-		if (sParameterName[0] == sParam) 
+		if (sParameterName[0] == sParam)
 		{
 			return sParameterName[1];
 		}
@@ -250,7 +250,7 @@ function resetForm(loader, btn){
 
 /*******************************       Rechercher un musée        *************************/
 /**
- * 
+ *
  * Message sent to server with text in search => textRecherche
  */
 function sendRecherche(textRecherche){
@@ -263,7 +263,7 @@ function sendRecherche(textRecherche){
 		},
 
 		dataType : "json",
-		success : function(data) { 
+		success : function(data) {
 			console.log("success from RechercherMuseeServlet");
 			//var resultat = $.parseJSON(data);
 			//var resultat = JSON.parse(JSON.stringify(data));
@@ -271,7 +271,7 @@ function sendRecherche(textRecherche){
 
 
 			console.log("resultat.message: "+resultat.message);
-			if (resultat.message=="1") 		
+			if (resultat.message=="1")
 			{
 				console.log("resultat.musees: "+resultat.musees);
 				var musees = resultat.musees;
@@ -286,9 +286,9 @@ function sendRecherche(textRecherche){
 				}
 
 				//return musees;
-			} 
+			}
 		},
-		error : function(XHR, testStatus, errorThrown) 
+		error : function(XHR, testStatus, errorThrown)
 		{
 			console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
 
@@ -297,7 +297,7 @@ function sendRecherche(textRecherche){
 }
 
 /**
- * 
+ *
  * @returns liste of museums to test display methods
  */
 function testRechercheMusee(){
@@ -312,7 +312,7 @@ function testRechercheMusee(){
 	return messageSserveur;
 }
 /**
- * 
+ *
  * @param musees
  * @param eltDomList
  */
@@ -334,7 +334,7 @@ function afficheMuseeRecherche(musees, eltDomList){
 }
 
 /**
- * 
+ *
  * @param musees
  * @param eltDomList
  */
@@ -346,7 +346,7 @@ function afficheMusee(musees, eltDomList){
 	for(i=0; i<musees.length; i++)
 	{
 
-		$(liste).append('<li class="list-group-item musee btn " id="'+musees[i].id+'">'+musees[i].nom+'</li>'); 
+		$(liste).append('<li class="list-group-item musee btn " id="'+musees[i].id+'">'+musees[i].nom+'</li>');
 
 		//console.log(musees[i].id);
 
@@ -377,8 +377,8 @@ function getAffluances(){
 				if(musees.length == 0)
 				{
 					$("#list-affluance").append('<li class="list-group-item" >Aucune information pour le moment</li>');
-				} 
-				else 
+				}
+				else
 				{
 					var affluances = [];
 					affluances.push(musees[0]);
@@ -394,7 +394,7 @@ function getAffluances(){
 						}
 						if(exists== false){
 							affluances.push(musees[i]);
-						} 
+						}
 
 					}
 					afficheMuseeRecherche(affluances, eltDomList);
@@ -408,7 +408,7 @@ function getAffluances(){
 				//return musees;
 			}
 		},
-		error : function(XHR, testStatus, errorThrown) 
+		error : function(XHR, testStatus, errorThrown)
 		{
 			console.log("status: " + XHR.status + ", erreur: " + XHR.responseText);
 		}
@@ -453,17 +453,17 @@ function getPropMeteo(){
 				if(musees.length == 0)
 				{
 					$("#list-meteo").append('<li class="list-group-item" >Aucune information pour le moment</li>');
-				} 
-				else 
-				{			
+				}
+				else
+				{
 					//affichePropMeteo(musees, eltDomList);
 					afficheMuseeRecherche(musees,eltDomList);
 					home.museesPropMeteo =musees;
-					
+
 				}
 			}
 		},
-		error : function(XHR, testStatus, errorThrown) 
+		error : function(XHR, testStatus, errorThrown)
 		{
 			hideDom("#loader-propMeteo");
 			$("#list-meteo").append('<li class="list-group-item" >Aucune information pour le moment</li>');
@@ -486,7 +486,7 @@ function affichePropMeteo(propositions, eltDomList)
 	for(i=0; i<propositions.length && i<5; i++)
 	{
 		$(liste).append('<li class="list-group-item">'+propositions[i].musee+'</li>');
-		
+
 	}
 
 }
@@ -499,10 +499,10 @@ function initMap(){
 	console.log("init map");
 	//console.log(home.museesPropAff);
 	//console.log(home.museesPropMeteo);
-	
-	
+
+
 	var m = home.museesPropAff[0].localisation;
-	
+
 	console.log("map");
 	var map = new google.maps.Map(document.getElementById('map'), {
 		center: m,
@@ -529,7 +529,7 @@ function initMap(){
 				map: map,
 				title: home.museesPropAff[i].nom,
 				icon:'images/red-icon.png',
-				
+
 			});
 		}
 	}
@@ -542,9 +542,9 @@ function initMap(){
 				map: map,
 				title: home.museesPropMeteo[i].nom,
 				icon: 'images/blue-icon.png',
-				
+
 			});
 		}
 	}
-	
+
 }
