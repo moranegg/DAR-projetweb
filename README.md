@@ -1,4 +1,6 @@
-## Projet Web MusExpress
+# Projet Web MusExpress
+
+## Introduction
 
 Dans le cadre de l’UE Développement d’Applications Réticulaires (DAR), 
 nous avons réalisé l’application Web « MusExpress » permettant aux utilisateurs
@@ -14,12 +16,11 @@ sous des conditions météorologiques défavorables (soleil de plomb, pluie torr
 L'objectif du projet est de développer une application web en utilisant des API 
 en Île-de-France sous une architecture client-serveur en se servant d'appels simultanés avec un traitement côté serveur.
 
+## Outils & Bibliothèques
 
-## Usage
-
-Go to http://81.57.18.95:8080/MusExpress/
-
-
+- Base de données: MYSQL
+- ORM: Hibernate
+- Javascript: Jquery, Bootstrap, Qunit
 
 ## Credits
 
@@ -29,10 +30,4 @@ Go to http://81.57.18.95:8080/MusExpress/
 
 
 
-##Recap des principales commandes:
--première fois: git clone 
-- recuperer la derniere version du depot: git pull
-- ajouter un fichier (encore jamais versionnÃƒÂ©): git add 
-- mettre a jour les fichiers: git commit -a -m "comment" git push
--N'oubliez pas d'update votre git pour que l'on ai votre nom ! (voir git --config)
 
